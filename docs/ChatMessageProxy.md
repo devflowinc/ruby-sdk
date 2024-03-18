@@ -1,4 +1,4 @@
-# OpenapiClient::ChatMessageProxy
+# TrieveRubyClient::ChatMessageProxy
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::ChatMessageProxy.new(
+instance = TrieveRubyClient::ChatMessageProxy.new(
   content: null,
   role: null
 )

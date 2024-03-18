@@ -1,4 +1,4 @@
-# OpenapiClient::InvitationData
+# TrieveRubyClient::InvitationData
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::InvitationData.new(
+instance = TrieveRubyClient::InvitationData.new(
   app_url: null,
   email: null,
   organization_id: null,

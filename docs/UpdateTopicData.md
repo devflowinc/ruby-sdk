@@ -1,4 +1,4 @@
-# OpenapiClient::UpdateTopicData
+# TrieveRubyClient::UpdateTopicData
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::UpdateTopicData.new(
+instance = TrieveRubyClient::UpdateTopicData.new(
   name: null,
   topic_id: null
 )

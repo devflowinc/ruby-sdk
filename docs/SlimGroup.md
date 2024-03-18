@@ -1,4 +1,4 @@
-# OpenapiClient::SlimGroup
+# TrieveRubyClient::SlimGroup
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::SlimGroup.new(
+instance = TrieveRubyClient::SlimGroup.new(
   dataset_id: null,
   id: null,
   name: null,

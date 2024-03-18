@@ -1,4 +1,4 @@
-# OpenapiClient::AuthApi
+# TrieveRubyClient::AuthApi
 
 All URIs are relative to *http://localhost*
 
@@ -22,15 +22,15 @@ openid_callback  This is the callback route for the OAuth provider, it should no
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-api_instance = OpenapiClient::AuthApi.new
+api_instance = TrieveRubyClient::AuthApi.new
 
 begin
   # openid_callback
   result = api_instance.callback
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling AuthApi->callback: #{e}"
 end
 ```
@@ -48,7 +48,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SlimUser>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling AuthApi->callback_with_http_info: #{e}"
 end
 ```
@@ -83,9 +83,9 @@ get_me  Get the user corresponding to your current auth credentials.
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -97,13 +97,13 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::AuthApi.new
+api_instance = TrieveRubyClient::AuthApi.new
 
 begin
   # get_me
   result = api_instance.get_me
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling AuthApi->get_me: #{e}"
 end
 ```
@@ -121,7 +121,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SlimUser>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling AuthApi->get_me_with_http_info: #{e}"
 end
 ```
@@ -156,9 +156,9 @@ login  This will redirect you to the OAuth provider for authentication with emai
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-api_instance = OpenapiClient::AuthApi.new
+api_instance = TrieveRubyClient::AuthApi.new
 opts = {
   inv_code: '38400000-8cf0-11bd-b23e-10b96e4ef00d', # String | Code sent via email as a result of successful call to send_invitation
   organization_id: '38400000-8cf0-11bd-b23e-10b96e4ef00d', # String | ID of organization to authenticate into
@@ -168,7 +168,7 @@ opts = {
 begin
   # login
   api_instance.login(opts)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling AuthApi->login: #{e}"
 end
 ```
@@ -186,7 +186,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling AuthApi->login_with_http_info: #{e}"
 end
 ```
@@ -225,14 +225,14 @@ logout  Invalidate your current auth credential stored typically stored in a coo
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-api_instance = OpenapiClient::AuthApi.new
+api_instance = TrieveRubyClient::AuthApi.new
 
 begin
   # logout
   api_instance.logout
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling AuthApi->logout: #{e}"
 end
 ```
@@ -250,7 +250,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling AuthApi->logout_with_http_info: #{e}"
 end
 ```

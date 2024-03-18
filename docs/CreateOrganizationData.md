@@ -1,4 +1,4 @@
-# OpenapiClient::CreateOrganizationData
+# TrieveRubyClient::CreateOrganizationData
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::CreateOrganizationData.new(
+instance = TrieveRubyClient::CreateOrganizationData.new(
   name: null
 )
 ```

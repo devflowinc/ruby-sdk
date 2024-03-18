@@ -1,4 +1,4 @@
-# OpenapiClient::UploadFileResult
+# TrieveRubyClient::UploadFileResult
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::UploadFileResult.new(
+instance = TrieveRubyClient::UploadFileResult.new(
   file_metadata: null
 )
 ```

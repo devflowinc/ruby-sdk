@@ -1,4 +1,4 @@
-# OpenapiClient::DeleteDatasetRequest
+# TrieveRubyClient::DeleteDatasetRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::DeleteDatasetRequest.new(
+instance = TrieveRubyClient::DeleteDatasetRequest.new(
   dataset_id: null
 )
 ```

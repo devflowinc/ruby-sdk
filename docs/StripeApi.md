@@ -1,4 +1,4 @@
-# OpenapiClient::StripeApi
+# TrieveRubyClient::StripeApi
 
 All URIs are relative to *http://localhost*
 
@@ -20,9 +20,9 @@ All URIs are relative to *http://localhost*
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -34,14 +34,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::StripeApi.new
+api_instance = TrieveRubyClient::StripeApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
 subscription_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the subscription you want to cancel
 
 begin
   
   api_instance.cancel_subscription(tr_organization, subscription_id)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling StripeApi->cancel_subscription: #{e}"
 end
 ```
@@ -59,7 +59,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling StripeApi->cancel_subscription_with_http_info: #{e}"
 end
 ```
@@ -95,16 +95,16 @@ nil (empty response body)
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-api_instance = OpenapiClient::StripeApi.new
+api_instance = TrieveRubyClient::StripeApi.new
 plan_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the plan you want to subscribe to
 organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the organization you want to subscribe to the plan
 
 begin
   
   api_instance.direct_to_payment_link(plan_id, organization_id)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling StripeApi->direct_to_payment_link: #{e}"
 end
 ```
@@ -122,7 +122,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling StripeApi->direct_to_payment_link_with_http_info: #{e}"
 end
 ```
@@ -158,15 +158,15 @@ No authorization required
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-api_instance = OpenapiClient::StripeApi.new
+api_instance = TrieveRubyClient::StripeApi.new
 
 begin
   
   result = api_instance.get_all_plans
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling StripeApi->get_all_plans: #{e}"
 end
 ```
@@ -184,7 +184,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<StripePlan>>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling StripeApi->get_all_plans_with_http_info: #{e}"
 end
 ```
@@ -217,9 +217,9 @@ No authorization required
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -231,7 +231,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::StripeApi.new
+api_instance = TrieveRubyClient::StripeApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
 subscription_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the subscription you want to update
 plan_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the plan you want to subscribe to
@@ -239,7 +239,7 @@ plan_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the plan you w
 begin
   
   api_instance.update_subscription_plan(tr_organization, subscription_id, plan_id)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling StripeApi->update_subscription_plan: #{e}"
 end
 ```
@@ -257,7 +257,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling StripeApi->update_subscription_plan_with_http_info: #{e}"
 end
 ```

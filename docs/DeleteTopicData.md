@@ -1,4 +1,4 @@
-# OpenapiClient::DeleteTopicData
+# TrieveRubyClient::DeleteTopicData
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::DeleteTopicData.new(
+instance = TrieveRubyClient::DeleteTopicData.new(
   topic_id: null
 )
 ```

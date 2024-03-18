@@ -1,4 +1,4 @@
-# OpenapiClient::ChunkFilter
+# TrieveRubyClient::ChunkFilter
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::ChunkFilter.new(
+instance = TrieveRubyClient::ChunkFilter.new(
   must: null,
   must_not: null,
   should: null

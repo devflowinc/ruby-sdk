@@ -1,4 +1,4 @@
-# OpenapiClient::SetUserApiKeyRequest
+# TrieveRubyClient::SetUserApiKeyRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::SetUserApiKeyRequest.new(
+instance = TrieveRubyClient::SetUserApiKeyRequest.new(
   name: null,
   role: null
 )

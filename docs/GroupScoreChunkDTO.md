@@ -1,4 +1,4 @@
-# OpenapiClient::GroupScoreChunkDTO
+# TrieveRubyClient::GroupScoreChunkDTO
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::GroupScoreChunkDTO.new(
+instance = TrieveRubyClient::GroupScoreChunkDTO.new(
   group_id: null,
   metadata: null
 )

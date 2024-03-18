@@ -1,4 +1,4 @@
-# OpenapiClient::ChunkMetadata
+# TrieveRubyClient::ChunkMetadata
 
 ## Properties
 
@@ -21,9 +21,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::ChunkMetadata.new(
+instance = TrieveRubyClient::ChunkMetadata.new(
   chunk_html: null,
   content: null,
   created_at: null,

@@ -1,4 +1,4 @@
-# OpenapiClient::CreateMessageData
+# TrieveRubyClient::CreateMessageData
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::CreateMessageData.new(
+instance = TrieveRubyClient::CreateMessageData.new(
   highlight_citations: null,
   highlight_delimiters: null,
   model: null,

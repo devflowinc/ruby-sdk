@@ -1,4 +1,4 @@
-# OpenapiClient::OrganizationUsageCount
+# TrieveRubyClient::OrganizationUsageCount
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::OrganizationUsageCount.new(
+instance = TrieveRubyClient::OrganizationUsageCount.new(
   dataset_count: null,
   file_storage: null,
   id: null,

@@ -1,4 +1,4 @@
-# OpenapiClient::SlimUser
+# TrieveRubyClient::SlimUser
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::SlimUser.new(
+instance = TrieveRubyClient::SlimUser.new(
   email: null,
   id: null,
   name: null,

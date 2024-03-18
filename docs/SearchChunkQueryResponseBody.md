@@ -1,4 +1,4 @@
-# OpenapiClient::SearchChunkQueryResponseBody
+# TrieveRubyClient::SearchChunkQueryResponseBody
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::SearchChunkQueryResponseBody.new(
+instance = TrieveRubyClient::SearchChunkQueryResponseBody.new(
   score_chunks: null,
   total_chunk_pages: null
 )

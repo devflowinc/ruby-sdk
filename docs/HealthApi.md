@@ -1,4 +1,4 @@
-# OpenapiClient::HealthApi
+# TrieveRubyClient::HealthApi
 
 All URIs are relative to *http://localhost*
 
@@ -17,14 +17,14 @@ All URIs are relative to *http://localhost*
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-api_instance = OpenapiClient::HealthApi.new
+api_instance = TrieveRubyClient::HealthApi.new
 
 begin
   
   api_instance.health_check
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling HealthApi->health_check: #{e}"
 end
 ```
@@ -42,7 +42,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling HealthApi->health_check_with_http_info: #{e}"
 end
 ```

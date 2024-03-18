@@ -1,4 +1,4 @@
-# OpenapiClient::ChunkApi
+# TrieveRubyClient::ChunkApi
 
 All URIs are relative to *http://localhost*
 
@@ -7,10 +7,10 @@ All URIs are relative to *http://localhost*
 | [**bulk_create_chunk**](ChunkApi.md#bulk_create_chunk) | **POST** /api/chunk/bulk | bulk_create_chunk |
 | [**create_chunk**](ChunkApi.md#create_chunk) | **POST** /api/chunk | create_chunk |
 | [**create_suggested_queries_handler**](ChunkApi.md#create_suggested_queries_handler) | **POST** /api/chunk/gen_suggestions | get_suggested_queries |
-| [**delete_chunk**](ChunkApi.md#delete_chunk) | **DELETE** /api/chunk/{chunk_id} | delete_chunk |
+| [**delete_chunk**](ChunkApi.md#delete_chunk) | **DELETE** /api/{tracking_or_chunk}/{chunk_id} | delete_chunk |
 | [**delete_chunk_by_tracking_id**](ChunkApi.md#delete_chunk_by_tracking_id) | **DELETE** /api/chunk/tracking_id/{tracking_id} | delete_chunk_by_tracking_id |
 | [**generate_off_chunks**](ChunkApi.md#generate_off_chunks) | **POST** /api/chunk/generate | augmented_generation_from_chunks |
-| [**get_chunk_by_id**](ChunkApi.md#get_chunk_by_id) | **GET** /api/chunk/{chunk_id} | get_chunk |
+| [**get_chunk_by_id**](ChunkApi.md#get_chunk_by_id) | **GET** /api/{tracking_or_chunk}/{chunk_id} | get_chunk |
 | [**get_chunk_by_tracking_id**](ChunkApi.md#get_chunk_by_tracking_id) | **GET** /api/chunk/tracking_id/{tracking_id} | get_chunk_by_tracking_id |
 | [**get_recommended_chunks**](ChunkApi.md#get_recommended_chunks) | **POST** /api/chunk/recommend | get_recommended_chunks |
 | [**search_chunk**](ChunkApi.md#search_chunk) | **POST** /api/chunk/search | search |
@@ -30,9 +30,9 @@ bulk_create_chunk  Create a new chunk from an array of chunks. If the chunk has 
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -44,15 +44,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkApi.new
+api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-create_chunk_data = OpenapiClient::CreateChunkData.new # CreateChunkData | JSON request payload to create a new chunk (chunk)
+create_chunk_data = TrieveRubyClient::CreateChunkData.new # CreateChunkData | JSON request payload to create a new chunk (chunk)
 
 begin
   # bulk_create_chunk
   result = api_instance.bulk_create_chunk(tr_dataset, create_chunk_data)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->bulk_create_chunk: #{e}"
 end
 ```
@@ -70,7 +70,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ReturnQueuedChunk>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->bulk_create_chunk_with_http_info: #{e}"
 end
 ```
@@ -108,9 +108,9 @@ create_chunk  Create a new chunk. If the chunk has the same tracking_id as an ex
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -122,15 +122,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkApi.new
+api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-create_chunk_data = OpenapiClient::CreateChunkData.new # CreateChunkData | JSON request payload to create a new chunk (chunk)
+create_chunk_data = TrieveRubyClient::CreateChunkData.new # CreateChunkData | JSON request payload to create a new chunk (chunk)
 
 begin
   # create_chunk
   result = api_instance.create_chunk(tr_dataset, create_chunk_data)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->create_chunk: #{e}"
 end
 ```
@@ -148,7 +148,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ReturnQueuedChunk>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->create_chunk_with_http_info: #{e}"
 end
 ```
@@ -186,9 +186,9 @@ get_suggested_queries  This endpoint will generate 3 suggested queries based off
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -200,15 +200,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkApi.new
+api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-suggested_queries_request = OpenapiClient::SuggestedQueriesRequest.new({query: 'query_example'}) # SuggestedQueriesRequest | JSON request payload to get alternative suggested queries
+suggested_queries_request = TrieveRubyClient::SuggestedQueriesRequest.new({query: 'query_example'}) # SuggestedQueriesRequest | JSON request payload to get alternative suggested queries
 
 begin
   # get_suggested_queries
   result = api_instance.create_suggested_queries_handler(tr_dataset, suggested_queries_request)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->create_suggested_queries_handler: #{e}"
 end
 ```
@@ -226,7 +226,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SuggestedQueriesResponse>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->create_suggested_queries_handler_with_http_info: #{e}"
 end
 ```
@@ -254,7 +254,7 @@ end
 
 ## delete_chunk
 
-> delete_chunk(tr_dataset, chunk_id)
+> delete_chunk(tr_dataset, chunk_id, tracking_or_chunk)
 
 delete_chunk
 
@@ -264,9 +264,9 @@ delete_chunk  Delete a chunk by its id. If deleting a root chunk which has a col
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -278,14 +278,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkApi.new
+api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-chunk_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the chunk you want to delete
+chunk_id = TODO # Uuid | Id of the chunk you want to fetch. This can be either the chunk_id or the tracking_id.
+tracking_or_chunk = 'tracking_or_chunk_example' # String | The type of id you are using to search for the chunk. This can be either 'chunk' or 'tracking_id'
 
 begin
   # delete_chunk
-  api_instance.delete_chunk(tr_dataset, chunk_id)
-rescue OpenapiClient::ApiError => e
+  api_instance.delete_chunk(tr_dataset, chunk_id, tracking_or_chunk)
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->delete_chunk: #{e}"
 end
 ```
@@ -294,16 +295,16 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> delete_chunk_with_http_info(tr_dataset, chunk_id)
+> <Array(nil, Integer, Hash)> delete_chunk_with_http_info(tr_dataset, chunk_id, tracking_or_chunk)
 
 ```ruby
 begin
   # delete_chunk
-  data, status_code, headers = api_instance.delete_chunk_with_http_info(tr_dataset, chunk_id)
+  data, status_code, headers = api_instance.delete_chunk_with_http_info(tr_dataset, chunk_id, tracking_or_chunk)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->delete_chunk_with_http_info: #{e}"
 end
 ```
@@ -313,7 +314,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **chunk_id** | **String** | id of the chunk you want to delete |  |
+| **chunk_id** | [**Uuid**](.md) | Id of the chunk you want to fetch. This can be either the chunk_id or the tracking_id. |  |
+| **tracking_or_chunk** | **String** | The type of id you are using to search for the chunk. This can be either &#39;chunk&#39; or &#39;tracking_id&#39; |  |
 
 ### Return type
 
@@ -341,9 +343,9 @@ delete_chunk_by_tracking_id  Delete a chunk by tracking_id. This is useful for w
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -355,14 +357,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkApi.new
+api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 tracking_id = 'tracking_id_example' # String | tracking_id of the chunk you want to delete
 
 begin
   # delete_chunk_by_tracking_id
   api_instance.delete_chunk_by_tracking_id(tr_dataset, tracking_id)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->delete_chunk_by_tracking_id: #{e}"
 end
 ```
@@ -380,7 +382,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->delete_chunk_by_tracking_id_with_http_info: #{e}"
 end
 ```
@@ -418,9 +420,9 @@ augmented_generation_from_chunks  This endpoint exists as an alternative to the 
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -432,15 +434,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkApi.new
+api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-generate_chunks_request = OpenapiClient::GenerateChunksRequest.new({chunk_ids: ['chunk_ids_example'], prev_messages: [OpenapiClient::ChatMessageProxy.new({content: 'content_example', role: 'role_example'})]}) # GenerateChunksRequest | JSON request payload to perform RAG on some chunks (chunks)
+generate_chunks_request = TrieveRubyClient::GenerateChunksRequest.new({chunk_ids: ['chunk_ids_example'], prev_messages: [TrieveRubyClient::ChatMessageProxy.new({content: 'content_example', role: 'role_example'})]}) # GenerateChunksRequest | JSON request payload to perform RAG on some chunks (chunks)
 
 begin
   # augmented_generation_from_chunks
   result = api_instance.generate_off_chunks(tr_dataset, generate_chunks_request)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->generate_off_chunks: #{e}"
 end
 ```
@@ -458,7 +460,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => String
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->generate_off_chunks_with_http_info: #{e}"
 end
 ```
@@ -486,7 +488,7 @@ end
 
 ## get_chunk_by_id
 
-> <ChunkMetadata> get_chunk_by_id(tr_dataset, chunk_id)
+> <ChunkMetadata> get_chunk_by_id(tr_dataset, chunk_id, tracking_or_chunk)
 
 get_chunk
 
@@ -496,9 +498,9 @@ get_chunk  Get a singular chunk by id.
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -510,15 +512,16 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkApi.new
+api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-chunk_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Id of the chunk you want to fetch.
+chunk_id = TODO # Uuid | Id of the chunk you want to fetch. This can be either the chunk_id or the tracking_id.
+tracking_or_chunk = 'tracking_or_chunk_example' # String | The type of id you are using to search for the chunk. This can be either 'chunk' or 'tracking_id'
 
 begin
   # get_chunk
-  result = api_instance.get_chunk_by_id(tr_dataset, chunk_id)
+  result = api_instance.get_chunk_by_id(tr_dataset, chunk_id, tracking_or_chunk)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->get_chunk_by_id: #{e}"
 end
 ```
@@ -527,16 +530,16 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ChunkMetadata>, Integer, Hash)> get_chunk_by_id_with_http_info(tr_dataset, chunk_id)
+> <Array(<ChunkMetadata>, Integer, Hash)> get_chunk_by_id_with_http_info(tr_dataset, chunk_id, tracking_or_chunk)
 
 ```ruby
 begin
   # get_chunk
-  data, status_code, headers = api_instance.get_chunk_by_id_with_http_info(tr_dataset, chunk_id)
+  data, status_code, headers = api_instance.get_chunk_by_id_with_http_info(tr_dataset, chunk_id, tracking_or_chunk)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ChunkMetadata>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->get_chunk_by_id_with_http_info: #{e}"
 end
 ```
@@ -546,7 +549,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **chunk_id** | **String** | Id of the chunk you want to fetch. |  |
+| **chunk_id** | [**Uuid**](.md) | Id of the chunk you want to fetch. This can be either the chunk_id or the tracking_id. |  |
+| **tracking_or_chunk** | **String** | The type of id you are using to search for the chunk. This can be either &#39;chunk&#39; or &#39;tracking_id&#39; |  |
 
 ### Return type
 
@@ -574,9 +578,9 @@ get_chunk_by_tracking_id  Get a singular chunk by tracking_id. This is useful fo
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -588,7 +592,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkApi.new
+api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 tracking_id = 'tracking_id_example' # String | tracking_id of the chunk you want to fetch
 
@@ -596,7 +600,7 @@ begin
   # get_chunk_by_tracking_id
   result = api_instance.get_chunk_by_tracking_id(tr_dataset, tracking_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->get_chunk_by_tracking_id: #{e}"
 end
 ```
@@ -614,7 +618,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ChunkMetadata>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->get_chunk_by_tracking_id_with_http_info: #{e}"
 end
 ```
@@ -652,9 +656,9 @@ get_recommended_chunks  Get recommendations of chunks similar to the chunks in t
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -666,15 +670,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkApi.new
+api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-recommend_chunks_request = OpenapiClient::RecommendChunksRequest.new # RecommendChunksRequest | JSON request payload to get recommendations of chunks similar to the chunks in the request
+recommend_chunks_request = TrieveRubyClient::RecommendChunksRequest.new # RecommendChunksRequest | JSON request payload to get recommendations of chunks similar to the chunks in the request
 
 begin
   # get_recommended_chunks
   result = api_instance.get_recommended_chunks(tr_dataset, recommend_chunks_request)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->get_recommended_chunks: #{e}"
 end
 ```
@@ -692,7 +696,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<ChunkMetadataWithFileData>>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->get_recommended_chunks_with_http_info: #{e}"
 end
 ```
@@ -730,9 +734,9 @@ search  This route provides the primary search functionality for the API. It can
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -744,15 +748,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkApi.new
+api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-search_chunk_data = OpenapiClient::SearchChunkData.new({query: 'query_example', search_type: 'search_type_example'}) # SearchChunkData | JSON request payload to semantically search for chunks (chunks)
+search_chunk_data = TrieveRubyClient::SearchChunkData.new({query: 'query_example', search_type: 'search_type_example'}) # SearchChunkData | JSON request payload to semantically search for chunks (chunks)
 
 begin
   # search
   result = api_instance.search_chunk(tr_dataset, search_chunk_data)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->search_chunk: #{e}"
 end
 ```
@@ -770,7 +774,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SearchChunkQueryResponseBody>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->search_chunk_with_http_info: #{e}"
 end
 ```
@@ -808,9 +812,9 @@ update_chunk  Update a chunk. If you try to change the tracking_id of the chunk 
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -822,14 +826,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkApi.new
+api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-update_chunk_data = OpenapiClient::UpdateChunkData.new # UpdateChunkData | JSON request payload to update a chunk (chunk)
+update_chunk_data = TrieveRubyClient::UpdateChunkData.new # UpdateChunkData | JSON request payload to update a chunk (chunk)
 
 begin
   # update_chunk
   api_instance.update_chunk(tr_dataset, update_chunk_data)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->update_chunk: #{e}"
 end
 ```
@@ -847,7 +851,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->update_chunk_with_http_info: #{e}"
 end
 ```
@@ -885,9 +889,9 @@ update_chunk_by_tracking_id  Update a chunk by tracking_id. This is useful for w
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -899,14 +903,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkApi.new
+api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-update_chunk_by_tracking_id_data = OpenapiClient::UpdateChunkByTrackingIdData.new({tracking_id: 'tracking_id_example'}) # UpdateChunkByTrackingIdData | JSON request payload to update a chunk by tracking_id (chunks)
+update_chunk_by_tracking_id_data = TrieveRubyClient::UpdateChunkByTrackingIdData.new({tracking_id: 'tracking_id_example'}) # UpdateChunkByTrackingIdData | JSON request payload to update a chunk by tracking_id (chunks)
 
 begin
   # update_chunk_by_tracking_id
   api_instance.update_chunk_by_tracking_id(tr_dataset, update_chunk_by_tracking_id_data)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->update_chunk_by_tracking_id: #{e}"
 end
 ```
@@ -924,7 +928,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->update_chunk_by_tracking_id_with_http_info: #{e}"
 end
 ```

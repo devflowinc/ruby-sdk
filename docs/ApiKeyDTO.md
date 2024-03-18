@@ -1,4 +1,4 @@
-# OpenapiClient::ApiKeyDTO
+# TrieveRubyClient::ApiKeyDTO
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::ApiKeyDTO.new(
+instance = TrieveRubyClient::ApiKeyDTO.new(
   created_at: null,
   id: null,
   name: null,

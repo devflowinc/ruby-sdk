@@ -1,4 +1,4 @@
-# OpenapiClient::UserApi
+# TrieveRubyClient::UserApi
 
 All URIs are relative to *http://localhost*
 
@@ -21,9 +21,9 @@ delete_user_api_key  Delete an api key for the auth'ed user.
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -35,14 +35,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::UserApi.new
-delete_user_api_key_request = OpenapiClient::DeleteUserApiKeyRequest.new({api_key_id: 'api_key_id_example'}) # DeleteUserApiKeyRequest | JSON request payload to delete a user api key
+api_instance = TrieveRubyClient::UserApi.new
+delete_user_api_key_request = TrieveRubyClient::DeleteUserApiKeyRequest.new({api_key_id: 'api_key_id_example'}) # DeleteUserApiKeyRequest | JSON request payload to delete a user api key
 
 begin
   # delete_user_api_key
   result = api_instance.delete_user_api_key(delete_user_api_key_request)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling UserApi->delete_user_api_key: #{e}"
 end
 ```
@@ -60,7 +60,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<ApiKeyDTO>>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling UserApi->delete_user_api_key_with_http_info: #{e}"
 end
 ```
@@ -97,9 +97,9 @@ set_user_api_key  Create a new api key for the auth'ed user. Successful response
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -111,14 +111,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::UserApi.new
-set_user_api_key_request = OpenapiClient::SetUserApiKeyRequest.new({name: 'name_example', role: 37}) # SetUserApiKeyRequest | JSON request payload to create a new user api key
+api_instance = TrieveRubyClient::UserApi.new
+set_user_api_key_request = TrieveRubyClient::SetUserApiKeyRequest.new({name: 'name_example', role: 37}) # SetUserApiKeyRequest | JSON request payload to create a new user api key
 
 begin
   # set_user_api_key
   result = api_instance.set_user_api_key(set_user_api_key_request)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling UserApi->set_user_api_key: #{e}"
 end
 ```
@@ -136,7 +136,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SetUserApiKeyResponse>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling UserApi->set_user_api_key_with_http_info: #{e}"
 end
 ```
@@ -173,9 +173,9 @@ update_user  Update a user's information. If the user_id is not provided, the au
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -187,14 +187,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::UserApi.new
-update_user_data = OpenapiClient::UpdateUserData.new({organization_id: 'organization_id_example'}) # UpdateUserData | JSON request payload to update user information for the auth'ed user
+api_instance = TrieveRubyClient::UserApi.new
+update_user_data = TrieveRubyClient::UpdateUserData.new({organization_id: 'organization_id_example'}) # UpdateUserData | JSON request payload to update user information for the auth'ed user
 
 begin
   # update_user
   result = api_instance.update_user(update_user_data)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling UserApi->update_user: #{e}"
 end
 ```
@@ -212,7 +212,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SlimUser>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling UserApi->update_user_with_http_info: #{e}"
 end
 ```

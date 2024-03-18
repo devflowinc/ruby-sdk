@@ -1,4 +1,4 @@
-# OpenapiClient::DeleteUserApiKeyRequest
+# TrieveRubyClient::DeleteUserApiKeyRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::DeleteUserApiKeyRequest.new(
+instance = TrieveRubyClient::DeleteUserApiKeyRequest.new(
   api_key_id: null
 )
 ```

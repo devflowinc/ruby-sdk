@@ -1,4 +1,4 @@
-# OpenapiClient::ChunkGroupAndFile
+# TrieveRubyClient::ChunkGroupAndFile
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::ChunkGroupAndFile.new(
+instance = TrieveRubyClient::ChunkGroupAndFile.new(
   created_at: null,
   dataset_id: null,
   description: null,

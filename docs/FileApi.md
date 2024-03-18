@@ -1,4 +1,4 @@
-# OpenapiClient::FileApi
+# TrieveRubyClient::FileApi
 
 All URIs are relative to *http://localhost*
 
@@ -22,9 +22,9 @@ delete_file  Delete a file from S3 attached to the server based on its id. This 
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -36,7 +36,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::FileApi.new
+api_instance = TrieveRubyClient::FileApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 file_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the file to delete
 delete_chunks = true # Boolean | Whether or not to delete the chunks associated with the file
@@ -44,7 +44,7 @@ delete_chunks = true # Boolean | Whether or not to delete the chunks associated 
 begin
   # delete_file
   api_instance.delete_file_handler(tr_dataset, file_id, delete_chunks)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling FileApi->delete_file_handler: #{e}"
 end
 ```
@@ -62,7 +62,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling FileApi->delete_file_handler_with_http_info: #{e}"
 end
 ```
@@ -101,9 +101,9 @@ get_dataset_files  Get all files which belong to a given dataset specified by th
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -115,7 +115,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::FileApi.new
+api_instance = TrieveRubyClient::FileApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 dataset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the dataset to fetch files for.
 page = 789 # Integer | The page number of files you wish to fetch. Each page contains at most 10 files.
@@ -124,7 +124,7 @@ begin
   # get_dataset_files
   result = api_instance.get_dataset_files_handler(tr_dataset, dataset_id, page)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling FileApi->get_dataset_files_handler: #{e}"
 end
 ```
@@ -142,7 +142,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array&lt;File&gt;
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling FileApi->get_dataset_files_handler_with_http_info: #{e}"
 end
 ```
@@ -181,9 +181,9 @@ get_file  Download a file from S3 attached to the server based on its id. We pla
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -195,7 +195,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::FileApi.new
+api_instance = TrieveRubyClient::FileApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 file_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the file to fetch
 
@@ -203,7 +203,7 @@ begin
   # get_file
   result = api_instance.get_file_handler(tr_dataset, file_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling FileApi->get_file_handler: #{e}"
 end
 ```
@@ -221,7 +221,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <FileDTO>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling FileApi->get_file_handler_with_http_info: #{e}"
 end
 ```
@@ -259,9 +259,9 @@ upload_file  Upload a file to S3 attached to the server. The file will be conver
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -273,15 +273,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::FileApi.new
+api_instance = TrieveRubyClient::FileApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-upload_file_data = OpenapiClient::UploadFileData.new({base64_file: 'base64_file_example', file_mime_type: 'file_mime_type_example', file_name: 'file_name_example'}) # UploadFileData | JSON request payload to upload a file
+upload_file_data = TrieveRubyClient::UploadFileData.new({base64_file: 'base64_file_example', file_mime_type: 'file_mime_type_example', file_name: 'file_name_example'}) # UploadFileData | JSON request payload to upload a file
 
 begin
   # upload_file
   result = api_instance.upload_file_handler(tr_dataset, upload_file_data)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling FileApi->upload_file_handler: #{e}"
 end
 ```
@@ -299,7 +299,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UploadFileResult>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling FileApi->upload_file_handler_with_http_info: #{e}"
 end
 ```

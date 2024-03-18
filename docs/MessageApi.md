@@ -1,4 +1,4 @@
-# OpenapiClient::MessageApi
+# TrieveRubyClient::MessageApi
 
 All URIs are relative to *http://localhost*
 
@@ -22,9 +22,9 @@ create_message  Create a message. Messages are attached to topics in order to co
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -36,15 +36,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::MessageApi.new
+api_instance = TrieveRubyClient::MessageApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-create_message_data = OpenapiClient::CreateMessageData.new({new_message_content: 'new_message_content_example', topic_id: 'topic_id_example'}) # CreateMessageData | JSON request payload to create a message completion
+create_message_data = TrieveRubyClient::CreateMessageData.new({new_message_content: 'new_message_content_example', topic_id: 'topic_id_example'}) # CreateMessageData | JSON request payload to create a message completion
 
 begin
   # create_message
   result = api_instance.create_message_completion_handler(tr_dataset, create_message_data)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling MessageApi->create_message_completion_handler: #{e}"
 end
 ```
@@ -62,7 +62,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => String
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling MessageApi->create_message_completion_handler_with_http_info: #{e}"
 end
 ```
@@ -100,9 +100,9 @@ edit_message  Edit a message which exists within the topic's chat history. This 
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -114,14 +114,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::MessageApi.new
+api_instance = TrieveRubyClient::MessageApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-edit_message_data = OpenapiClient::EditMessageData.new({message_sort_order: 37, new_message_content: 'new_message_content_example', topic_id: 'topic_id_example'}) # EditMessageData | JSON request payload to edit a message and get a new stream
+edit_message_data = TrieveRubyClient::EditMessageData.new({message_sort_order: 37, new_message_content: 'new_message_content_example', topic_id: 'topic_id_example'}) # EditMessageData | JSON request payload to edit a message and get a new stream
 
 begin
   # edit_message
   api_instance.edit_message_handler(tr_dataset, edit_message_data)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling MessageApi->edit_message_handler: #{e}"
 end
 ```
@@ -139,7 +139,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling MessageApi->edit_message_handler_with_http_info: #{e}"
 end
 ```
@@ -177,9 +177,9 @@ get_all_messages  Get all messages for a given topic. If the topic is a RAG topi
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -191,7 +191,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::MessageApi.new
+api_instance = TrieveRubyClient::MessageApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 messages_topic_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the topic to get messages for.
 
@@ -199,7 +199,7 @@ begin
   # get_all_messages
   result = api_instance.get_all_topic_messages(tr_dataset, messages_topic_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling MessageApi->get_all_topic_messages: #{e}"
 end
 ```
@@ -217,7 +217,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<Message>>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling MessageApi->get_all_topic_messages_with_http_info: #{e}"
 end
 ```
@@ -255,9 +255,9 @@ regenerate_message  Regenerate the assistant response to the last user message o
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -269,15 +269,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::MessageApi.new
+api_instance = TrieveRubyClient::MessageApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-regenerate_message_data = OpenapiClient::RegenerateMessageData.new({topic_id: 'topic_id_example'}) # RegenerateMessageData | JSON request payload to delete an agent message then regenerate it in a strem
+regenerate_message_data = TrieveRubyClient::RegenerateMessageData.new({topic_id: 'topic_id_example'}) # RegenerateMessageData | JSON request payload to delete an agent message then regenerate it in a strem
 
 begin
   # regenerate_message
   result = api_instance.regenerate_message_handler(tr_dataset, regenerate_message_data)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling MessageApi->regenerate_message_handler: #{e}"
 end
 ```
@@ -295,7 +295,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => String
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling MessageApi->regenerate_message_handler_with_http_info: #{e}"
 end
 ```

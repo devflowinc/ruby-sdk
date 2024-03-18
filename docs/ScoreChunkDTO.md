@@ -1,4 +1,4 @@
-# OpenapiClient::ScoreChunkDTO
+# TrieveRubyClient::ScoreChunkDTO
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::ScoreChunkDTO.new(
+instance = TrieveRubyClient::ScoreChunkDTO.new(
   metadata: null,
   score: null
 )

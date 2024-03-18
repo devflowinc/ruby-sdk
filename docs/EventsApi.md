@@ -1,4 +1,4 @@
-# OpenapiClient::EventsApi
+# TrieveRubyClient::EventsApi
 
 All URIs are relative to *http://localhost*
 
@@ -19,9 +19,9 @@ get_events  Get events for the auth'ed user. Currently, this is only for events 
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -33,7 +33,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::EventsApi.new
+api_instance = TrieveRubyClient::EventsApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 page = 789 # Integer | Page number of events to get
 
@@ -41,7 +41,7 @@ begin
   # get_events
   result = api_instance.get_events(tr_dataset, page)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling EventsApi->get_events: #{e}"
 end
 ```
@@ -59,7 +59,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <EventReturn>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling EventsApi->get_events_with_http_info: #{e}"
 end
 ```

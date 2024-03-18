@@ -1,4 +1,4 @@
-# OpenapiClient::StripeSubscription
+# TrieveRubyClient::StripeSubscription
 
 ## Properties
 
@@ -15,9 +15,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::StripeSubscription.new(
+instance = TrieveRubyClient::StripeSubscription.new(
   created_at: null,
   current_period_end: null,
   id: null,

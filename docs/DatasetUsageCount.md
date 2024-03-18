@@ -1,4 +1,4 @@
-# OpenapiClient::DatasetUsageCount
+# TrieveRubyClient::DatasetUsageCount
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::DatasetUsageCount.new(
+instance = TrieveRubyClient::DatasetUsageCount.new(
   chunk_count: null,
   dataset_id: null,
   id: null

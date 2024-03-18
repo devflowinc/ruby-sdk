@@ -1,4 +1,4 @@
-# OpenapiClient::MatchCondition
+# TrieveRubyClient::MatchCondition
 
 ## Class instance methods
 
@@ -9,9 +9,9 @@ Returns the list of classes defined in oneOf.
 #### Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-OpenapiClient::MatchCondition.openapi_one_of
+TrieveRubyClient::MatchCondition.openapi_one_of
 # =>
 # [
 #   :'Integer',
@@ -26,12 +26,12 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 #### Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-OpenapiClient::MatchCondition.build(data)
+TrieveRubyClient::MatchCondition.build(data)
 # => #<Integer:0x00007fdd4aab02a0>
 
-OpenapiClient::MatchCondition.build(data_that_doesnt_match)
+TrieveRubyClient::MatchCondition.build(data_that_doesnt_match)
 # => nil
 ```
 

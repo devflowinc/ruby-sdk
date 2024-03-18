@@ -1,4 +1,4 @@
-# OpenapiClient::ClientDatasetConfiguration
+# TrieveRubyClient::ClientDatasetConfiguration
 
 ## Properties
 
@@ -19,9 +19,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::ClientDatasetConfiguration.new(
+instance = TrieveRubyClient::ClientDatasetConfiguration.new(
   create_chunk_feature: null,
   date_range_value: null,
   document_upload_feature: null,

@@ -1,4 +1,4 @@
-# OpenapiClient::CreateChunkData
+# TrieveRubyClient::CreateChunkData
 
 ## Properties
 
@@ -21,9 +21,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::CreateChunkData.new(
+instance = TrieveRubyClient::CreateChunkData.new(
   chunk_html: null,
   chunk_vector: null,
   file_id: null,

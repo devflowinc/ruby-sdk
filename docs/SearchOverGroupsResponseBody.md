@@ -1,4 +1,4 @@
-# OpenapiClient::SearchOverGroupsResponseBody
+# TrieveRubyClient::SearchOverGroupsResponseBody
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::SearchOverGroupsResponseBody.new(
+instance = TrieveRubyClient::SearchOverGroupsResponseBody.new(
   group_chunks: null,
   total_chunk_pages: null
 )

@@ -1,4 +1,4 @@
-# OpenapiClient::Range
+# TrieveRubyClient::Range
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::Range.new(
+instance = TrieveRubyClient::Range.new(
   gt: null,
   gte: null,
   lt: null,

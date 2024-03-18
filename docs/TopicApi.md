@@ -1,4 +1,4 @@
-# OpenapiClient::TopicApi
+# TrieveRubyClient::TopicApi
 
 All URIs are relative to *http://localhost*
 
@@ -22,9 +22,9 @@ create_topic  Create a new chat topic. Topics are attached to a user and act as 
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -36,15 +36,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TopicApi.new
+api_instance = TrieveRubyClient::TopicApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-create_topic_data = OpenapiClient::CreateTopicData.new # CreateTopicData | JSON request payload to create chat topic
+create_topic_data = TrieveRubyClient::CreateTopicData.new # CreateTopicData | JSON request payload to create chat topic
 
 begin
   # create_topic
   result = api_instance.create_topic(tr_dataset, create_topic_data)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling TopicApi->create_topic: #{e}"
 end
 ```
@@ -62,7 +62,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Topic>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling TopicApi->create_topic_with_http_info: #{e}"
 end
 ```
@@ -100,9 +100,9 @@ delete_topic  Delete an existing chat topic. When a topic is deleted, all associ
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -114,14 +114,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TopicApi.new
+api_instance = TrieveRubyClient::TopicApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-delete_topic_data = OpenapiClient::DeleteTopicData.new({topic_id: 'topic_id_example'}) # DeleteTopicData | JSON request payload to delete a chat topic
+delete_topic_data = TrieveRubyClient::DeleteTopicData.new({topic_id: 'topic_id_example'}) # DeleteTopicData | JSON request payload to delete a chat topic
 
 begin
   # delete_topic
   api_instance.delete_topic(tr_dataset, delete_topic_data)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling TopicApi->delete_topic: #{e}"
 end
 ```
@@ -139,7 +139,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling TopicApi->delete_topic_with_http_info: #{e}"
 end
 ```
@@ -177,9 +177,9 @@ get_all_topics_for_user  Get all topics belonging to a the auth'ed user. Soon, w
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -191,7 +191,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TopicApi.new
+api_instance = TrieveRubyClient::TopicApi.new
 user_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the user to get topics for
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 
@@ -199,7 +199,7 @@ begin
   # get_all_topics_for_user
   result = api_instance.get_all_topics_for_user(user_id, tr_dataset)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling TopicApi->get_all_topics_for_user: #{e}"
 end
 ```
@@ -217,7 +217,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<Topic>>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling TopicApi->get_all_topics_for_user_with_http_info: #{e}"
 end
 ```
@@ -255,9 +255,9 @@ update_topic  Update an existing chat topic. Currently, only the name of the top
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -269,14 +269,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TopicApi.new
+api_instance = TrieveRubyClient::TopicApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-update_topic_data = OpenapiClient::UpdateTopicData.new({name: 'name_example', topic_id: 'topic_id_example'}) # UpdateTopicData | JSON request payload to update a chat topic
+update_topic_data = TrieveRubyClient::UpdateTopicData.new({name: 'name_example', topic_id: 'topic_id_example'}) # UpdateTopicData | JSON request payload to update a chat topic
 
 begin
   # update_topic
   api_instance.update_topic(tr_dataset, update_topic_data)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling TopicApi->update_topic: #{e}"
 end
 ```
@@ -294,7 +294,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling TopicApi->update_topic_with_http_info: #{e}"
 end
 ```

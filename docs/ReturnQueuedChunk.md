@@ -1,4 +1,4 @@
-# OpenapiClient::ReturnQueuedChunk
+# TrieveRubyClient::ReturnQueuedChunk
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::ReturnQueuedChunk.new(
+instance = TrieveRubyClient::ReturnQueuedChunk.new(
   chunk_metadata: null,
   pos_in_queue: null
 )

@@ -1,4 +1,4 @@
-# OpenapiClient::CreateDatasetRequest
+# TrieveRubyClient::CreateDatasetRequest
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::CreateDatasetRequest.new(
+instance = TrieveRubyClient::CreateDatasetRequest.new(
   client_configuration: null,
   dataset_name: null,
   organization_id: null,

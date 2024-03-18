@@ -1,4 +1,4 @@
-# OpenapiClient::ChunkGroupApi
+# TrieveRubyClient::ChunkGroupApi
 
 All URIs are relative to *http://localhost*
 
@@ -7,9 +7,9 @@ All URIs are relative to *http://localhost*
 | [**add_chunk_to_group**](ChunkGroupApi.md#add_chunk_to_group) | **POST** /api/chunk_group/chunk/{group_id} | add_chunk_to_group |
 | [**add_chunk_to_group_by_tracking_id**](ChunkGroupApi.md#add_chunk_to_group_by_tracking_id) | **POST** /api/chunk_group/tracking_id/{tracking_id} | add_chunk_to_group_by_tracking_id |
 | [**create_chunk_group**](ChunkGroupApi.md#create_chunk_group) | **POST** /api/chunk_group | create_chunk_group |
-| [**delete_chunk_group**](ChunkGroupApi.md#delete_chunk_group) | **DELETE** /api/chunk_group/{group_id} | delete_chunk_group |
+| [**delete_chunk_group**](ChunkGroupApi.md#delete_chunk_group) | **DELETE** /api/{tracking_or_chunk}/{group_id} | delete_chunk_group |
 | [**delete_group_by_tracking_id**](ChunkGroupApi.md#delete_group_by_tracking_id) | **DELETE** /api/chunk_group/tracking_id/{tracking_id} |  |
-| [**get_chunks_in_group**](ChunkGroupApi.md#get_chunks_in_group) | **GET** /api/chunk_group/{group_id}/{page} | get_chunks_in_group |
+| [**get_chunks_in_group**](ChunkGroupApi.md#get_chunks_in_group) | **GET** /api/chunk_group/{tracking_or_chunk}/{group_id}/{page} | get_chunks_in_group |
 | [**get_chunks_in_group_by_tracking_id**](ChunkGroupApi.md#get_chunks_in_group_by_tracking_id) | **GET** /api/chunk_group/tracking_id/{group_tracking_id}/{page} | get_chunks_in_group_by_tracking_id |
 | [**get_group_by_tracking_id**](ChunkGroupApi.md#get_group_by_tracking_id) | **GET** /api/chunk_group/tracking_id/{tracking_id} | get_group_by_tracking_id |
 | [**get_groups_chunk_is_in**](ChunkGroupApi.md#get_groups_chunk_is_in) | **POST** /api/chunk_group/chunks |  |
@@ -34,9 +34,9 @@ add_chunk_to_group  Route to add a chunk to a group
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -48,15 +48,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Id of the group to add the chunk to as a bookmark
-add_chunk_to_group_data = OpenapiClient::AddChunkToGroupData.new({chunk_id: 'chunk_id_example'}) # AddChunkToGroupData | JSON request payload to add a chunk to a group (bookmark it)
+add_chunk_to_group_data = TrieveRubyClient::AddChunkToGroupData.new({chunk_id: 'chunk_id_example'}) # AddChunkToGroupData | JSON request payload to add a chunk to a group (bookmark it)
 
 begin
   # add_chunk_to_group
   api_instance.add_chunk_to_group(tr_dataset, group_id, add_chunk_to_group_data)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->add_chunk_to_group: #{e}"
 end
 ```
@@ -74,7 +74,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->add_chunk_to_group_with_http_info: #{e}"
 end
 ```
@@ -113,9 +113,9 @@ add_chunk_to_group_by_tracking_id  Route to add a chunk to a group by tracking i
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -127,15 +127,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 tracking_id = 'tracking_id_example' # String | Id of the group to add the chunk to as a bookmark
-add_chunk_to_group_data = OpenapiClient::AddChunkToGroupData.new({chunk_id: 'chunk_id_example'}) # AddChunkToGroupData | JSON request payload to add a chunk to a group (bookmark it)
+add_chunk_to_group_data = TrieveRubyClient::AddChunkToGroupData.new({chunk_id: 'chunk_id_example'}) # AddChunkToGroupData | JSON request payload to add a chunk to a group (bookmark it)
 
 begin
   # add_chunk_to_group_by_tracking_id
   api_instance.add_chunk_to_group_by_tracking_id(tr_dataset, tracking_id, add_chunk_to_group_data)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->add_chunk_to_group_by_tracking_id: #{e}"
 end
 ```
@@ -153,7 +153,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->add_chunk_to_group_by_tracking_id_with_http_info: #{e}"
 end
 ```
@@ -192,9 +192,9 @@ create_chunk_group  Create a new chunk_group.
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -206,15 +206,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-create_chunk_group_data = OpenapiClient::CreateChunkGroupData.new({description: 'description_example', name: 'name_example'}) # CreateChunkGroupData | JSON request payload to cretea a chunkGroup
+create_chunk_group_data = TrieveRubyClient::CreateChunkGroupData.new({description: 'description_example', name: 'name_example'}) # CreateChunkGroupData | JSON request payload to cretea a chunkGroup
 
 begin
   # create_chunk_group
   result = api_instance.create_chunk_group(tr_dataset, create_chunk_group_data)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->create_chunk_group: #{e}"
 end
 ```
@@ -232,7 +232,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ChunkGroup>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->create_chunk_group_with_http_info: #{e}"
 end
 ```
@@ -260,7 +260,7 @@ end
 
 ## delete_chunk_group
 
-> delete_chunk_group(tr_dataset, group_id, delete_chunks)
+> delete_chunk_group(tr_dataset, group_id, tracking_or_chunk, delete_chunks)
 
 delete_chunk_group
 
@@ -270,9 +270,9 @@ delete_chunk_group  This will delete a chunk_group. This will not delete the chu
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -284,15 +284,16 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Id of the chunk_group to delete
+group_id = TODO # Uuid | Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used.
+tracking_or_chunk = 'tracking_or_chunk_example' # String | The type of id you are using to search for the group. This can be either 'chunk' or 'tracking_id'
 delete_chunks = true # Boolean | Delete the chunks within the group
 
 begin
   # delete_chunk_group
-  api_instance.delete_chunk_group(tr_dataset, group_id, delete_chunks)
-rescue OpenapiClient::ApiError => e
+  api_instance.delete_chunk_group(tr_dataset, group_id, tracking_or_chunk, delete_chunks)
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->delete_chunk_group: #{e}"
 end
 ```
@@ -301,16 +302,16 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> delete_chunk_group_with_http_info(tr_dataset, group_id, delete_chunks)
+> <Array(nil, Integer, Hash)> delete_chunk_group_with_http_info(tr_dataset, group_id, tracking_or_chunk, delete_chunks)
 
 ```ruby
 begin
   # delete_chunk_group
-  data, status_code, headers = api_instance.delete_chunk_group_with_http_info(tr_dataset, group_id, delete_chunks)
+  data, status_code, headers = api_instance.delete_chunk_group_with_http_info(tr_dataset, group_id, tracking_or_chunk, delete_chunks)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->delete_chunk_group_with_http_info: #{e}"
 end
 ```
@@ -320,7 +321,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **group_id** | **String** | Id of the chunk_group to delete |  |
+| **group_id** | [**Uuid**](.md) | Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used. |  |
+| **tracking_or_chunk** | **String** | The type of id you are using to search for the group. This can be either &#39;chunk&#39; or &#39;tracking_id&#39; |  |
 | **delete_chunks** | **Boolean** | Delete the chunks within the group |  |
 
 ### Return type
@@ -347,9 +349,9 @@ nil (empty response body)
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -361,14 +363,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 tracking_id = 'tracking_id_example' # String | Tracking id of the chunk_group to delete
 
 begin
   
   api_instance.delete_group_by_tracking_id(tr_dataset, tracking_id)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->delete_group_by_tracking_id: #{e}"
 end
 ```
@@ -386,7 +388,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->delete_group_by_tracking_id_with_http_info: #{e}"
 end
 ```
@@ -414,7 +416,7 @@ nil (empty response body)
 
 ## get_chunks_in_group
 
-> <BookmarkData> get_chunks_in_group(tr_dataset, group_id, page)
+> <BookmarkData> get_chunks_in_group(tr_dataset, group_id, tracking_or_chunk, page)
 
 get_chunks_in_group
 
@@ -424,9 +426,9 @@ get_chunks_in_group  Route to get all chunks for a group. The response is pagina
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -438,16 +440,17 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the group to get the chunks from
+group_id = TODO # Uuid | Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used.
+tracking_or_chunk = 'tracking_or_chunk_example' # String | The type of id you are using to search for the group. This can be either 'chunk' or 'tracking_id'
 page = 789 # Integer | The page of chunks to get from the group
 
 begin
   # get_chunks_in_group
-  result = api_instance.get_chunks_in_group(tr_dataset, group_id, page)
+  result = api_instance.get_chunks_in_group(tr_dataset, group_id, tracking_or_chunk, page)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_chunks_in_group: #{e}"
 end
 ```
@@ -456,16 +459,16 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<BookmarkData>, Integer, Hash)> get_chunks_in_group_with_http_info(tr_dataset, group_id, page)
+> <Array(<BookmarkData>, Integer, Hash)> get_chunks_in_group_with_http_info(tr_dataset, group_id, tracking_or_chunk, page)
 
 ```ruby
 begin
   # get_chunks_in_group
-  data, status_code, headers = api_instance.get_chunks_in_group_with_http_info(tr_dataset, group_id, page)
+  data, status_code, headers = api_instance.get_chunks_in_group_with_http_info(tr_dataset, group_id, tracking_or_chunk, page)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <BookmarkData>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_chunks_in_group_with_http_info: #{e}"
 end
 ```
@@ -475,7 +478,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **group_id** | **String** | The id of the group to get the chunks from |  |
+| **group_id** | [**Uuid**](.md) | Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used. |  |
+| **tracking_or_chunk** | **String** | The type of id you are using to search for the group. This can be either &#39;chunk&#39; or &#39;tracking_id&#39; |  |
 | **page** | **Integer** | The page of chunks to get from the group |  |
 
 ### Return type
@@ -504,9 +508,9 @@ get_chunks_in_group_by_tracking_id  Route to get all chunks for a group. The res
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -518,7 +522,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 group_tracking_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the group to get the chunks from
 page = 789 # Integer | The page of chunks to get from the group
@@ -527,7 +531,7 @@ begin
   # get_chunks_in_group_by_tracking_id
   result = api_instance.get_chunks_in_group_by_tracking_id(tr_dataset, group_tracking_id, page)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_chunks_in_group_by_tracking_id: #{e}"
 end
 ```
@@ -545,7 +549,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <BookmarkData>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_chunks_in_group_by_tracking_id_with_http_info: #{e}"
 end
 ```
@@ -584,9 +588,9 @@ get_group_by_tracking_id
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -598,7 +602,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 tracking_id = 'tracking_id_example' # String | The tracking id of the group to fetch.
 
@@ -606,7 +610,7 @@ begin
   # get_group_by_tracking_id
   result = api_instance.get_group_by_tracking_id(tr_dataset, tracking_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_group_by_tracking_id: #{e}"
 end
 ```
@@ -624,7 +628,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ChunkGroup>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_group_by_tracking_id_with_http_info: #{e}"
 end
 ```
@@ -660,9 +664,9 @@ end
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -674,15 +678,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-get_groups_for_chunks_data = OpenapiClient::GetGroupsForChunksData.new({chunk_ids: ['chunk_ids_example']}) # GetGroupsForChunksData | JSON request payload to get the groups that a chunk is in
+get_groups_for_chunks_data = TrieveRubyClient::GetGroupsForChunksData.new({chunk_ids: ['chunk_ids_example']}) # GetGroupsForChunksData | JSON request payload to get the groups that a chunk is in
 
 begin
   
   result = api_instance.get_groups_chunk_is_in(tr_dataset, get_groups_for_chunks_data)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_groups_chunk_is_in: #{e}"
 end
 ```
@@ -700,7 +704,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<BookmarkGroupResult>>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_groups_chunk_is_in_with_http_info: #{e}"
 end
 ```
@@ -736,9 +740,9 @@ end
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -750,15 +754,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-reccomend_group_chunks_request = OpenapiClient::ReccomendGroupChunksRequest.new # ReccomendGroupChunksRequest | JSON request payload to get recommendations of chunks similar to the chunks in the request
+reccomend_group_chunks_request = TrieveRubyClient::ReccomendGroupChunksRequest.new # ReccomendGroupChunksRequest | JSON request payload to get recommendations of chunks similar to the chunks in the request
 
 begin
   
   result = api_instance.get_recommended_groups(tr_dataset, reccomend_group_chunks_request)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_recommended_groups: #{e}"
 end
 ```
@@ -776,7 +780,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<GroupScoreChunkDTO>>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_recommended_groups_with_http_info: #{e}"
 end
 ```
@@ -814,9 +818,9 @@ get_dataset_groups  Fetch the groups which belong to a dataset specified by its 
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -828,7 +832,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 dataset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the dataset to fetch groups for.
 page = 789 # Integer | The page of groups to fetch. Each page contains 10 groups. Support for custom page size is coming soon.
@@ -837,7 +841,7 @@ begin
   # get_dataset_groups
   result = api_instance.get_specific_dataset_chunk_groups(tr_dataset, dataset_id, page)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_specific_dataset_chunk_groups: #{e}"
 end
 ```
@@ -855,7 +859,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GroupData>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_specific_dataset_chunk_groups_with_http_info: #{e}"
 end
 ```
@@ -894,9 +898,9 @@ remove_chunk_from_group  Route to remove a chunk from a group.
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -908,15 +912,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Id of the group to remove the bookmark'ed chunk from
-create_chunk_group_data = OpenapiClient::CreateChunkGroupData.new({description: 'description_example', name: 'name_example'}) # CreateChunkGroupData | JSON request payload to cretea a chunkGroup
+create_chunk_group_data = TrieveRubyClient::CreateChunkGroupData.new({description: 'description_example', name: 'name_example'}) # CreateChunkGroupData | JSON request payload to cretea a chunkGroup
 
 begin
   # remove_chunk_from_group
   api_instance.remove_chunk_from_group(tr_dataset, group_id, create_chunk_group_data)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->remove_chunk_from_group: #{e}"
 end
 ```
@@ -934,7 +938,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->remove_chunk_from_group_with_http_info: #{e}"
 end
 ```
@@ -973,16 +977,16 @@ group_oriented_search  This route allows you to get groups as results instead of
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-api_instance = OpenapiClient::ChunkGroupApi.new
-search_over_groups_data = OpenapiClient::SearchOverGroupsData.new({query: 'query_example', search_type: 'search_type_example'}) # SearchOverGroupsData | JSON request payload to semantically search over groups
+api_instance = TrieveRubyClient::ChunkGroupApi.new
+search_over_groups_data = TrieveRubyClient::SearchOverGroupsData.new({query: 'query_example', search_type: 'search_type_example'}) # SearchOverGroupsData | JSON request payload to semantically search over groups
 
 begin
   # group_oriented_search
   result = api_instance.search_over_groups(search_over_groups_data)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->search_over_groups: #{e}"
 end
 ```
@@ -1000,7 +1004,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SearchOverGroupsResponseBody>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->search_over_groups_with_http_info: #{e}"
 end
 ```
@@ -1037,9 +1041,9 @@ search_within_group  This route allows you to search only within a group. This i
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1051,15 +1055,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-search_within_group_data = OpenapiClient::SearchWithinGroupData.new({query: 'query_example', search_type: 'search_type_example'}) # SearchWithinGroupData | JSON request payload to semantically search a group
+search_within_group_data = TrieveRubyClient::SearchWithinGroupData.new({query: 'query_example', search_type: 'search_type_example'}) # SearchWithinGroupData | JSON request payload to semantically search a group
 
 begin
   # search_within_group
   result = api_instance.search_within_group(tr_dataset, search_within_group_data)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->search_within_group: #{e}"
 end
 ```
@@ -1077,7 +1081,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SearchGroupsResult>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->search_within_group_with_http_info: #{e}"
 end
 ```
@@ -1115,9 +1119,9 @@ update_chunk_group  Update a chunk_group.
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1129,14 +1133,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-update_chunk_group_data = OpenapiClient::UpdateChunkGroupData.new({group_id: 'group_id_example'}) # UpdateChunkGroupData | JSON request payload to update a chunkGroup
+update_chunk_group_data = TrieveRubyClient::UpdateChunkGroupData.new # UpdateChunkGroupData | JSON request payload to update a chunkGroup
 
 begin
   # update_chunk_group
   api_instance.update_chunk_group(tr_dataset, update_chunk_group_data)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->update_chunk_group: #{e}"
 end
 ```
@@ -1154,7 +1158,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->update_chunk_group_with_http_info: #{e}"
 end
 ```
@@ -1190,9 +1194,9 @@ nil (empty response body)
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1204,15 +1208,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ChunkGroupApi.new
+api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 tracking_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Tracking id of the chunk_group to update
-update_group_by_tracking_id_data = OpenapiClient::UpdateGroupByTrackingIDData.new({tracking_id: 'tracking_id_example'}) # UpdateGroupByTrackingIDData | JSON request payload to update a chunkGroup
+update_group_by_tracking_id_data = TrieveRubyClient::UpdateGroupByTrackingIDData.new({tracking_id: 'tracking_id_example'}) # UpdateGroupByTrackingIDData | JSON request payload to update a chunkGroup
 
 begin
   
   api_instance.update_group_by_tracking_id(tr_dataset, tracking_id, update_group_by_tracking_id_data)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->update_group_by_tracking_id: #{e}"
 end
 ```
@@ -1230,7 +1234,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->update_group_by_tracking_id_with_http_info: #{e}"
 end
 ```

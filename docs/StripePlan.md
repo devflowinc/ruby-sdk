@@ -1,4 +1,4 @@
-# OpenapiClient::StripePlan
+# TrieveRubyClient::StripePlan
 
 ## Properties
 
@@ -19,9 +19,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::StripePlan.new(
+instance = TrieveRubyClient::StripePlan.new(
   amount: null,
   chunk_count: null,
   created_at: null,

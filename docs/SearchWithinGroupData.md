@@ -1,4 +1,4 @@
-# OpenapiClient::SearchWithinGroupData
+# TrieveRubyClient::SearchWithinGroupData
 
 ## Properties
 
@@ -20,9 +20,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::SearchWithinGroupData.new(
+instance = TrieveRubyClient::SearchWithinGroupData.new(
   date_bias: null,
   filters: null,
   group_id: null,

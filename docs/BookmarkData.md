@@ -1,4 +1,4 @@
-# OpenapiClient::BookmarkData
+# TrieveRubyClient::BookmarkData
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::BookmarkData.new(
+instance = TrieveRubyClient::BookmarkData.new(
   chunks: null,
   group: null,
   total_pages: null

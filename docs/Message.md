@@ -1,4 +1,4 @@
-# OpenapiClient::Message
+# TrieveRubyClient::Message
 
 ## Properties
 
@@ -19,9 +19,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::Message.new(
+instance = TrieveRubyClient::Message.new(
   completion_tokens: null,
   content: null,
   created_at: null,

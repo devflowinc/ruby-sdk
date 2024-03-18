@@ -1,4 +1,4 @@
-# OpenapiClient::CreateTopicData
+# TrieveRubyClient::CreateTopicData
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::CreateTopicData.new(
+instance = TrieveRubyClient::CreateTopicData.new(
   first_user_message: null,
   model: null,
   name: null

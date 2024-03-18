@@ -1,4 +1,4 @@
-# OpenapiClient::OrganizationApi
+# TrieveRubyClient::OrganizationApi
 
 All URIs are relative to *http://localhost*
 
@@ -24,9 +24,9 @@ create_organization  Create a new organization. The auth'ed user who creates the
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -38,14 +38,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::OrganizationApi.new
-create_organization_data = OpenapiClient::CreateOrganizationData.new({name: 'name_example'}) # CreateOrganizationData | The organization data that you want to create
+api_instance = TrieveRubyClient::OrganizationApi.new
+create_organization_data = TrieveRubyClient::CreateOrganizationData.new({name: 'name_example'}) # CreateOrganizationData | The organization data that you want to create
 
 begin
   # create_organization
   result = api_instance.create_organization(create_organization_data)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling OrganizationApi->create_organization: #{e}"
 end
 ```
@@ -63,7 +63,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Organization>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling OrganizationApi->create_organization_with_http_info: #{e}"
 end
 ```
@@ -100,9 +100,9 @@ delete_organization  Delete an organization by its id. The auth'ed user must be 
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -114,7 +114,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::OrganizationApi.new
+api_instance = TrieveRubyClient::OrganizationApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
 organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the organization you want to fetch.
 
@@ -122,7 +122,7 @@ begin
   # delete_organization
   result = api_instance.delete_organization_by_id(tr_organization, organization_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling OrganizationApi->delete_organization_by_id: #{e}"
 end
 ```
@@ -140,7 +140,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Organization>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling OrganizationApi->delete_organization_by_id_with_http_info: #{e}"
 end
 ```
@@ -178,9 +178,9 @@ get_organization  Fetch the details of an organization by its id. The auth'ed us
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -192,7 +192,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::OrganizationApi.new
+api_instance = TrieveRubyClient::OrganizationApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
 organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the organization you want to fetch.
 
@@ -200,7 +200,7 @@ begin
   # get_organization
   result = api_instance.get_organization_by_id(tr_organization, organization_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling OrganizationApi->get_organization_by_id: #{e}"
 end
 ```
@@ -218,7 +218,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Organization>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling OrganizationApi->get_organization_by_id_with_http_info: #{e}"
 end
 ```
@@ -256,9 +256,9 @@ get_organization_usage  Fetch the current usage specification of an organization
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -270,7 +270,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::OrganizationApi.new
+api_instance = TrieveRubyClient::OrganizationApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
 organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the organization you want to fetch the usage of.
 
@@ -278,7 +278,7 @@ begin
   # get_organization_usage
   result = api_instance.get_organization_usage(tr_organization, organization_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling OrganizationApi->get_organization_usage: #{e}"
 end
 ```
@@ -296,7 +296,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <OrganizationUsageCount>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling OrganizationApi->get_organization_usage_with_http_info: #{e}"
 end
 ```
@@ -334,9 +334,9 @@ get_organization_users  Fetch the users of an organization by its id. The auth'e
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -348,7 +348,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::OrganizationApi.new
+api_instance = TrieveRubyClient::OrganizationApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
 organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the organization you want to fetch the users of.
 
@@ -356,7 +356,7 @@ begin
   # get_organization_users
   result = api_instance.get_organization_users(tr_organization, organization_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling OrganizationApi->get_organization_users: #{e}"
 end
 ```
@@ -374,7 +374,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<SlimUser>>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling OrganizationApi->get_organization_users_with_http_info: #{e}"
 end
 ```
@@ -412,9 +412,9 @@ update_organization  Update an organization. Only the owner of the organization 
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -426,15 +426,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::OrganizationApi.new
+api_instance = TrieveRubyClient::OrganizationApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
-update_organization_data = OpenapiClient::UpdateOrganizationData.new({organization_id: 'organization_id_example'}) # UpdateOrganizationData | The organization data that you want to update
+update_organization_data = TrieveRubyClient::UpdateOrganizationData.new({organization_id: 'organization_id_example'}) # UpdateOrganizationData | The organization data that you want to update
 
 begin
   # update_organization
   result = api_instance.update_organization(tr_organization, update_organization_data)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling OrganizationApi->update_organization: #{e}"
 end
 ```
@@ -452,7 +452,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Organization>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling OrganizationApi->update_organization_with_http_info: #{e}"
 end
 ```

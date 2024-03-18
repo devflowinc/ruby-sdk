@@ -1,4 +1,4 @@
-# OpenapiClient::FieldCondition
+# TrieveRubyClient::FieldCondition
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::FieldCondition.new(
+instance = TrieveRubyClient::FieldCondition.new(
   field: null,
   match: null,
   range: null

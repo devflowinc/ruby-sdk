@@ -1,4 +1,4 @@
-# OpenapiClient::InvitationApi
+# TrieveRubyClient::InvitationApi
 
 All URIs are relative to *http://localhost*
 
@@ -19,9 +19,9 @@ send_invitation  Invitations act as a way to invite users to join an organizatio
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -33,14 +33,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::InvitationApi.new
+api_instance = TrieveRubyClient::InvitationApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
-invitation_data = OpenapiClient::InvitationData.new({app_url: 'app_url_example', email: 'email_example', organization_id: 'organization_id_example', redirect_uri: 'redirect_uri_example', user_role: 37}) # InvitationData | JSON request payload to send an invitation
+invitation_data = TrieveRubyClient::InvitationData.new({app_url: 'app_url_example', email: 'email_example', organization_id: 'organization_id_example', redirect_uri: 'redirect_uri_example', user_role: 37}) # InvitationData | JSON request payload to send an invitation
 
 begin
   # send_invitation
   api_instance.post_invitation(tr_organization, invitation_data)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling InvitationApi->post_invitation: #{e}"
 end
 ```
@@ -58,7 +58,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling InvitationApi->post_invitation_with_http_info: #{e}"
 end
 ```

@@ -1,4 +1,4 @@
-# OpenapiClient::ErrorResponseBody
+# TrieveRubyClient::ErrorResponseBody
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::ErrorResponseBody.new(
+instance = TrieveRubyClient::ErrorResponseBody.new(
   message: null
 )
 ```

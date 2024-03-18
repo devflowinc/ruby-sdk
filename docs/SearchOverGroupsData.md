@@ -1,4 +1,4 @@
-# OpenapiClient::SearchOverGroupsData
+# TrieveRubyClient::SearchOverGroupsData
 
 ## Properties
 
@@ -18,9 +18,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::SearchOverGroupsData.new(
+instance = TrieveRubyClient::SearchOverGroupsData.new(
   filters: null,
   get_collisions: null,
   group_size: null,

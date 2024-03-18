@@ -1,4 +1,4 @@
-# OpenapiClient::SuggestedQueriesRequest
+# TrieveRubyClient::SuggestedQueriesRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::SuggestedQueriesRequest.new(
+instance = TrieveRubyClient::SuggestedQueriesRequest.new(
   query: null
 )
 ```

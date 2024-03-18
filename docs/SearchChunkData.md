@@ -1,4 +1,4 @@
-# OpenapiClient::SearchChunkData
+# TrieveRubyClient::SearchChunkData
 
 ## Properties
 
@@ -19,9 +19,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::SearchChunkData.new(
+instance = TrieveRubyClient::SearchChunkData.new(
   date_bias: null,
   filters: null,
   get_collisions: null,

@@ -1,4 +1,4 @@
-# OpenapiClient::EventReturn
+# TrieveRubyClient::EventReturn
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::EventReturn.new(
+instance = TrieveRubyClient::EventReturn.new(
   events: null,
   page_count: null
 )

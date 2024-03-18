@@ -1,12 +1,18 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "trieve-server",
-    "description": "Trieve REST API OpenAPI Documentation",
-    "license": {
-      "name": ""
+    "title": "Trieve API",
+    "description": "Trieve OpenAPI Specification. This document describes all of the operations available through the Trieve API.",
+    "contact": {
+      "name": "Trieve Team",
+      "url": "https://trieve.ai",
+      "email": "developers@trieve.ai"
     },
-    "version": "0.3.3"
+    "license": {
+      "name": "BSL",
+      "url": "https://github.com/devflowinc/trieve/blob/main/LICENSE.txt"
+    },
+    "version": "0.3.4"
   },
   "paths": {
     "/api/auth": {
@@ -639,6 +645,7 @@
             }
           }
         },
+        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -694,6 +701,7 @@
             }
           }
         },
+        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -744,127 +752,6 @@
           },
           "400": {
             "description": "Service error relating to to updating chunk, likely due to conflicting tracking_id",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseBody"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "ApiKey": [
-              "admin"
-            ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
-          }
-        ]
-      }
-    },
-    "/api/chunk/{chunk_id}": {
-      "get": {
-        "tags": [
-          "chunk"
-        ],
-        "summary": "get_chunk",
-        "description": "get_chunk\n\nGet a singular chunk by id.",
-        "operationId": "get_chunk_by_id",
-        "parameters": [
-          {
-            "name": "TR-Dataset",
-            "in": "header",
-            "description": "The dataset id to use for the request",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "chunk_id",
-            "in": "path",
-            "description": "Id of the chunk you want to fetch.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "chunk with the id that you were searching for",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ChunkMetadata"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error relating to fidning a chunk by tracking_id",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseBody"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "ApiKey": [
-              "readonly"
-            ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
-          }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "chunk"
-        ],
-        "summary": "delete_chunk",
-        "description": "delete_chunk\n\nDelete a chunk by its id. If deleting a root chunk which has a collision, the most recently created collision will become a new root chunk.",
-        "operationId": "delete_chunk",
-        "parameters": [
-          {
-            "name": "TR-Dataset",
-            "in": "header",
-            "description": "The dataset id to use for the request",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "chunk_id",
-            "in": "path",
-            "description": "id of the chunk you want to delete",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Confirmation that the chunk with the id specified was deleted"
-          },
-          "400": {
-            "description": "Service error relating to finding a chunk by tracking_id",
             "content": {
               "application/json": {
                 "schema": {
@@ -1066,6 +953,7 @@
             }
           }
         },
+        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -1133,6 +1021,7 @@
             }
           }
         },
+        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -1452,6 +1341,7 @@
             }
           }
         },
+        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -1516,6 +1406,7 @@
             }
           }
         },
+        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -1582,6 +1473,7 @@
             }
           }
         },
+        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -1647,6 +1539,7 @@
             }
           }
         },
+        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -1700,6 +1593,7 @@
             }
           }
         },
+        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -1714,74 +1608,7 @@
         ]
       }
     },
-    "/api/chunk_group/{group_id}": {
-      "delete": {
-        "tags": [
-          "chunk_group"
-        ],
-        "summary": "delete_chunk_group",
-        "description": "delete_chunk_group\n\nThis will delete a chunk_group. This will not delete the chunks that are in the group. We will soon support deleting a chunk_group along with its member chunks.",
-        "operationId": "delete_chunk_group",
-        "parameters": [
-          {
-            "name": "TR-Dataset",
-            "in": "header",
-            "description": "The dataset id to use for the request",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "group_id",
-            "in": "path",
-            "description": "Id of the chunk_group to delete",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "delete_chunks",
-            "in": "query",
-            "description": "Delete the chunks within the group",
-            "required": true,
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Confirmation that the chunkGroup was deleted"
-          },
-          "400": {
-            "description": "Service error relating to deleting the chunkGroup",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseBody"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "ApiKey": [
-              "admin"
-            ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
-          }
-        ]
-      }
-    },
-    "/api/chunk_group/{group_id}/{page}": {
+    "/api/chunk_group/{tracking_or_chunk}/{group_id}/{page}": {
       "get": {
         "tags": [
           "chunk_group"
@@ -1802,11 +1629,24 @@
           {
             "name": "group_id",
             "in": "path",
-            "description": "The id of the group to get the chunks from",
+            "description": "Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used.",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/uuid"
+                }
+              ],
+              "nullable": true
+            }
+          },
+          {
+            "name": "tracking_or_chunk",
+            "in": "path",
+            "description": "The type of id you are using to search for the group. This can be either 'chunk' or 'tracking_id'",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -3988,6 +3828,233 @@
           }
         ]
       }
+    },
+    "/api/{tracking_or_chunk}/{chunk_id}": {
+      "get": {
+        "tags": [
+          "chunk"
+        ],
+        "summary": "get_chunk",
+        "description": "get_chunk\n\nGet a singular chunk by id.",
+        "operationId": "get_chunk_by_id",
+        "parameters": [
+          {
+            "name": "TR-Dataset",
+            "in": "header",
+            "description": "The dataset id to use for the request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chunk_id",
+            "in": "path",
+            "description": "Id of the chunk you want to fetch. This can be either the chunk_id or the tracking_id.",
+            "required": true,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/uuid"
+                }
+              ],
+              "nullable": true
+            }
+          },
+          {
+            "name": "tracking_or_chunk",
+            "in": "path",
+            "description": "The type of id you are using to search for the chunk. This can be either 'chunk' or 'tracking_id'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "chunk with the id that you were searching for",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChunkMetadata"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Service error relating to fidning a chunk by tracking_id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [
+              "readonly"
+            ]
+          },
+          {
+            "Cookie": [
+              "readonly"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "chunk"
+        ],
+        "summary": "delete_chunk",
+        "description": "delete_chunk\n\nDelete a chunk by its id. If deleting a root chunk which has a collision, the most recently created collision will become a new root chunk.",
+        "operationId": "delete_chunk",
+        "parameters": [
+          {
+            "name": "TR-Dataset",
+            "in": "header",
+            "description": "The dataset id to use for the request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chunk_id",
+            "in": "path",
+            "description": "Id of the chunk you want to fetch. This can be either the chunk_id or the tracking_id.",
+            "required": true,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/uuid"
+                }
+              ],
+              "nullable": true
+            }
+          },
+          {
+            "name": "tracking_or_chunk",
+            "in": "path",
+            "description": "The type of id you are using to search for the chunk. This can be either 'chunk' or 'tracking_id'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Confirmation that the chunk with the id specified was deleted"
+          },
+          "400": {
+            "description": "Service error relating to finding a chunk by tracking_id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [
+              "admin"
+            ]
+          },
+          {
+            "Cookie": [
+              "admin"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/{tracking_or_chunk}/{group_id}": {
+      "delete": {
+        "tags": [
+          "chunk_group"
+        ],
+        "summary": "delete_chunk_group",
+        "description": "delete_chunk_group\n\nThis will delete a chunk_group. This will not delete the chunks that are in the group. We will soon support deleting a chunk_group along with its member chunks.",
+        "operationId": "delete_chunk_group",
+        "parameters": [
+          {
+            "name": "TR-Dataset",
+            "in": "header",
+            "description": "The dataset id to use for the request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "group_id",
+            "in": "path",
+            "description": "Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used.",
+            "required": true,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/uuid"
+                }
+              ],
+              "nullable": true
+            }
+          },
+          {
+            "name": "tracking_or_chunk",
+            "in": "path",
+            "description": "The type of id you are using to search for the group. This can be either 'chunk' or 'tracking_id'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "delete_chunks",
+            "in": "query",
+            "description": "Delete the chunks within the group",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Confirmation that the chunkGroup was deleted"
+          },
+          "400": {
+            "description": "Service error relating to deleting the chunkGroup",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [
+              "admin"
+            ]
+          },
+          {
+            "Cookie": [
+              "admin"
+            ]
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -6034,6 +6101,23 @@
             "description": "HTML content of the chunk you want to update. This can also be plaintext. The innerText of the HTML will be used to create the embedding vector. The point of using HTML is for convienience, as some users have applications where users submit HTML content. If no chunk_html is provided, the existing chunk_html will be used.",
             "nullable": true
           },
+          "group_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Group ids are the ids of the groups that the chunk should be placed into. This is useful for when you want to update a chunk and add it to a group or multiple groups in one request.",
+            "nullable": true
+          },
+          "group_tracking_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Group tracking_ids are the tracking_ids of the groups that the chunk should be placed into. This is useful for when you want to update a chunk and add it to a group or multiple groups in one request.",
+            "nullable": true
+          },
           "link": {
             "type": "string",
             "description": "Link of the chunk you want to update. This can also be any string. Frequently, this is a link to the source of the chunk. The link value will not affect the embedding creation. If no link is provided, the existing link will be used.",
@@ -6074,6 +6158,23 @@
             "description": "Id of the chunk you want to update. You can provide either the chunk_id or the tracking_id. If both are provided, the chunk_id will be used.",
             "nullable": true
           },
+          "group_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Group ids are the ids of the groups that the chunk should be placed into. This is useful for when you want to update a chunk and add it to a group or multiple groups in one request.",
+            "nullable": true
+          },
+          "group_tracking_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Group tracking_ids are the tracking_ids of the groups that the chunk should be placed into. This is useful for when you want to update a chunk and add it to a group or multiple groups in one request.",
+            "nullable": true
+          },
           "link": {
             "type": "string",
             "description": "Link of the chunk you want to update. This can also be any string. Frequently, this is a link to the source of the chunk. The link value will not affect the embedding creation. If no link is provided, the existing link will be used.",
@@ -6103,9 +6204,6 @@
       },
       "UpdateChunkGroupData": {
         "type": "object",
-        "required": [
-          "group_id"
-        ],
         "properties": {
           "description": {
             "type": "string",
@@ -6115,11 +6213,17 @@
           "group_id": {
             "type": "string",
             "format": "uuid",
-            "description": "Id of the chunk_group to update."
+            "description": "Id of the chunk_group to update.",
+            "nullable": true
           },
           "name": {
             "type": "string",
             "description": "Name to assign to the chunk_group. Does not need to be unique. If not provided, the name will not be updated.",
+            "nullable": true
+          },
+          "tracking_id": {
+            "type": "string",
+            "description": "Tracking Id of the chunk_group to update.",
             "nullable": true
           }
         }

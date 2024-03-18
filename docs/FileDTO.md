@@ -1,4 +1,4 @@
-# OpenapiClient::FileDTO
+# TrieveRubyClient::FileDTO
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::FileDTO.new(
+instance = TrieveRubyClient::FileDTO.new(
   created_at: null,
   file_name: null,
   id: null,

@@ -1,4 +1,4 @@
-# OpenapiClient::UserOrganization
+# TrieveRubyClient::UserOrganization
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::UserOrganization.new(
+instance = TrieveRubyClient::UserOrganization.new(
   created_at: null,
   id: null,
   organization_id: null,

@@ -1,4 +1,4 @@
-# OpenapiClient::UploadFileData
+# TrieveRubyClient::UploadFileData
 
 ## Properties
 
@@ -17,9 +17,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::UploadFileData.new(
+instance = TrieveRubyClient::UploadFileData.new(
   base64_file: null,
   create_chunks: null,
   description: null,

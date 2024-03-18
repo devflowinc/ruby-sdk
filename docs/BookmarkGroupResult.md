@@ -1,4 +1,4 @@
-# OpenapiClient::BookmarkGroupResult
+# TrieveRubyClient::BookmarkGroupResult
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::BookmarkGroupResult.new(
+instance = TrieveRubyClient::BookmarkGroupResult.new(
   chunk_uuid: null,
   slim_groups: null
 )

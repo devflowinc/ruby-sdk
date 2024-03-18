@@ -1,4 +1,4 @@
-# OpenapiClient::DatasetDTO
+# TrieveRubyClient::DatasetDTO
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::DatasetDTO.new(
+instance = TrieveRubyClient::DatasetDTO.new(
   client_configuration: null,
   created_at: null,
   id: null,

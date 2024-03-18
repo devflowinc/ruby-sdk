@@ -1,4 +1,4 @@
-# OpenapiClient::GenerateChunksRequest
+# TrieveRubyClient::GenerateChunksRequest
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::GenerateChunksRequest.new(
+instance = TrieveRubyClient::GenerateChunksRequest.new(
   chunk_ids: null,
   model: null,
   prev_messages: null,

@@ -1,4 +1,4 @@
-# OpenapiClient::UpdateUserData
+# TrieveRubyClient::UpdateUserData
 
 ## Properties
 
@@ -15,9 +15,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::UpdateUserData.new(
+instance = TrieveRubyClient::UpdateUserData.new(
   name: null,
   organization_id: null,
   role: null,

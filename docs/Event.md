@@ -1,4 +1,4 @@
-# OpenapiClient::Event
+# TrieveRubyClient::Event
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::Event.new(
+instance = TrieveRubyClient::Event.new(
   created_at: null,
   dataset_id: null,
   event_data: null,

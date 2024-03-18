@@ -1,4 +1,4 @@
-# OpenapiClient::EditMessageData
+# TrieveRubyClient::EditMessageData
 
 ## Properties
 
@@ -15,9 +15,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::EditMessageData.new(
+instance = TrieveRubyClient::EditMessageData.new(
   highlight_citations: null,
   highlight_delimiters: null,
   message_sort_order: null,

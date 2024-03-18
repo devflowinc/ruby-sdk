@@ -1,4 +1,4 @@
-# OpenapiClient::GroupData
+# TrieveRubyClient::GroupData
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::GroupData.new(
+instance = TrieveRubyClient::GroupData.new(
   groups: null,
   total_pages: null
 )

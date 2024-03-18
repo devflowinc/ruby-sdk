@@ -1,4 +1,4 @@
-# OpenapiClient::GetGroupsForChunksData
+# TrieveRubyClient::GetGroupsForChunksData
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::GetGroupsForChunksData.new(
+instance = TrieveRubyClient::GetGroupsForChunksData.new(
   chunk_ids: null
 )
 ```

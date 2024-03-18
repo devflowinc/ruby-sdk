@@ -1,4 +1,4 @@
-# OpenapiClient::RecommendChunksRequest
+# TrieveRubyClient::RecommendChunksRequest
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'trieve_ruby_client'
 
-instance = OpenapiClient::RecommendChunksRequest.new(
+instance = TrieveRubyClient::RecommendChunksRequest.new(
   filters: null,
   limit: null,
   negative_chunk_ids: null,

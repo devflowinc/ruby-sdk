@@ -1,4 +1,4 @@
-# OpenapiClient::DatasetApi
+# TrieveRubyClient::DatasetApi
 
 All URIs are relative to *http://localhost*
 
@@ -24,9 +24,9 @@ create_dataset  Create a new dataset. The auth'ed user must be an owner of the o
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -38,15 +38,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::DatasetApi.new
+api_instance = TrieveRubyClient::DatasetApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
-create_dataset_request = OpenapiClient::CreateDatasetRequest.new({client_configuration: 3.56, dataset_name: 'dataset_name_example', organization_id: 'organization_id_example', server_configuration: 3.56}) # CreateDatasetRequest | JSON request payload to create a new dataset
+create_dataset_request = TrieveRubyClient::CreateDatasetRequest.new({client_configuration: 3.56, dataset_name: 'dataset_name_example', organization_id: 'organization_id_example', server_configuration: 3.56}) # CreateDatasetRequest | JSON request payload to create a new dataset
 
 begin
   # create_dataset
   result = api_instance.create_dataset(tr_organization, create_dataset_request)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->create_dataset: #{e}"
 end
 ```
@@ -64,7 +64,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Dataset>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->create_dataset_with_http_info: #{e}"
 end
 ```
@@ -102,9 +102,9 @@ delete_dataset  Delete a dataset. The auth'ed user must be an owner of the organ
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -116,14 +116,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::DatasetApi.new
+api_instance = TrieveRubyClient::DatasetApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
-delete_dataset_request = OpenapiClient::DeleteDatasetRequest.new({dataset_id: 'dataset_id_example'}) # DeleteDatasetRequest | JSON request payload to delete a dataset
+delete_dataset_request = TrieveRubyClient::DeleteDatasetRequest.new({dataset_id: 'dataset_id_example'}) # DeleteDatasetRequest | JSON request payload to delete a dataset
 
 begin
   # delete_dataset
   api_instance.delete_dataset(tr_organization, delete_dataset_request)
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->delete_dataset: #{e}"
 end
 ```
@@ -141,7 +141,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->delete_dataset_with_http_info: #{e}"
 end
 ```
@@ -179,9 +179,9 @@ get_client_dataset_config  Get the client configuration for a dataset. Will use 
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -193,14 +193,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::DatasetApi.new
+api_instance = TrieveRubyClient::DatasetApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 
 begin
   # get_client_dataset_config
   result = api_instance.get_client_dataset_config(tr_dataset)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->get_client_dataset_config: #{e}"
 end
 ```
@@ -218,7 +218,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ClientDatasetConfiguration>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->get_client_dataset_config_with_http_info: #{e}"
 end
 ```
@@ -255,9 +255,9 @@ get_dataset  Get a dataset by id. The auth'ed user must be an admin or owner of 
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -269,7 +269,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::DatasetApi.new
+api_instance = TrieveRubyClient::DatasetApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 dataset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the dataset you want to retrieve.
@@ -278,7 +278,7 @@ begin
   # get_dataset
   result = api_instance.get_dataset(tr_organization, tr_dataset, dataset_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->get_dataset: #{e}"
 end
 ```
@@ -296,7 +296,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Dataset>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->get_dataset_with_http_info: #{e}"
 end
 ```
@@ -335,9 +335,9 @@ get_organization_datasets  Get all datasets for an organization. The auth'ed use
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -349,7 +349,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::DatasetApi.new
+api_instance = TrieveRubyClient::DatasetApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
 organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the organization you want to retrieve datasets for
 
@@ -357,7 +357,7 @@ begin
   # get_organization_datasets
   result = api_instance.get_datasets_from_organization(tr_organization, organization_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->get_datasets_from_organization: #{e}"
 end
 ```
@@ -375,7 +375,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<DatasetAndUsage>>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->get_datasets_from_organization_with_http_info: #{e}"
 end
 ```
@@ -413,9 +413,9 @@ update_dataset  Update a dataset. The auth'ed user must be an owner of the organ
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'trieve_ruby_client'
 # setup authorization
-OpenapiClient.configure do |config|
+TrieveRubyClient.configure do |config|
   # Configure API key authorization: Cookie
   config.api_key['Cookie'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -427,15 +427,15 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['ApiKey'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::DatasetApi.new
+api_instance = TrieveRubyClient::DatasetApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
-update_dataset_request = OpenapiClient::UpdateDatasetRequest.new({dataset_id: 'dataset_id_example'}) # UpdateDatasetRequest | JSON request payload to update a dataset
+update_dataset_request = TrieveRubyClient::UpdateDatasetRequest.new({dataset_id: 'dataset_id_example'}) # UpdateDatasetRequest | JSON request payload to update a dataset
 
 begin
   # update_dataset
   result = api_instance.update_dataset(tr_organization, update_dataset_request)
   p result
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->update_dataset: #{e}"
 end
 ```
@@ -453,7 +453,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Dataset>
-rescue OpenapiClient::ApiError => e
+rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->update_dataset_with_http_info: #{e}"
 end
 ```
