@@ -12,7 +12,7 @@
       "name": "BSL",
       "url": "https://github.com/devflowinc/trieve/blob/main/LICENSE.txt"
     },
-    "version": "0.3.4"
+    "version": "0.3.5"
   },
   "paths": {
     "/api/auth": {
@@ -6464,11 +6464,6 @@
       "ApiKey": {
         "type": "apiKey",
         "in": "header",
-        "name": "Authorization"
-      },
-      "Cookie": {
-        "type": "apiKey",
-        "in": "cookie",
         "name": "Authorization"
       }
     }

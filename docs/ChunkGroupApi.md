@@ -37,11 +37,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -93,7 +88,7 @@ nil (empty response body)
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -116,11 +111,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -172,7 +162,7 @@ nil (empty response body)
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -195,11 +185,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -250,7 +235,7 @@ end
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -273,11 +258,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -331,7 +311,7 @@ nil (empty response body)
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -352,11 +332,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -406,7 +381,7 @@ nil (empty response body)
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -429,11 +404,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -488,7 +458,7 @@ end
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -511,11 +481,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -568,7 +533,7 @@ end
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -591,11 +556,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -646,7 +606,7 @@ end
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -667,11 +627,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -722,7 +677,7 @@ end
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -743,11 +698,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -798,7 +748,7 @@ end
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -821,11 +771,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -878,7 +823,7 @@ end
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -901,11 +846,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -957,7 +897,7 @@ nil (empty response body)
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -1044,11 +984,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1099,7 +1034,7 @@ end
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -1122,11 +1057,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1176,7 +1106,7 @@ nil (empty response body)
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -1197,11 +1127,6 @@ require 'time'
 require 'trieve_ruby_client'
 # setup authorization
 TrieveRubyClient.configure do |config|
-  # Configure API key authorization: Cookie
-  config.api_key['Cookie'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['Cookie'] = 'Bearer'
-
   # Configure API key authorization: ApiKey
   config.api_key['ApiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1253,7 +1178,7 @@ nil (empty response body)
 
 ### Authorization
 
-[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
