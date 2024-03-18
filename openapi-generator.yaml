@@ -1,6 +1,6 @@
 gemAuthor: "Trieve"
 gemAuthorEmail: "developers@trieve.ai"
-gemDescription: "Trieve Ruby API client"
+gemDescription: "Ruby client for Trieve API generated from its OpenAPI specification using openapi-generator."
 gemHomepage: "https://trieve.ai"
 gemLicense: "MIT"
 gemName: "trieve_ruby_client"

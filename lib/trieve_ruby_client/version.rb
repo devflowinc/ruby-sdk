@@ -11,5 +11,5 @@ Generator version: 7.4.0
 =end
 
 module TrieveRubyClient
-  VERSION = '0.3.4'
+  VERSION = '0.3.41'
 end
