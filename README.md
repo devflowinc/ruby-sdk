@@ -14,6 +14,7 @@ This repository holds the generated Ruby client for Trieve. This client is creat
 
 1. Update the version in `.travis.yml` to match that of the OpenAPI spec 
 2. Run `npx @openapitools/openapi-generator-cli generate -i openapi.json -g ruby`
+3. Remove any changes outside of `lib` that affect the overall gem
 
 ### Publishing
 
