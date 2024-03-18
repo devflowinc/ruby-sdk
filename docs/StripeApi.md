@@ -1,0 +1,285 @@
+# OpenapiClient::StripeApi
+
+All URIs are relative to *http://localhost*
+
+| Method | HTTP request | Description |
+| ------ | ------------ | ----------- |
+| [**cancel_subscription**](StripeApi.md#cancel_subscription) | **DELETE** /api/stripe/subscription/{subscription_id} |  |
+| [**direct_to_payment_link**](StripeApi.md#direct_to_payment_link) | **GET** /api/stripe/payment_link/{plan_id}/{organization_id} |  |
+| [**get_all_plans**](StripeApi.md#get_all_plans) | **GET** /api/stripe/plans |  |
+| [**update_subscription_plan**](StripeApi.md#update_subscription_plan) | **PATCH** /api/stripe/subscription_plan/{subscription_id}/{plan_id} |  |
+
+
+## cancel_subscription
+
+> cancel_subscription(tr_organization, subscription_id)
+
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'openapi_client'
+# setup authorization
+OpenapiClient.configure do |config|
+  # Configure API key authorization: Cookie
+  config.api_key['Cookie'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['Cookie'] = 'Bearer'
+
+  # Configure API key authorization: ApiKey
+  config.api_key['ApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKey'] = 'Bearer'
+end
+
+api_instance = OpenapiClient::StripeApi.new
+tr_organization = 'tr_organization_example' # String | The organization id to use for the request
+subscription_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the subscription you want to cancel
+
+begin
+  
+  api_instance.cancel_subscription(tr_organization, subscription_id)
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling StripeApi->cancel_subscription: #{e}"
+end
+```
+
+#### Using the cancel_subscription_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> cancel_subscription_with_http_info(tr_organization, subscription_id)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.cancel_subscription_with_http_info(tr_organization, subscription_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling StripeApi->cancel_subscription_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **tr_organization** | **String** | The organization id to use for the request |  |
+| **subscription_id** | **String** | id of the subscription you want to cancel |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## direct_to_payment_link
+
+> direct_to_payment_link(plan_id, organization_id)
+
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'openapi_client'
+
+api_instance = OpenapiClient::StripeApi.new
+plan_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the plan you want to subscribe to
+organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the organization you want to subscribe to the plan
+
+begin
+  
+  api_instance.direct_to_payment_link(plan_id, organization_id)
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling StripeApi->direct_to_payment_link: #{e}"
+end
+```
+
+#### Using the direct_to_payment_link_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> direct_to_payment_link_with_http_info(plan_id, organization_id)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.direct_to_payment_link_with_http_info(plan_id, organization_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling StripeApi->direct_to_payment_link_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **plan_id** | **String** | id of the plan you want to subscribe to |  |
+| **organization_id** | **String** | id of the organization you want to subscribe to the plan |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_all_plans
+
+> <Array<StripePlan>> get_all_plans
+
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'openapi_client'
+
+api_instance = OpenapiClient::StripeApi.new
+
+begin
+  
+  result = api_instance.get_all_plans
+  p result
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling StripeApi->get_all_plans: #{e}"
+end
+```
+
+#### Using the get_all_plans_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Array<StripePlan>>, Integer, Hash)> get_all_plans_with_http_info
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.get_all_plans_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Array<StripePlan>>
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling StripeApi->get_all_plans_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**Array&lt;StripePlan&gt;**](StripePlan.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## update_subscription_plan
+
+> update_subscription_plan(tr_organization, subscription_id, plan_id)
+
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'openapi_client'
+# setup authorization
+OpenapiClient.configure do |config|
+  # Configure API key authorization: Cookie
+  config.api_key['Cookie'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['Cookie'] = 'Bearer'
+
+  # Configure API key authorization: ApiKey
+  config.api_key['ApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKey'] = 'Bearer'
+end
+
+api_instance = OpenapiClient::StripeApi.new
+tr_organization = 'tr_organization_example' # String | The organization id to use for the request
+subscription_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the subscription you want to update
+plan_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the plan you want to subscribe to
+
+begin
+  
+  api_instance.update_subscription_plan(tr_organization, subscription_id, plan_id)
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling StripeApi->update_subscription_plan: #{e}"
+end
+```
+
+#### Using the update_subscription_plan_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> update_subscription_plan_with_http_info(tr_organization, subscription_id, plan_id)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.update_subscription_plan_with_http_info(tr_organization, subscription_id, plan_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling StripeApi->update_subscription_plan_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **tr_organization** | **String** | The organization id to use for the request |  |
+| **subscription_id** | **String** | id of the subscription you want to update |  |
+| **plan_id** | **String** | id of the plan you want to subscribe to |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[Cookie](../README.md#Cookie), [ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
