@@ -1,22 +1,22 @@
 # TrieveRubyClient::AuthApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8090*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**callback**](AuthApi.md#callback) | **GET** /api/auth/callback | openid_callback |
-| [**get_me**](AuthApi.md#get_me) | **GET** /api/auth/me | get_me |
-| [**login**](AuthApi.md#login) | **GET** /api/auth | login |
-| [**logout**](AuthApi.md#logout) | **DELETE** /api/auth | logout |
+| [**callback**](AuthApi.md#callback) | **GET** /api/auth/callback | OpenID Connect callback |
+| [**get_me**](AuthApi.md#get_me) | **GET** /api/auth/me | Get Me |
+| [**login**](AuthApi.md#login) | **GET** /api/auth | Login |
+| [**logout**](AuthApi.md#logout) | **DELETE** /api/auth | Logout |
 
 
 ## callback
 
 > <SlimUser> callback
 
-openid_callback
+OpenID Connect callback
 
-openid_callback  This is the callback route for the OAuth provider, it should not be called directly. Redirects to browser with set-cookie header.
+OpenID Connect callback  This is the callback route for the OAuth provider, it should not be called directly. Redirects to browser with set-cookie header.
 
 ### Examples
 
@@ -27,7 +27,7 @@ require 'trieve_ruby_client'
 api_instance = TrieveRubyClient::AuthApi.new
 
 begin
-  # openid_callback
+  # OpenID Connect callback
   result = api_instance.callback
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -43,7 +43,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # openid_callback
+  # OpenID Connect callback
   data, status_code, headers = api_instance.callback_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
@@ -75,9 +75,9 @@ No authorization required
 
 > <SlimUser> get_me
 
-get_me
+Get Me
 
-get_me  Get the user corresponding to your current auth credentials.
+Get Me  Get the user corresponding to your current auth credentials.
 
 ### Examples
 
@@ -95,7 +95,7 @@ end
 api_instance = TrieveRubyClient::AuthApi.new
 
 begin
-  # get_me
+  # Get Me
   result = api_instance.get_me
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -111,7 +111,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # get_me
+  # Get Me
   data, status_code, headers = api_instance.get_me_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
@@ -141,11 +141,11 @@ This endpoint does not need any parameter.
 
 ## login
 
-> login(opts)
+> login(content)
 
-login
+Login
 
-login  This will redirect you to the OAuth provider for authentication with email/pass, SSO, Google, Github, etc.
+Login  This will redirect you to the OAuth provider for authentication with email/pass, SSO, Google, Github, etc.
 
 ### Examples
 
@@ -154,15 +154,11 @@ require 'time'
 require 'trieve_ruby_client'
 
 api_instance = TrieveRubyClient::AuthApi.new
-opts = {
-  inv_code: '38400000-8cf0-11bd-b23e-10b96e4ef00d', # String | Code sent via email as a result of successful call to send_invitation
-  organization_id: '38400000-8cf0-11bd-b23e-10b96e4ef00d', # String | ID of organization to authenticate into
-  redirect_uri: 'redirect_uri_example' # String | URL to redirect to after successful login
-}
+content = TrieveRubyClient::AuthQuery.new # AuthQuery | Query parameters for login to be included as kv pairs after ? on the request URL.
 
 begin
-  # login
-  api_instance.login(opts)
+  # Login
+  api_instance.login(content)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling AuthApi->login: #{e}"
 end
@@ -172,12 +168,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> login_with_http_info(opts)
+> <Array(nil, Integer, Hash)> login_with_http_info(content)
 
 ```ruby
 begin
-  # login
-  data, status_code, headers = api_instance.login_with_http_info(opts)
+  # Login
+  data, status_code, headers = api_instance.login_with_http_info(content)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -190,9 +186,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **inv_code** | **String** | Code sent via email as a result of successful call to send_invitation | [optional] |
-| **organization_id** | **String** | ID of organization to authenticate into | [optional] |
-| **redirect_uri** | **String** | URL to redirect to after successful login | [optional] |
+| **content** | [**AuthQuery**](.md) | Query parameters for login to be included as kv pairs after ? on the request URL. |  |
 
 ### Return type
 
@@ -204,7 +198,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/x-www-form-urlencoded
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -212,9 +206,9 @@ No authorization required
 
 > logout
 
-logout
+Logout
 
-logout  Invalidate your current auth credential stored typically stored in a cookie. This does not invalidate your API key.
+Logout  Invalidate your current auth credential stored typically stored in a cookie. This does not invalidate your API key.
 
 ### Examples
 
@@ -225,7 +219,7 @@ require 'trieve_ruby_client'
 api_instance = TrieveRubyClient::AuthApi.new
 
 begin
-  # logout
+  # Logout
   api_instance.logout
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling AuthApi->logout: #{e}"
@@ -240,7 +234,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # logout
+  # Logout
   data, status_code, headers = api_instance.logout_with_http_info
   p status_code # => 2xx
   p headers # => { ... }

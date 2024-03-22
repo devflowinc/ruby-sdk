@@ -9,10 +9,13 @@ Rakefile
 docs/AddChunkToGroupData.md
 docs/ApiKeyDTO.md
 docs/AuthApi.md
+docs/AuthQuery.md
+docs/BatchQueuedChunkResponse.md
 docs/BookmarkData.md
 docs/BookmarkGroupResult.md
 docs/ChatMessageProxy.md
 docs/ChunkApi.md
+docs/ChunkData.md
 docs/ChunkFilter.md
 docs/ChunkGroup.md
 docs/ChunkGroupAndFile.md
@@ -44,6 +47,7 @@ docs/File.md
 docs/FileApi.md
 docs/FileDTO.md
 docs/GenerateChunksRequest.md
+docs/GetEventsData.md
 docs/GetGroupsForChunksData.md
 docs/GroupData.md
 docs/GroupScoreChunkDTO.md
@@ -70,11 +74,11 @@ docs/SearchOverGroupsResponseBody.md
 docs/SearchWithinGroupData.md
 docs/SetUserApiKeyRequest.md
 docs/SetUserApiKeyResponse.md
+docs/SingleQueuedChunkResponse.md
 docs/SlimGroup.md
 docs/SlimUser.md
 docs/StripeApi.md
 docs/StripePlan.md
-docs/StripeSubscription.md
 docs/SuggestedQueriesRequest.md
 docs/SuggestedQueriesResponse.md
 docs/Topic.md
@@ -111,9 +115,12 @@ lib/trieve_ruby_client/api_error.rb
 lib/trieve_ruby_client/configuration.rb
 lib/trieve_ruby_client/models/add_chunk_to_group_data.rb
 lib/trieve_ruby_client/models/api_key_dto.rb
+lib/trieve_ruby_client/models/auth_query.rb
+lib/trieve_ruby_client/models/batch_queued_chunk_response.rb
 lib/trieve_ruby_client/models/bookmark_data.rb
 lib/trieve_ruby_client/models/bookmark_group_result.rb
 lib/trieve_ruby_client/models/chat_message_proxy.rb
+lib/trieve_ruby_client/models/chunk_data.rb
 lib/trieve_ruby_client/models/chunk_filter.rb
 lib/trieve_ruby_client/models/chunk_group.rb
 lib/trieve_ruby_client/models/chunk_group_and_file.rb
@@ -141,6 +148,7 @@ lib/trieve_ruby_client/models/field_condition.rb
 lib/trieve_ruby_client/models/file.rb
 lib/trieve_ruby_client/models/file_dto.rb
 lib/trieve_ruby_client/models/generate_chunks_request.rb
+lib/trieve_ruby_client/models/get_events_data.rb
 lib/trieve_ruby_client/models/get_groups_for_chunks_data.rb
 lib/trieve_ruby_client/models/group_data.rb
 lib/trieve_ruby_client/models/group_score_chunk_dto.rb
@@ -163,10 +171,10 @@ lib/trieve_ruby_client/models/search_over_groups_response_body.rb
 lib/trieve_ruby_client/models/search_within_group_data.rb
 lib/trieve_ruby_client/models/set_user_api_key_request.rb
 lib/trieve_ruby_client/models/set_user_api_key_response.rb
+lib/trieve_ruby_client/models/single_queued_chunk_response.rb
 lib/trieve_ruby_client/models/slim_group.rb
 lib/trieve_ruby_client/models/slim_user.rb
 lib/trieve_ruby_client/models/stripe_plan.rb
-lib/trieve_ruby_client/models/stripe_subscription.rb
 lib/trieve_ruby_client/models/suggested_queries_request.rb
 lib/trieve_ruby_client/models/suggested_queries_response.rb
 lib/trieve_ruby_client/models/topic.rb

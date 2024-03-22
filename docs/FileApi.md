@@ -1,22 +1,22 @@
 # TrieveRubyClient::FileApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8090*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**delete_file_handler**](FileApi.md#delete_file_handler) | **DELETE** /api/file/{file_id} | delete_file |
-| [**get_dataset_files_handler**](FileApi.md#get_dataset_files_handler) | **GET** /api/dataset/files/{dataset_id}/{page} | get_dataset_files |
-| [**get_file_handler**](FileApi.md#get_file_handler) | **GET** /api/file/{file_id} | get_file |
-| [**upload_file_handler**](FileApi.md#upload_file_handler) | **POST** /api/file | upload_file |
+| [**delete_file_handler**](FileApi.md#delete_file_handler) | **DELETE** /api/file/{file_id} | Delete File |
+| [**get_dataset_files_handler**](FileApi.md#get_dataset_files_handler) | **GET** /api/dataset/files/{dataset_id}/{page} | Get Files for Dataset |
+| [**get_file_handler**](FileApi.md#get_file_handler) | **GET** /api/file/{file_id} | Get File |
+| [**upload_file_handler**](FileApi.md#upload_file_handler) | **POST** /api/file | Upload File |
 
 
 ## delete_file_handler
 
 > delete_file_handler(tr_dataset, file_id, delete_chunks)
 
-delete_file
+Delete File
 
-delete_file  Delete a file from S3 attached to the server based on its id. This will disassociate chunks from the file, but will not delete the chunks. We plan to add support for deleting chunks in a release soon. Auth'ed user must be an admin or owner of the dataset's organization to upload a file.
+Delete File  Delete a file from S3 attached to the server based on its id. This will disassociate chunks from the file, but will not delete the chunks. We plan to add support for deleting chunks in a release soon. Auth'ed user must be an admin or owner of the dataset's organization to upload a file.
 
 ### Examples
 
@@ -37,7 +37,7 @@ file_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the file t
 delete_chunks = true # Boolean | Whether or not to delete the chunks associated with the file
 
 begin
-  # delete_file
+  # Delete File
   api_instance.delete_file_handler(tr_dataset, file_id, delete_chunks)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling FileApi->delete_file_handler: #{e}"
@@ -52,7 +52,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # delete_file
+  # Delete File
   data, status_code, headers = api_instance.delete_file_handler_with_http_info(tr_dataset, file_id, delete_chunks)
   p status_code # => 2xx
   p headers # => { ... }
@@ -88,9 +88,9 @@ nil (empty response body)
 
 > Array&lt;File&gt; get_dataset_files_handler(tr_dataset, dataset_id, page)
 
-get_dataset_files
+Get Files for Dataset
 
-get_dataset_files  Get all files which belong to a given dataset specified by the dataset_id parameter. 10 files are returned per page.
+Get Files for Dataset  Get all files which belong to a given dataset specified by the dataset_id parameter. 10 files are returned per page.
 
 ### Examples
 
@@ -111,7 +111,7 @@ dataset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the dat
 page = 789 # Integer | The page number of files you wish to fetch. Each page contains at most 10 files.
 
 begin
-  # get_dataset_files
+  # Get Files for Dataset
   result = api_instance.get_dataset_files_handler(tr_dataset, dataset_id, page)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -127,7 +127,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # get_dataset_files
+  # Get Files for Dataset
   data, status_code, headers = api_instance.get_dataset_files_handler_with_http_info(tr_dataset, dataset_id, page)
   p status_code # => 2xx
   p headers # => { ... }
@@ -163,9 +163,9 @@ end
 
 > <FileDTO> get_file_handler(tr_dataset, file_id)
 
-get_file
+Get File
 
-get_file  Download a file from S3 attached to the server based on its id. We plan to add support for getting signed S3 URLs to download from S3 directly in a release soon.
+Get File  Download a file from S3 attached to the server based on its id. We plan to add support for getting signed S3 URLs to download from S3 directly in a release soon.
 
 ### Examples
 
@@ -185,7 +185,7 @@ tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the reque
 file_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the file to fetch
 
 begin
-  # get_file
+  # Get File
   result = api_instance.get_file_handler(tr_dataset, file_id)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -201,7 +201,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # get_file
+  # Get File
   data, status_code, headers = api_instance.get_file_handler_with_http_info(tr_dataset, file_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -236,9 +236,9 @@ end
 
 > <UploadFileResult> upload_file_handler(tr_dataset, upload_file_data)
 
-upload_file
+Upload File
 
-upload_file  Upload a file to S3 attached to the server. The file will be converted to HTML with tika and chunked algorithmically, images will be OCR'ed with tesseract. The resulting chunks will be indexed and searchable. Optionally, you can only upload the file and manually create chunks associated to the file after. See docs.trieve.ai and/or contact us for more details and tips. Auth'ed user must be an admin or owner of the dataset's organization to upload a file.
+Upload File  Upload a file to S3 attached to the server. The file will be converted to HTML with tika and chunked algorithmically, images will be OCR'ed with tesseract. The resulting chunks will be indexed and searchable. Optionally, you can only upload the file and manually create chunks associated to the file after. See docs.trieve.ai and/or contact us for more details and tips. Auth'ed user must be an admin or owner of the dataset's organization to upload a file.
 
 ### Examples
 
@@ -258,7 +258,7 @@ tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the reque
 upload_file_data = TrieveRubyClient::UploadFileData.new({base64_file: 'base64_file_example', file_mime_type: 'file_mime_type_example', file_name: 'file_name_example'}) # UploadFileData | JSON request payload to upload a file
 
 begin
-  # upload_file
+  # Upload File
   result = api_instance.upload_file_handler(tr_dataset, upload_file_data)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -274,7 +274,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # upload_file
+  # Upload File
   data, status_code, headers = api_instance.upload_file_handler_with_http_info(tr_dataset, upload_file_data)
   p status_code # => 2xx
   p headers # => { ... }

@@ -1,19 +1,19 @@
 # TrieveRubyClient::InvitationApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8090*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**post_invitation**](InvitationApi.md#post_invitation) | **POST** /api/invitation | send_invitation |
+| [**post_invitation**](InvitationApi.md#post_invitation) | **POST** /api/invitation | Send Invitation |
 
 
 ## post_invitation
 
 > post_invitation(tr_organization, invitation_data)
 
-send_invitation
+Send Invitation
 
-send_invitation  Invitations act as a way to invite users to join an organization. After a user is invited, they will automatically be added to the organization with the role specified in the invitation once they set their.
+Send Invitation  Invitations act as a way to invite users to join an organization. After a user is invited, they will automatically be added to the organization with the role specified in the invitation once they set their.
 
 ### Examples
 
@@ -33,7 +33,7 @@ tr_organization = 'tr_organization_example' # String | The organization id to us
 invitation_data = TrieveRubyClient::InvitationData.new({app_url: 'app_url_example', email: 'email_example', organization_id: 'organization_id_example', redirect_uri: 'redirect_uri_example', user_role: 37}) # InvitationData | JSON request payload to send an invitation
 
 begin
-  # send_invitation
+  # Send Invitation
   api_instance.post_invitation(tr_organization, invitation_data)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling InvitationApi->post_invitation: #{e}"
@@ -48,7 +48,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # send_invitation
+  # Send Invitation
   data, status_code, headers = api_instance.post_invitation_with_http_info(tr_organization, invitation_data)
   p status_code # => 2xx
   p headers # => { ... }

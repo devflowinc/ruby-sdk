@@ -1,22 +1,22 @@
 # TrieveRubyClient::TopicApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8090*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**create_topic**](TopicApi.md#create_topic) | **POST** /api/topic | create_topic |
-| [**delete_topic**](TopicApi.md#delete_topic) | **DELETE** /api/topic | delete_topic |
-| [**get_all_topics_for_user**](TopicApi.md#get_all_topics_for_user) | **GET** /api/topic/user/{user_id} | get_all_topics_for_user |
-| [**update_topic**](TopicApi.md#update_topic) | **PUT** /api/topic | update_topic |
+| [**create_topic**](TopicApi.md#create_topic) | **POST** /api/topic | Create Topic |
+| [**delete_topic**](TopicApi.md#delete_topic) | **DELETE** /api/topic | Delete Topic |
+| [**get_all_topics_for_user**](TopicApi.md#get_all_topics_for_user) | **GET** /api/topic/user/{user_id} | Get All Topics for User |
+| [**update_topic**](TopicApi.md#update_topic) | **PUT** /api/topic | Update Topic |
 
 
 ## create_topic
 
 > <Topic> create_topic(tr_dataset, create_topic_data)
 
-create_topic
+Create Topic
 
-create_topic  Create a new chat topic. Topics are attached to a user and act as a coordinator for memory of gen-AI chat sessions. We are considering refactoring this resource of the API soon.
+Create Topic  Create a new chat topic. Topics are attached to a user and act as a coordinator for memory of gen-AI chat sessions. We are considering refactoring this resource of the API soon.
 
 ### Examples
 
@@ -36,7 +36,7 @@ tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the reque
 create_topic_data = TrieveRubyClient::CreateTopicData.new # CreateTopicData | JSON request payload to create chat topic
 
 begin
-  # create_topic
+  # Create Topic
   result = api_instance.create_topic(tr_dataset, create_topic_data)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -52,7 +52,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # create_topic
+  # Create Topic
   data, status_code, headers = api_instance.create_topic_with_http_info(tr_dataset, create_topic_data)
   p status_code # => 2xx
   p headers # => { ... }
@@ -87,9 +87,9 @@ end
 
 > delete_topic(tr_dataset, delete_topic_data)
 
-delete_topic
+Delete Topic
 
-delete_topic  Delete an existing chat topic. When a topic is deleted, all associated chat messages are also deleted.
+Delete Topic  Delete an existing chat topic. When a topic is deleted, all associated chat messages are also deleted.
 
 ### Examples
 
@@ -109,7 +109,7 @@ tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the reque
 delete_topic_data = TrieveRubyClient::DeleteTopicData.new({topic_id: 'topic_id_example'}) # DeleteTopicData | JSON request payload to delete a chat topic
 
 begin
-  # delete_topic
+  # Delete Topic
   api_instance.delete_topic(tr_dataset, delete_topic_data)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling TopicApi->delete_topic: #{e}"
@@ -124,7 +124,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # delete_topic
+  # Delete Topic
   data, status_code, headers = api_instance.delete_topic_with_http_info(tr_dataset, delete_topic_data)
   p status_code # => 2xx
   p headers # => { ... }
@@ -159,9 +159,9 @@ nil (empty response body)
 
 > <Array<Topic>> get_all_topics_for_user(user_id, tr_dataset)
 
-get_all_topics_for_user
+Get All Topics for User
 
-get_all_topics_for_user  Get all topics belonging to a the auth'ed user. Soon, we plan to allow specification of the user for this route and include pagination.
+Get All Topics for User  Get all topics belonging to a the auth'ed user. Soon, we plan to allow specification of the user for this route and include pagination.
 
 ### Examples
 
@@ -181,7 +181,7 @@ user_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the user t
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 
 begin
-  # get_all_topics_for_user
+  # Get All Topics for User
   result = api_instance.get_all_topics_for_user(user_id, tr_dataset)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -197,7 +197,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # get_all_topics_for_user
+  # Get All Topics for User
   data, status_code, headers = api_instance.get_all_topics_for_user_with_http_info(user_id, tr_dataset)
   p status_code # => 2xx
   p headers # => { ... }
@@ -232,9 +232,9 @@ end
 
 > update_topic(tr_dataset, update_topic_data)
 
-update_topic
+Update Topic
 
-update_topic  Update an existing chat topic. Currently, only the name of the topic can be updated.
+Update Topic  Update an existing chat topic. Currently, only the name of the topic can be updated.
 
 ### Examples
 
@@ -254,7 +254,7 @@ tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the reque
 update_topic_data = TrieveRubyClient::UpdateTopicData.new({name: 'name_example', topic_id: 'topic_id_example'}) # UpdateTopicData | JSON request payload to update a chat topic
 
 begin
-  # update_topic
+  # Update Topic
   api_instance.update_topic(tr_dataset, update_topic_data)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling TopicApi->update_topic: #{e}"
@@ -269,7 +269,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # update_topic
+  # Update Topic
   data, status_code, headers = api_instance.update_topic_with_http_info(tr_dataset, update_topic_data)
   p status_code # => 2xx
   p headers # => { ... }

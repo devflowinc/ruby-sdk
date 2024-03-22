@@ -1,34 +1,35 @@
 # TrieveRubyClient::ChunkGroupApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8090*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**add_chunk_to_group**](ChunkGroupApi.md#add_chunk_to_group) | **POST** /api/chunk_group/chunk/{group_id} | add_chunk_to_group |
-| [**add_chunk_to_group_by_tracking_id**](ChunkGroupApi.md#add_chunk_to_group_by_tracking_id) | **POST** /api/chunk_group/tracking_id/{tracking_id} | add_chunk_to_group_by_tracking_id |
-| [**create_chunk_group**](ChunkGroupApi.md#create_chunk_group) | **POST** /api/chunk_group | create_chunk_group |
-| [**delete_chunk_group**](ChunkGroupApi.md#delete_chunk_group) | **DELETE** /api/{tracking_or_chunk}/{group_id} | delete_chunk_group |
-| [**delete_group_by_tracking_id**](ChunkGroupApi.md#delete_group_by_tracking_id) | **DELETE** /api/chunk_group/tracking_id/{tracking_id} |  |
-| [**get_chunks_in_group**](ChunkGroupApi.md#get_chunks_in_group) | **GET** /api/chunk_group/{tracking_or_chunk}/{group_id}/{page} | get_chunks_in_group |
-| [**get_chunks_in_group_by_tracking_id**](ChunkGroupApi.md#get_chunks_in_group_by_tracking_id) | **GET** /api/chunk_group/tracking_id/{group_tracking_id}/{page} | get_chunks_in_group_by_tracking_id |
-| [**get_group_by_tracking_id**](ChunkGroupApi.md#get_group_by_tracking_id) | **GET** /api/chunk_group/tracking_id/{tracking_id} | get_group_by_tracking_id |
-| [**get_groups_chunk_is_in**](ChunkGroupApi.md#get_groups_chunk_is_in) | **POST** /api/chunk_group/chunks |  |
-| [**get_recommended_groups**](ChunkGroupApi.md#get_recommended_groups) | **POST** /api/chunk_group/recommend |  |
-| [**get_specific_dataset_chunk_groups**](ChunkGroupApi.md#get_specific_dataset_chunk_groups) | **GET** /api/dataset/groups/{dataset_id}/{page} | get_dataset_groups |
-| [**remove_chunk_from_group**](ChunkGroupApi.md#remove_chunk_from_group) | **DELETE** /api/chunk_group/chunk/{group_id} | remove_chunk_from_group |
-| [**search_over_groups**](ChunkGroupApi.md#search_over_groups) | **POST** /api/chunk_group/group_oriented_search | group_oriented_search |
-| [**search_within_group**](ChunkGroupApi.md#search_within_group) | **POST** /api/chunk_group/search | search_within_group |
-| [**update_chunk_group**](ChunkGroupApi.md#update_chunk_group) | **PUT** /api/chunk_group | update_chunk_group |
-| [**update_group_by_tracking_id**](ChunkGroupApi.md#update_group_by_tracking_id) | **PUT** /api/chunk_group/tracking_id/{tracking_id} |  |
+| [**add_chunk_to_group**](ChunkGroupApi.md#add_chunk_to_group) | **POST** /api/chunk_group/chunk/{group_id} | Add Chunk to Group |
+| [**add_chunk_to_group_by_tracking_id**](ChunkGroupApi.md#add_chunk_to_group_by_tracking_id) | **POST** /api/chunk_group/tracking_id/{tracking_id} | Add Chunk to Group by Tracking ID |
+| [**create_chunk_group**](ChunkGroupApi.md#create_chunk_group) | **POST** /api/chunk_group | Create Chunk Group |
+| [**delete_chunk_group**](ChunkGroupApi.md#delete_chunk_group) | **DELETE** /api/chunk_group/{tracking_or_chunk}/{group_id} | Delete Group |
+| [**delete_group_by_tracking_id**](ChunkGroupApi.md#delete_group_by_tracking_id) | **DELETE** /api/chunk_group/tracking_id/{tracking_id} | Delete Group by Tracking ID |
+| [**get_chunk_group**](ChunkGroupApi.md#get_chunk_group) | **GET** /api/chunk_group/{tracking_or_chunk}/{group_id} | Get Group |
+| [**get_chunks_in_group**](ChunkGroupApi.md#get_chunks_in_group) | **GET** /api/chunk_group/{tracking_or_chunk}/{group_id}/{page} | Get Chunks in Group |
+| [**get_chunks_in_group_by_tracking_id**](ChunkGroupApi.md#get_chunks_in_group_by_tracking_id) | **GET** /api/chunk_group/tracking_id/{group_tracking_id}/{page} | Get Chunks in Group by Tracking ID |
+| [**get_group_by_tracking_id**](ChunkGroupApi.md#get_group_by_tracking_id) | **GET** /api/chunk_group/tracking_id/{tracking_id} | Get Group by Tracking ID |
+| [**get_groups_chunk_is_in**](ChunkGroupApi.md#get_groups_chunk_is_in) | **POST** /api/chunk_group/chunks | Get Groups for Chunks |
+| [**get_recommended_groups**](ChunkGroupApi.md#get_recommended_groups) | **POST** /api/chunk_group/recommend | Get Recommended Groups |
+| [**get_specific_dataset_chunk_groups**](ChunkGroupApi.md#get_specific_dataset_chunk_groups) | **GET** /api/dataset/groups/{dataset_id}/{page} | Get Groups for Dataset |
+| [**remove_chunk_from_group**](ChunkGroupApi.md#remove_chunk_from_group) | **DELETE** /api/chunk_group/chunk/{group_id} | Remove Chunk from Group |
+| [**search_over_groups**](ChunkGroupApi.md#search_over_groups) | **POST** /api/chunk_group/group_oriented_search | Search Over Groups |
+| [**search_within_group**](ChunkGroupApi.md#search_within_group) | **POST** /api/chunk_group/search | Search Within Group |
+| [**update_chunk_group**](ChunkGroupApi.md#update_chunk_group) | **PUT** /api/chunk_group | Update Group |
+| [**update_group_by_tracking_id**](ChunkGroupApi.md#update_group_by_tracking_id) | **PUT** /api/chunk_group/tracking_id/{tracking_id} | Update Group by Tracking ID |
 
 
 ## add_chunk_to_group
 
 > add_chunk_to_group(tr_dataset, group_id, add_chunk_to_group_data)
 
-add_chunk_to_group
+Add Chunk to Group
 
-add_chunk_to_group  Route to add a chunk to a group
+Add Chunk to Group  Route to add a chunk to a group
 
 ### Examples
 
@@ -49,7 +50,7 @@ group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Id of the group to 
 add_chunk_to_group_data = TrieveRubyClient::AddChunkToGroupData.new({chunk_id: 'chunk_id_example'}) # AddChunkToGroupData | JSON request payload to add a chunk to a group (bookmark it)
 
 begin
-  # add_chunk_to_group
+  # Add Chunk to Group
   api_instance.add_chunk_to_group(tr_dataset, group_id, add_chunk_to_group_data)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->add_chunk_to_group: #{e}"
@@ -64,7 +65,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # add_chunk_to_group
+  # Add Chunk to Group
   data, status_code, headers = api_instance.add_chunk_to_group_with_http_info(tr_dataset, group_id, add_chunk_to_group_data)
   p status_code # => 2xx
   p headers # => { ... }
@@ -100,9 +101,9 @@ nil (empty response body)
 
 > add_chunk_to_group_by_tracking_id(tr_dataset, tracking_id, add_chunk_to_group_data)
 
-add_chunk_to_group_by_tracking_id
+Add Chunk to Group by Tracking ID
 
-add_chunk_to_group_by_tracking_id  Route to add a chunk to a group by tracking id. Think of a bookmark as a chunk which is a member of a group.
+Add Chunk to Group by Tracking ID  Route to add a chunk to a group by tracking id. Think of a bookmark as a chunk which is a member of a group.
 
 ### Examples
 
@@ -123,7 +124,7 @@ tracking_id = 'tracking_id_example' # String | Id of the group to add the chunk 
 add_chunk_to_group_data = TrieveRubyClient::AddChunkToGroupData.new({chunk_id: 'chunk_id_example'}) # AddChunkToGroupData | JSON request payload to add a chunk to a group (bookmark it)
 
 begin
-  # add_chunk_to_group_by_tracking_id
+  # Add Chunk to Group by Tracking ID
   api_instance.add_chunk_to_group_by_tracking_id(tr_dataset, tracking_id, add_chunk_to_group_data)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->add_chunk_to_group_by_tracking_id: #{e}"
@@ -138,7 +139,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # add_chunk_to_group_by_tracking_id
+  # Add Chunk to Group by Tracking ID
   data, status_code, headers = api_instance.add_chunk_to_group_by_tracking_id_with_http_info(tr_dataset, tracking_id, add_chunk_to_group_data)
   p status_code # => 2xx
   p headers # => { ... }
@@ -174,9 +175,9 @@ nil (empty response body)
 
 > <ChunkGroup> create_chunk_group(tr_dataset, create_chunk_group_data)
 
-create_chunk_group
+Create Chunk Group
 
-create_chunk_group  Create a new chunk_group.
+Create Chunk Group  Create a new chunk_group.
 
 ### Examples
 
@@ -196,7 +197,7 @@ tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the reque
 create_chunk_group_data = TrieveRubyClient::CreateChunkGroupData.new({description: 'description_example', name: 'name_example'}) # CreateChunkGroupData | JSON request payload to cretea a chunkGroup
 
 begin
-  # create_chunk_group
+  # Create Chunk Group
   result = api_instance.create_chunk_group(tr_dataset, create_chunk_group_data)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -212,7 +213,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # create_chunk_group
+  # Create Chunk Group
   data, status_code, headers = api_instance.create_chunk_group_with_http_info(tr_dataset, create_chunk_group_data)
   p status_code # => 2xx
   p headers # => { ... }
@@ -245,11 +246,11 @@ end
 
 ## delete_chunk_group
 
-> delete_chunk_group(tr_dataset, group_id, tracking_or_chunk, delete_chunks)
+> delete_chunk_group(tr_dataset, tracking_or_chunk, group_id, delete_chunks)
 
-delete_chunk_group
+Delete Group
 
-delete_chunk_group  This will delete a chunk_group. This will not delete the chunks that are in the group. We will soon support deleting a chunk_group along with its member chunks.
+Delete Group  This will delete a chunk_group. This will not delete the chunks that are in the group. We will soon support deleting a chunk_group along with its member chunks.
 
 ### Examples
 
@@ -266,13 +267,13 @@ end
 
 api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-group_id = TODO # Uuid | Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used.
 tracking_or_chunk = 'tracking_or_chunk_example' # String | The type of id you are using to search for the group. This can be either 'chunk' or 'tracking_id'
+group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used.
 delete_chunks = true # Boolean | Delete the chunks within the group
 
 begin
-  # delete_chunk_group
-  api_instance.delete_chunk_group(tr_dataset, group_id, tracking_or_chunk, delete_chunks)
+  # Delete Group
+  api_instance.delete_chunk_group(tr_dataset, tracking_or_chunk, group_id, delete_chunks)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->delete_chunk_group: #{e}"
 end
@@ -282,12 +283,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> delete_chunk_group_with_http_info(tr_dataset, group_id, tracking_or_chunk, delete_chunks)
+> <Array(nil, Integer, Hash)> delete_chunk_group_with_http_info(tr_dataset, tracking_or_chunk, group_id, delete_chunks)
 
 ```ruby
 begin
-  # delete_chunk_group
-  data, status_code, headers = api_instance.delete_chunk_group_with_http_info(tr_dataset, group_id, tracking_or_chunk, delete_chunks)
+  # Delete Group
+  data, status_code, headers = api_instance.delete_chunk_group_with_http_info(tr_dataset, tracking_or_chunk, group_id, delete_chunks)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -301,8 +302,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **group_id** | [**Uuid**](.md) | Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used. |  |
 | **tracking_or_chunk** | **String** | The type of id you are using to search for the group. This can be either &#39;chunk&#39; or &#39;tracking_id&#39; |  |
+| **group_id** | **String** | Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used. |  |
 | **delete_chunks** | **Boolean** | Delete the chunks within the group |  |
 
 ### Return type
@@ -323,7 +324,9 @@ nil (empty response body)
 
 > delete_group_by_tracking_id(tr_dataset, tracking_id)
 
+Delete Group by Tracking ID
 
+Delete Group by Tracking ID  Delete a chunk_group with the given tracking id.
 
 ### Examples
 
@@ -343,7 +346,7 @@ tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the reque
 tracking_id = 'tracking_id_example' # String | Tracking id of the chunk_group to delete
 
 begin
-  
+  # Delete Group by Tracking ID
   api_instance.delete_group_by_tracking_id(tr_dataset, tracking_id)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->delete_group_by_tracking_id: #{e}"
@@ -358,7 +361,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  
+  # Delete Group by Tracking ID
   data, status_code, headers = api_instance.delete_group_by_tracking_id_with_http_info(tr_dataset, tracking_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -389,13 +392,13 @@ nil (empty response body)
 - **Accept**: application/json
 
 
-## get_chunks_in_group
+## get_chunk_group
 
-> <BookmarkData> get_chunks_in_group(tr_dataset, group_id, tracking_or_chunk, page)
+> <ChunkGroup> get_chunk_group(tr_dataset, tracking_or_chunk, group_id)
 
-get_chunks_in_group
+Get Group
 
-get_chunks_in_group  Route to get all chunks for a group. The response is paginated, with each page containing 10 chunks. Support for custom page size is coming soon.
+Get Group  Fetch the group with the given id. get_group
 
 ### Examples
 
@@ -412,13 +415,88 @@ end
 
 api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-group_id = TODO # Uuid | Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used.
 tracking_or_chunk = 'tracking_or_chunk_example' # String | The type of id you are using to search for the group. This can be either 'chunk' or 'tracking_id'
+group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Id of the group you want to fetch. This can be either the group_id or the tracking_id.
+
+begin
+  # Get Group
+  result = api_instance.get_chunk_group(tr_dataset, tracking_or_chunk, group_id)
+  p result
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling ChunkGroupApi->get_chunk_group: #{e}"
+end
+```
+
+#### Using the get_chunk_group_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ChunkGroup>, Integer, Hash)> get_chunk_group_with_http_info(tr_dataset, tracking_or_chunk, group_id)
+
+```ruby
+begin
+  # Get Group
+  data, status_code, headers = api_instance.get_chunk_group_with_http_info(tr_dataset, tracking_or_chunk, group_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ChunkGroup>
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling ChunkGroupApi->get_chunk_group_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **tr_dataset** | **String** | The dataset id to use for the request |  |
+| **tracking_or_chunk** | **String** | The type of id you are using to search for the group. This can be either &#39;chunk&#39; or &#39;tracking_id&#39; |  |
+| **group_id** | **String** | Id of the group you want to fetch. This can be either the group_id or the tracking_id. |  |
+
+### Return type
+
+[**ChunkGroup**](ChunkGroup.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_chunks_in_group
+
+> <BookmarkData> get_chunks_in_group(tr_dataset, tracking_or_chunk, group_id, page)
+
+Get Chunks in Group
+
+Get Chunks in Group  Route to get all chunks for a group. The response is paginated, with each page containing 10 chunks. Support for custom page size is coming soon.
+
+### Examples
+
+```ruby
+require 'time'
+require 'trieve_ruby_client'
+# setup authorization
+TrieveRubyClient.configure do |config|
+  # Configure API key authorization: ApiKey
+  config.api_key['ApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKey'] = 'Bearer'
+end
+
+api_instance = TrieveRubyClient::ChunkGroupApi.new
+tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
+tracking_or_chunk = 'tracking_or_chunk_example' # String | The type of id you are using to search for the group. This can be either 'chunk' or 'tracking_id'
+group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used.
 page = 789 # Integer | The page of chunks to get from the group
 
 begin
-  # get_chunks_in_group
-  result = api_instance.get_chunks_in_group(tr_dataset, group_id, tracking_or_chunk, page)
+  # Get Chunks in Group
+  result = api_instance.get_chunks_in_group(tr_dataset, tracking_or_chunk, group_id, page)
   p result
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_chunks_in_group: #{e}"
@@ -429,12 +507,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<BookmarkData>, Integer, Hash)> get_chunks_in_group_with_http_info(tr_dataset, group_id, tracking_or_chunk, page)
+> <Array(<BookmarkData>, Integer, Hash)> get_chunks_in_group_with_http_info(tr_dataset, tracking_or_chunk, group_id, page)
 
 ```ruby
 begin
-  # get_chunks_in_group
-  data, status_code, headers = api_instance.get_chunks_in_group_with_http_info(tr_dataset, group_id, tracking_or_chunk, page)
+  # Get Chunks in Group
+  data, status_code, headers = api_instance.get_chunks_in_group_with_http_info(tr_dataset, tracking_or_chunk, group_id, page)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <BookmarkData>
@@ -448,8 +526,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **group_id** | [**Uuid**](.md) | Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used. |  |
 | **tracking_or_chunk** | **String** | The type of id you are using to search for the group. This can be either &#39;chunk&#39; or &#39;tracking_id&#39; |  |
+| **group_id** | **String** | Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used. |  |
 | **page** | **Integer** | The page of chunks to get from the group |  |
 
 ### Return type
@@ -470,9 +548,9 @@ end
 
 > <BookmarkData> get_chunks_in_group_by_tracking_id(tr_dataset, group_tracking_id, page)
 
-get_chunks_in_group_by_tracking_id
+Get Chunks in Group by Tracking ID
 
-get_chunks_in_group_by_tracking_id  Route to get all chunks for a group. The response is paginated, with each page containing 10 chunks. Support for custom page size is coming soon.
+Get Chunks in Group by Tracking ID  Route to get all chunks for a group. The response is paginated, with each page containing 10 chunks. Support for custom page size is coming soon.
 
 ### Examples
 
@@ -493,7 +571,7 @@ group_tracking_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of 
 page = 789 # Integer | The page of chunks to get from the group
 
 begin
-  # get_chunks_in_group_by_tracking_id
+  # Get Chunks in Group by Tracking ID
   result = api_instance.get_chunks_in_group_by_tracking_id(tr_dataset, group_tracking_id, page)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -509,7 +587,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # get_chunks_in_group_by_tracking_id
+  # Get Chunks in Group by Tracking ID
   data, status_code, headers = api_instance.get_chunks_in_group_by_tracking_id_with_http_info(tr_dataset, group_tracking_id, page)
   p status_code # => 2xx
   p headers # => { ... }
@@ -545,9 +623,9 @@ end
 
 > <ChunkGroup> get_group_by_tracking_id(tr_dataset, tracking_id)
 
-get_group_by_tracking_id
+Get Group by Tracking ID
 
-get_group_by_tracking_id
+Get Group by Tracking ID  Fetch the group with the given tracking id. get_group_by_tracking_id
 
 ### Examples
 
@@ -567,7 +645,7 @@ tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the reque
 tracking_id = 'tracking_id_example' # String | The tracking id of the group to fetch.
 
 begin
-  # get_group_by_tracking_id
+  # Get Group by Tracking ID
   result = api_instance.get_group_by_tracking_id(tr_dataset, tracking_id)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -583,7 +661,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # get_group_by_tracking_id
+  # Get Group by Tracking ID
   data, status_code, headers = api_instance.get_group_by_tracking_id_with_http_info(tr_dataset, tracking_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -618,7 +696,9 @@ end
 
 > <Array<BookmarkGroupResult>> get_groups_chunk_is_in(tr_dataset, get_groups_for_chunks_data)
 
+Get Groups for Chunks
 
+Get Groups for Chunks  Route to get the groups that a chunk is in.
 
 ### Examples
 
@@ -638,7 +718,7 @@ tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the reque
 get_groups_for_chunks_data = TrieveRubyClient::GetGroupsForChunksData.new({chunk_ids: ['chunk_ids_example']}) # GetGroupsForChunksData | JSON request payload to get the groups that a chunk is in
 
 begin
-  
+  # Get Groups for Chunks
   result = api_instance.get_groups_chunk_is_in(tr_dataset, get_groups_for_chunks_data)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -654,7 +734,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  
+  # Get Groups for Chunks
   data, status_code, headers = api_instance.get_groups_chunk_is_in_with_http_info(tr_dataset, get_groups_for_chunks_data)
   p status_code # => 2xx
   p headers # => { ... }
@@ -689,7 +769,9 @@ end
 
 > <Array<GroupScoreChunkDTO>> get_recommended_groups(tr_dataset, reccomend_group_chunks_request)
 
+Get Recommended Groups
 
+Get Recommended Groups  Route to get recommended groups. This route will return groups which are similar to the groups in the request body.
 
 ### Examples
 
@@ -709,7 +791,7 @@ tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the reque
 reccomend_group_chunks_request = TrieveRubyClient::ReccomendGroupChunksRequest.new # ReccomendGroupChunksRequest | JSON request payload to get recommendations of chunks similar to the chunks in the request
 
 begin
-  
+  # Get Recommended Groups
   result = api_instance.get_recommended_groups(tr_dataset, reccomend_group_chunks_request)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -725,7 +807,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  
+  # Get Recommended Groups
   data, status_code, headers = api_instance.get_recommended_groups_with_http_info(tr_dataset, reccomend_group_chunks_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -760,9 +842,9 @@ end
 
 > <GroupData> get_specific_dataset_chunk_groups(tr_dataset, dataset_id, page)
 
-get_dataset_groups
+Get Groups for Dataset
 
-get_dataset_groups  Fetch the groups which belong to a dataset specified by its id.
+Get Groups for Dataset  Fetch the groups which belong to a dataset specified by its id.
 
 ### Examples
 
@@ -783,7 +865,7 @@ dataset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the dat
 page = 789 # Integer | The page of groups to fetch. Each page contains 10 groups. Support for custom page size is coming soon.
 
 begin
-  # get_dataset_groups
+  # Get Groups for Dataset
   result = api_instance.get_specific_dataset_chunk_groups(tr_dataset, dataset_id, page)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -799,7 +881,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # get_dataset_groups
+  # Get Groups for Dataset
   data, status_code, headers = api_instance.get_specific_dataset_chunk_groups_with_http_info(tr_dataset, dataset_id, page)
   p status_code # => 2xx
   p headers # => { ... }
@@ -835,9 +917,9 @@ end
 
 > remove_chunk_from_group(tr_dataset, group_id, create_chunk_group_data)
 
-remove_chunk_from_group
+Remove Chunk from Group
 
-remove_chunk_from_group  Route to remove a chunk from a group.
+Remove Chunk from Group  Route to remove a chunk from a group.
 
 ### Examples
 
@@ -858,7 +940,7 @@ group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Id of the group to 
 create_chunk_group_data = TrieveRubyClient::CreateChunkGroupData.new({description: 'description_example', name: 'name_example'}) # CreateChunkGroupData | JSON request payload to cretea a chunkGroup
 
 begin
-  # remove_chunk_from_group
+  # Remove Chunk from Group
   api_instance.remove_chunk_from_group(tr_dataset, group_id, create_chunk_group_data)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->remove_chunk_from_group: #{e}"
@@ -873,7 +955,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # remove_chunk_from_group
+  # Remove Chunk from Group
   data, status_code, headers = api_instance.remove_chunk_from_group_with_http_info(tr_dataset, group_id, create_chunk_group_data)
   p status_code # => 2xx
   p headers # => { ... }
@@ -909,9 +991,9 @@ nil (empty response body)
 
 > <SearchOverGroupsResponseBody> search_over_groups(search_over_groups_data)
 
-group_oriented_search
+Search Over Groups
 
-group_oriented_search  This route allows you to get groups as results instead of chunks. Each group returned will have the matching chunks sorted by similarity within the group. This is useful for when you want to get groups of chunks which are similar to the search query. If choosing hybrid search, the results will be re-ranked using BAAI/bge-reranker-large. Compatible with semantic, fulltext, or hybrid search modes.
+Search Over Groups  This route allows you to get groups as results instead of chunks. Each group returned will have the matching chunks sorted by similarity within the group. This is useful for when you want to get groups of chunks which are similar to the search query. If choosing hybrid search, the results will be re-ranked using BAAI/bge-reranker-large. Compatible with semantic, fulltext, or hybrid search modes.
 
 ### Examples
 
@@ -923,7 +1005,7 @@ api_instance = TrieveRubyClient::ChunkGroupApi.new
 search_over_groups_data = TrieveRubyClient::SearchOverGroupsData.new({query: 'query_example', search_type: 'search_type_example'}) # SearchOverGroupsData | JSON request payload to semantically search over groups
 
 begin
-  # group_oriented_search
+  # Search Over Groups
   result = api_instance.search_over_groups(search_over_groups_data)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -939,7 +1021,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # group_oriented_search
+  # Search Over Groups
   data, status_code, headers = api_instance.search_over_groups_with_http_info(search_over_groups_data)
   p status_code # => 2xx
   p headers # => { ... }
@@ -973,9 +1055,9 @@ No authorization required
 
 > <SearchGroupsResult> search_within_group(tr_dataset, search_within_group_data)
 
-search_within_group
+Search Within Group
 
-search_within_group  This route allows you to search only within a group. This is useful for when you only want search results to contain chunks which are members of a specific group. If choosing hybrid search, the results will be re-ranked using BAAI/bge-reranker-large.
+Search Within Group  This route allows you to search only within a group. This is useful for when you only want search results to contain chunks which are members of a specific group. If choosing hybrid search, the results will be re-ranked using BAAI/bge-reranker-large.
 
 ### Examples
 
@@ -995,7 +1077,7 @@ tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the reque
 search_within_group_data = TrieveRubyClient::SearchWithinGroupData.new({query: 'query_example', search_type: 'search_type_example'}) # SearchWithinGroupData | JSON request payload to semantically search a group
 
 begin
-  # search_within_group
+  # Search Within Group
   result = api_instance.search_within_group(tr_dataset, search_within_group_data)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -1011,7 +1093,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # search_within_group
+  # Search Within Group
   data, status_code, headers = api_instance.search_within_group_with_http_info(tr_dataset, search_within_group_data)
   p status_code # => 2xx
   p headers # => { ... }
@@ -1046,9 +1128,9 @@ end
 
 > update_chunk_group(tr_dataset, update_chunk_group_data)
 
-update_chunk_group
+Update Group
 
-update_chunk_group  Update a chunk_group.
+Update Group  Update a chunk_group.
 
 ### Examples
 
@@ -1068,7 +1150,7 @@ tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the reque
 update_chunk_group_data = TrieveRubyClient::UpdateChunkGroupData.new # UpdateChunkGroupData | JSON request payload to update a chunkGroup
 
 begin
-  # update_chunk_group
+  # Update Group
   api_instance.update_chunk_group(tr_dataset, update_chunk_group_data)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->update_chunk_group: #{e}"
@@ -1083,7 +1165,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # update_chunk_group
+  # Update Group
   data, status_code, headers = api_instance.update_chunk_group_with_http_info(tr_dataset, update_chunk_group_data)
   p status_code # => 2xx
   p headers # => { ... }
@@ -1118,7 +1200,9 @@ nil (empty response body)
 
 > update_group_by_tracking_id(tr_dataset, tracking_id, update_group_by_tracking_id_data)
 
+Update Group by Tracking ID
 
+Update Group by Tracking ID  Update a chunk_group with the given tracking id.
 
 ### Examples
 
@@ -1139,7 +1223,7 @@ tracking_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Tracking id of t
 update_group_by_tracking_id_data = TrieveRubyClient::UpdateGroupByTrackingIDData.new({tracking_id: 'tracking_id_example'}) # UpdateGroupByTrackingIDData | JSON request payload to update a chunkGroup
 
 begin
-  
+  # Update Group by Tracking ID
   api_instance.update_group_by_tracking_id(tr_dataset, tracking_id, update_group_by_tracking_id_data)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->update_group_by_tracking_id: #{e}"
@@ -1154,7 +1238,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  
+  # Update Group by Tracking ID
   data, status_code, headers = api_instance.update_group_by_tracking_id_with_http_info(tr_dataset, tracking_id, update_group_by_tracking_id_data)
   p status_code # => 2xx
   p headers # => { ... }

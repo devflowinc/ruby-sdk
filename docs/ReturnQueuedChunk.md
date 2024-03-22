@@ -1,20 +1,49 @@
 # TrieveRubyClient::ReturnQueuedChunk
 
-## Properties
+## Class instance methods
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **chunk_metadata** | [**ChunkMetadata**](ChunkMetadata.md) |  |  |
-| **pos_in_queue** | **Integer** |  |  |
+### `openapi_one_of`
 
-## Example
+Returns the list of classes defined in oneOf.
+
+#### Example
 
 ```ruby
 require 'trieve_ruby_client'
 
-instance = TrieveRubyClient::ReturnQueuedChunk.new(
-  chunk_metadata: null,
-  pos_in_queue: null
-)
+TrieveRubyClient::ReturnQueuedChunk.openapi_one_of
+# =>
+# [
+#   :'BatchQueuedChunkResponse',
+#   :'SingleQueuedChunkResponse'
+# ]
 ```
+
+### build
+
+Find the appropriate object from the `openapi_one_of` list and casts the data into it.
+
+#### Example
+
+```ruby
+require 'trieve_ruby_client'
+
+TrieveRubyClient::ReturnQueuedChunk.build(data)
+# => #<BatchQueuedChunkResponse:0x00007fdd4aab02a0>
+
+TrieveRubyClient::ReturnQueuedChunk.build(data_that_doesnt_match)
+# => nil
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| **data** | **Mixed** | data to be matched against the list of oneOf items |
+
+#### Return type
+
+- `BatchQueuedChunkResponse`
+- `SingleQueuedChunkResponse`
+- `nil` (if no type matches)
 

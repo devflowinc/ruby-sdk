@@ -12,28 +12,38 @@
       "name": "BSL",
       "url": "https://github.com/devflowinc/trieve/blob/main/LICENSE.txt"
     },
-    "version": "0.3.5"
+    "version": "0.4.0"
   },
+  "servers": [
+    {
+      "url": "http://localhost:8090",
+      "description": "Local development server"
+    },
+    {
+      "url": "https://api.trieve.ai",
+      "description": "Production server"
+    }
+  ],
   "paths": {
     "/api/auth": {
       "get": {
         "tags": [
           "auth"
         ],
-        "summary": "login",
-        "description": "login\n\nThis will redirect you to the OAuth provider for authentication with email/pass, SSO, Google, Github, etc.",
+        "summary": "Login",
+        "description": "Login\n\nThis will redirect you to the OAuth provider for authentication with email/pass, SSO, Google, Github, etc.",
         "operationId": "login",
-        "requestBody": {
-          "description": "Query parameters for login to be included as kv pairs after ? on the request URL.",
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/AuthQuery"
-              }
+        "parameters": [
+          {
+            "name": "content",
+            "in": "query",
+            "description": "Query parameters for login to be included as kv pairs after ? on the request URL.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AuthQuery"
             }
-          },
-          "required": true
-        },
+          }
+        ],
         "responses": {
           "303": {
             "description": "Response that redirects to OAuth provider through a Location header to be handled by browser."
@@ -54,8 +64,8 @@
         "tags": [
           "auth"
         ],
-        "summary": "logout",
-        "description": "logout\n\nInvalidate your current auth credential stored typically stored in a cookie. This does not invalidate your API key.",
+        "summary": "Logout",
+        "description": "Logout\n\nInvalidate your current auth credential stored typically stored in a cookie. This does not invalidate your API key.",
         "operationId": "logout",
         "responses": {
           "204": {
@@ -69,8 +79,8 @@
         "tags": [
           "auth"
         ],
-        "summary": "openid_callback",
-        "description": "openid_callback\n\nThis is the callback route for the OAuth provider, it should not be called directly. Redirects to browser with set-cookie header.",
+        "summary": "OpenID Connect callback",
+        "description": "OpenID Connect callback\n\nThis is the callback route for the OAuth provider, it should not be called directly. Redirects to browser with set-cookie header.",
         "operationId": "callback",
         "responses": {
           "200": {
@@ -101,8 +111,8 @@
         "tags": [
           "auth"
         ],
-        "summary": "get_me",
-        "description": "get_me\n\nGet the user corresponding to your current auth credentials.",
+        "summary": "Get Me",
+        "description": "Get Me\n\nGet the user corresponding to your current auth credentials.",
         "operationId": "get_me",
         "responses": {
           "200": {
@@ -128,10 +138,9 @@
         },
         "security": [
           {
-            "ApiKey": []
-          },
-          {
-            "Cookie": []
+            "ApiKey": [
+              "readonly"
+            ]
           }
         ]
       }
@@ -141,8 +150,8 @@
         "tags": [
           "chunk"
         ],
-        "summary": "create_chunk",
-        "description": "create_chunk\n\nCreate a new chunk. If the chunk has the same tracking_id as an existing chunk, the request will fail. Once a chunk is created, it can be searched for using the search endpoint.",
+        "summary": "Create Chunk",
+        "description": "Create Chunk\n\nCreate a new chunk. If the chunk has the same tracking_id as an existing chunk, the request will fail. Once a chunk is created, it can be searched for using the search endpoint.",
         "operationId": "create_chunk",
         "parameters": [
           {
@@ -178,7 +187,17 @@
             }
           },
           "400": {
-            "description": "Service error relating to to creating a chunk, likely due to conflicting tracking_id",
+            "description": "Error typically due to deserialization issues",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseBody"
+                }
+              }
+            }
+          },
+          "426": {
+            "description": "Error when upgrade is needed to process more chunks",
             "content": {
               "application/json": {
                 "schema": {
@@ -191,77 +210,6 @@
         "security": [
           {
             "ApiKey": [
-              "admin"
-            ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
-          }
-        ]
-      }
-    },
-    "/api/chunk/bulk": {
-      "post": {
-        "tags": [
-          "chunk"
-        ],
-        "summary": "bulk_create_chunk",
-        "description": "bulk_create_chunk\n\nCreate a new chunk from an array of chunks. If the chunk has the same tracking_id as an existing chunk, the request will fail. Once a chunk is created, it can be searched for using the search endpoint.",
-        "operationId": "bulk_create_chunk",
-        "parameters": [
-          {
-            "name": "TR-Dataset",
-            "in": "header",
-            "description": "The dataset id to use for the request",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "JSON request payload to create a new chunk (chunk)",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateChunkData"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "JSON response payload containing the created chunk",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ReturnQueuedChunk"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error relating to to creating a chunk, likely due to conflicting tracking_id",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseBody"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "ApiKey": [
-              "admin"
-            ]
-          },
-          {
-            "Cookie": [
               "admin"
             ]
           }
@@ -273,8 +221,8 @@
         "tags": [
           "chunk"
         ],
-        "summary": "get_suggested_queries",
-        "description": "get_suggested_queries\n\nThis endpoint will generate 3 suggested queries based off the query provided in the request body and return them as a JSON object.",
+        "summary": "Generate suggested queries",
+        "description": "Generate suggested queries\n\nThis endpoint will generate 3 suggested queries based off the query provided in the request body and return them as a JSON object.",
         "operationId": "create_suggested_queries_handler",
         "parameters": [
           {
@@ -325,11 +273,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -339,8 +282,8 @@
         "tags": [
           "chunk"
         ],
-        "summary": "augmented_generation_from_chunks",
-        "description": "augmented_generation_from_chunks\n\nThis endpoint exists as an alternative to the topic+message concept where our API handles chat memory. With this endpoint, the user is responsible for providing the context window and the prompt. See more in the \"search before generate\" page at docs.trieve.ai.",
+        "summary": "RAG on User Defined Chunks",
+        "description": "RAG on User Defined Chunks\n\nThis endpoint exists as an alternative to the topic+message concept where our API handles chat memory. With this endpoint, the user is responsible for providing the context window and the prompt. See more in the \"search before generate\" page at docs.trieve.ai.",
         "operationId": "generate_off_chunks",
         "parameters": [
           {
@@ -391,11 +334,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -405,8 +343,8 @@
         "tags": [
           "chunk"
         ],
-        "summary": "get_recommended_chunks",
-        "description": "get_recommended_chunks\n\nGet recommendations of chunks similar to the chunks in the request. Think about this as a feature similar to the \"add to playlist\" recommendation feature on Spotify. This request pairs especially well with our groups endpoint.",
+        "summary": "Get Recommended Chunks",
+        "description": "Get Recommended Chunks\n\nGet recommendations of chunks similar to the chunks in the request. Think about this as a feature similar to the \"add to playlist\" recommendation feature on Spotify. This request pairs especially well with our groups endpoint.",
         "operationId": "get_recommended_chunks",
         "parameters": [
           {
@@ -460,11 +398,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -474,8 +407,8 @@
         "tags": [
           "chunk"
         ],
-        "summary": "search",
-        "description": "search\n\nThis route provides the primary search functionality for the API. It can be used to search for chunks by semantic similarity, full-text similarity, or a combination of both. Results' `chunk_html` values will be modified with `<b>` tags for sub-sentence highlighting.",
+        "summary": "Search",
+        "description": "Search\n\nThis route provides the primary search functionality for the API. It can be used to search for chunks by semantic similarity, full-text similarity, or a combination of both. Results' `chunk_html` values will be modified with `<b>` tags for sub-sentence highlighting.",
         "operationId": "search_chunk",
         "parameters": [
           {
@@ -526,11 +459,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -540,8 +468,8 @@
         "tags": [
           "chunk"
         ],
-        "summary": "update_chunk_by_tracking_id",
-        "description": "update_chunk_by_tracking_id\n\nUpdate a chunk by tracking_id. This is useful for when you are coordinating with an external system and want to use the tracking_id to identify the chunk.",
+        "summary": "Update Chunk By Tracking Id",
+        "description": "Update Chunk By Tracking Id\n\nUpdate a chunk by tracking_id. This is useful for when you are coordinating with an external system and want to use the tracking_id to identify the chunk.",
         "operationId": "update_chunk_by_tracking_id",
         "parameters": [
           {
@@ -586,11 +514,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       }
@@ -600,8 +523,8 @@
         "tags": [
           "chunk"
         ],
-        "summary": "get_chunk_by_tracking_id",
-        "description": "get_chunk_by_tracking_id\n\nGet a singular chunk by tracking_id. This is useful for when you are coordinating with an external system and want to use your own id as the primary reference for a chunk.",
+        "summary": "Get Chunk By Tracking Id",
+        "description": "Get Chunk By Tracking Id\n\nGet a singular chunk by tracking_id. This is useful for when you are coordinating with an external system and want to use your own id as the primary reference for a chunk.",
         "operationId": "get_chunk_by_tracking_id",
         "parameters": [
           {
@@ -651,11 +574,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       },
@@ -663,8 +581,8 @@
         "tags": [
           "chunk"
         ],
-        "summary": "delete_chunk_by_tracking_id",
-        "description": "delete_chunk_by_tracking_id\n\nDelete a chunk by tracking_id. This is useful for when you are coordinating with an external system and want to use the tracking_id to identify the chunk. If deleting a root chunk which has a collision, the most recently created collision will become a new root chunk.",
+        "summary": "Delete Chunk By Tracking Id",
+        "description": "Delete Chunk By Tracking Id\n\nDelete a chunk by tracking_id. This is useful for when you are coordinating with an external system and want to use the tracking_id to identify the chunk. If deleting a root chunk which has a collision, the most recently created collision will become a new root chunk.",
         "operationId": "delete_chunk_by_tracking_id",
         "parameters": [
           {
@@ -707,11 +625,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       }
@@ -721,8 +634,8 @@
         "tags": [
           "chunk"
         ],
-        "summary": "update_chunk",
-        "description": "update_chunk\n\nUpdate a chunk. If you try to change the tracking_id of the chunk to have the same tracking_id as an existing chunk, the request will fail.",
+        "summary": "Update Chunk",
+        "description": "Update Chunk\n\nUpdate a chunk. If you try to change the tracking_id of the chunk to have the same tracking_id as an existing chunk, the request will fail.",
         "operationId": "update_chunk",
         "parameters": [
           {
@@ -766,9 +679,135 @@
             "ApiKey": [
               "admin"
             ]
+          }
+        ]
+      }
+    },
+    "/api/chunk/{tracking_or_chunk}/{chunk_id}": {
+      "get": {
+        "tags": [
+          "chunk"
+        ],
+        "summary": "Get Chunk By Id",
+        "description": "Get Chunk By Id\n\nGet a singular chunk by id.",
+        "operationId": "get_chunk_by_id",
+        "parameters": [
+          {
+            "name": "TR-Dataset",
+            "in": "header",
+            "description": "The dataset id to use for the request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           },
           {
-            "Cookie": [
+            "name": "tracking_or_chunk",
+            "in": "path",
+            "description": "The type of id you are using to search for the chunk. This can be either 'chunk' or 'tracking_id'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chunk_id",
+            "in": "path",
+            "description": "Id of the chunk you want to fetch. This can be either the chunk_id or the tracking_id.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "chunk with the id that you were searching for",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChunkMetadata"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Service error relating to fidning a chunk by tracking_id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [
+              "readonly"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "chunk"
+        ],
+        "summary": "Delete Chunk",
+        "description": "Delete Chunk\n\nDelete a chunk by its id. If deleting a root chunk which has a collision, the most recently created collision will become a new root chunk.",
+        "operationId": "delete_chunk",
+        "parameters": [
+          {
+            "name": "TR-Dataset",
+            "in": "header",
+            "description": "The dataset id to use for the request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tracking_or_chunk",
+            "in": "path",
+            "description": "The type of id you are using to search for the chunk. This can be either 'chunk' or 'tracking_id'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chunk_id",
+            "in": "path",
+            "description": "Id of the chunk you want to fetch. This can be either the chunk_id or the tracking_id.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Confirmation that the chunk with the id specified was deleted"
+          },
+          "400": {
+            "description": "Service error relating to finding a chunk by tracking_id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [
               "admin"
             ]
           }
@@ -780,8 +819,8 @@
         "tags": [
           "chunk_group"
         ],
-        "summary": "create_chunk_group",
-        "description": "create_chunk_group\n\nCreate a new chunk_group.",
+        "summary": "Create Chunk Group",
+        "description": "Create Chunk Group\n\nCreate a new chunk_group.",
         "operationId": "create_chunk_group",
         "parameters": [
           {
@@ -832,11 +871,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       },
@@ -844,8 +878,8 @@
         "tags": [
           "chunk_group"
         ],
-        "summary": "update_chunk_group",
-        "description": "update_chunk_group\n\nUpdate a chunk_group.",
+        "summary": "Update Group",
+        "description": "Update Group\n\nUpdate a chunk_group.",
         "operationId": "update_chunk_group",
         "parameters": [
           {
@@ -889,11 +923,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       }
@@ -903,8 +932,8 @@
         "tags": [
           "chunk_group"
         ],
-        "summary": "add_chunk_to_group",
-        "description": "add_chunk_to_group\n\nRoute to add a chunk to a group",
+        "summary": "Add Chunk to Group",
+        "description": "Add Chunk to Group\n\nRoute to add a chunk to a group",
         "operationId": "add_chunk_to_group",
         "parameters": [
           {
@@ -959,11 +988,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       },
@@ -971,8 +995,8 @@
         "tags": [
           "chunk_group"
         ],
-        "summary": "remove_chunk_from_group",
-        "description": "remove_chunk_from_group\n\nRoute to remove a chunk from a group.",
+        "summary": "Remove Chunk from Group",
+        "description": "Remove Chunk from Group\n\nRoute to remove a chunk from a group.",
         "operationId": "remove_chunk_from_group",
         "parameters": [
           {
@@ -1027,11 +1051,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       }
@@ -1041,6 +1060,8 @@
         "tags": [
           "chunk_group"
         ],
+        "summary": "Get Groups for Chunks",
+        "description": "Get Groups for Chunks\n\nRoute to get the groups that a chunk is in.",
         "operationId": "get_groups_chunk_is_in",
         "parameters": [
           {
@@ -1094,11 +1115,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -1108,8 +1124,8 @@
         "tags": [
           "chunk_group"
         ],
-        "summary": "group_oriented_search",
-        "description": "group_oriented_search\n\nThis route allows you to get groups as results instead of chunks. Each group returned will have the matching chunks sorted by similarity within the group. This is useful for when you want to get groups of chunks which are similar to the search query. If choosing hybrid search, the results will be re-ranked using BAAI/bge-reranker-large. Compatible with semantic, fulltext, or hybrid search modes.",
+        "summary": "Search Over Groups",
+        "description": "Search Over Groups\n\nThis route allows you to get groups as results instead of chunks. Each group returned will have the matching chunks sorted by similarity within the group. This is useful for when you want to get groups of chunks which are similar to the search query. If choosing hybrid search, the results will be re-ranked using BAAI/bge-reranker-large. Compatible with semantic, fulltext, or hybrid search modes.",
         "operationId": "search_over_groups",
         "requestBody": {
           "description": "JSON request payload to semantically search over groups",
@@ -1151,6 +1167,8 @@
         "tags": [
           "chunk_group"
         ],
+        "summary": "Get Recommended Groups",
+        "description": "Get Recommended Groups\n\nRoute to get recommended groups. This route will return groups which are similar to the groups in the request body.",
         "operationId": "get_recommended_groups",
         "parameters": [
           {
@@ -1204,11 +1222,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -1218,8 +1231,8 @@
         "tags": [
           "chunk_group"
         ],
-        "summary": "search_within_group",
-        "description": "search_within_group\n\nThis route allows you to search only within a group. This is useful for when you only want search results to contain chunks which are members of a specific group. If choosing hybrid search, the results will be re-ranked using BAAI/bge-reranker-large.",
+        "summary": "Search Within Group",
+        "description": "Search Within Group\n\nThis route allows you to search only within a group. This is useful for when you only want search results to contain chunks which are members of a specific group. If choosing hybrid search, the results will be re-ranked using BAAI/bge-reranker-large.",
         "operationId": "search_within_group",
         "parameters": [
           {
@@ -1270,11 +1283,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -1284,8 +1292,8 @@
         "tags": [
           "chunk_group"
         ],
-        "summary": "get_chunks_in_group_by_tracking_id",
-        "description": "get_chunks_in_group_by_tracking_id\n\nRoute to get all chunks for a group. The response is paginated, with each page containing 10 chunks. Support for custom page size is coming soon.",
+        "summary": "Get Chunks in Group by Tracking ID",
+        "description": "Get Chunks in Group by Tracking ID\n\nRoute to get all chunks for a group. The response is paginated, with each page containing 10 chunks. Support for custom page size is coming soon.",
         "operationId": "get_chunks_in_group_by_tracking_id",
         "parameters": [
           {
@@ -1347,11 +1355,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -1361,8 +1364,8 @@
         "tags": [
           "chunk_group"
         ],
-        "summary": "get_group_by_tracking_id",
-        "description": "get_group_by_tracking_id",
+        "summary": "Get Group by Tracking ID",
+        "description": "Get Group by Tracking ID\n\nFetch the group with the given tracking id.\nget_group_by_tracking_id",
         "operationId": "get_group_by_tracking_id",
         "parameters": [
           {
@@ -1412,11 +1415,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       },
@@ -1424,8 +1422,8 @@
         "tags": [
           "chunk_group"
         ],
-        "summary": "add_chunk_to_group_by_tracking_id",
-        "description": "add_chunk_to_group_by_tracking_id\n\nRoute to add a chunk to a group by tracking id. Think of a bookmark as a chunk which is a member of a group.",
+        "summary": "Add Chunk to Group by Tracking ID",
+        "description": "Add Chunk to Group by Tracking ID\n\nRoute to add a chunk to a group by tracking id. Think of a bookmark as a chunk which is a member of a group.",
         "operationId": "add_chunk_to_group_by_tracking_id",
         "parameters": [
           {
@@ -1479,11 +1477,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       },
@@ -1491,6 +1484,8 @@
         "tags": [
           "chunk_group"
         ],
+        "summary": "Update Group by Tracking ID",
+        "description": "Update Group by Tracking ID\n\nUpdate a chunk_group with the given tracking id.",
         "operationId": "update_group_by_tracking_id",
         "parameters": [
           {
@@ -1545,11 +1540,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       },
@@ -1557,6 +1547,8 @@
         "tags": [
           "chunk_group"
         ],
+        "summary": "Delete Group by Tracking ID",
+        "description": "Delete Group by Tracking ID\n\nDelete a chunk_group with the given tracking id.",
         "operationId": "delete_group_by_tracking_id",
         "parameters": [
           {
@@ -1599,9 +1591,144 @@
             "ApiKey": [
               "admin"
             ]
+          }
+        ]
+      }
+    },
+    "/api/chunk_group/{tracking_or_chunk}/{group_id}": {
+      "get": {
+        "tags": [
+          "chunk_group"
+        ],
+        "summary": "Get Group",
+        "description": "Get Group\n\nFetch the group with the given id.\nget_group",
+        "operationId": "get_chunk_group",
+        "parameters": [
+          {
+            "name": "TR-Dataset",
+            "in": "header",
+            "description": "The dataset id to use for the request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           },
           {
-            "Cookie": [
+            "name": "tracking_or_chunk",
+            "in": "path",
+            "description": "The type of id you are using to search for the group. This can be either 'chunk' or 'tracking_id'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "group_id",
+            "in": "path",
+            "description": "Id of the group you want to fetch. This can be either the group_id or the tracking_id.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON body representing the group with the given tracking id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChunkGroup"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Service error relating to getting the group with the given tracking id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [
+              "readonly"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "chunk_group"
+        ],
+        "summary": "Delete Group",
+        "description": "Delete Group\n\nThis will delete a chunk_group. This will not delete the chunks that are in the group. We will soon support deleting a chunk_group along with its member chunks.",
+        "operationId": "delete_chunk_group",
+        "parameters": [
+          {
+            "name": "TR-Dataset",
+            "in": "header",
+            "description": "The dataset id to use for the request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tracking_or_chunk",
+            "in": "path",
+            "description": "The type of id you are using to search for the group. This can be either 'chunk' or 'tracking_id'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "group_id",
+            "in": "path",
+            "description": "Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "delete_chunks",
+            "in": "query",
+            "description": "Delete the chunks within the group",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Confirmation that the chunkGroup was deleted"
+          },
+          "400": {
+            "description": "Service error relating to deleting the chunkGroup",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [
               "admin"
             ]
           }
@@ -1613,8 +1740,8 @@
         "tags": [
           "chunk_group"
         ],
-        "summary": "get_chunks_in_group",
-        "description": "get_chunks_in_group\n\nRoute to get all chunks for a group. The response is paginated, with each page containing 10 chunks. Support for custom page size is coming soon.",
+        "summary": "Get Chunks in Group",
+        "description": "Get Chunks in Group\n\nRoute to get all chunks for a group. The response is paginated, with each page containing 10 chunks. Support for custom page size is coming soon.",
         "operationId": "get_chunks_in_group",
         "parameters": [
           {
@@ -1627,26 +1754,23 @@
             }
           },
           {
-            "name": "group_id",
-            "in": "path",
-            "description": "Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used.",
-            "required": true,
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/uuid"
-                }
-              ],
-              "nullable": true
-            }
-          },
-          {
             "name": "tracking_or_chunk",
             "in": "path",
             "description": "The type of id you are using to search for the group. This can be either 'chunk' or 'tracking_id'",
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "group_id",
+            "in": "path",
+            "description": "Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
             }
           },
           {
@@ -1688,11 +1812,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -1702,8 +1821,8 @@
         "tags": [
           "dataset"
         ],
-        "summary": "create_dataset",
-        "description": "create_dataset\n\nCreate a new dataset. The auth'ed user must be an owner of the organization to create a dataset.",
+        "summary": "Create dataset",
+        "description": "Create dataset\n\nCreate a new dataset. The auth'ed user must be an owner of the organization to create a dataset.",
         "operationId": "create_dataset",
         "parameters": [
           {
@@ -1754,11 +1873,6 @@
             "ApiKey": [
               "owner"
             ]
-          },
-          {
-            "Cookie": [
-              "owner"
-            ]
           }
         ]
       },
@@ -1766,8 +1880,8 @@
         "tags": [
           "dataset"
         ],
-        "summary": "update_dataset",
-        "description": "update_dataset\n\nUpdate a dataset. The auth'ed user must be an owner of the organization to update a dataset.",
+        "summary": "Update Dataset",
+        "description": "Update Dataset\n\nUpdate a dataset. The auth'ed user must be an owner of the organization to update a dataset.",
         "operationId": "update_dataset",
         "parameters": [
           {
@@ -1818,11 +1932,6 @@
             "ApiKey": [
               "owner"
             ]
-          },
-          {
-            "Cookie": [
-              "owner"
-            ]
           }
         ]
       },
@@ -1830,8 +1939,8 @@
         "tags": [
           "dataset"
         ],
-        "summary": "delete_dataset",
-        "description": "delete_dataset\n\nDelete a dataset. The auth'ed user must be an owner of the organization to delete a dataset.",
+        "summary": "Delete Dataset",
+        "description": "Delete Dataset\n\nDelete a dataset. The auth'ed user must be an owner of the organization to delete a dataset.",
         "operationId": "delete_dataset",
         "parameters": [
           {
@@ -1875,11 +1984,6 @@
             "ApiKey": [
               "owner"
             ]
-          },
-          {
-            "Cookie": [
-              "owner"
-            ]
           }
         ]
       }
@@ -1889,8 +1993,8 @@
         "tags": [
           "dataset"
         ],
-        "summary": "get_client_dataset_config",
-        "description": "get_client_dataset_config\n\nGet the client configuration for a dataset. Will use the TR-D",
+        "summary": "Get Client Configuration",
+        "description": "Get Client Configuration\n\nGet the client configuration for a dataset. Will use the TR-D",
         "operationId": "get_client_dataset_config",
         "parameters": [
           {
@@ -1930,11 +2034,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -1944,8 +2043,8 @@
         "tags": [
           "file"
         ],
-        "summary": "get_dataset_files",
-        "description": "get_dataset_files\n\nGet all files which belong to a given dataset specified by the dataset_id parameter. 10 files are returned per page.",
+        "summary": "Get Files for Dataset",
+        "description": "Get Files for Dataset\n\nGet all files which belong to a given dataset specified by the dataset_id parameter. 10 files are returned per page.",
         "operationId": "get_dataset_files_handler",
         "parameters": [
           {
@@ -2009,11 +2108,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -2023,8 +2117,8 @@
         "tags": [
           "chunk_group"
         ],
-        "summary": "get_dataset_groups",
-        "description": "get_dataset_groups\n\nFetch the groups which belong to a dataset specified by its id.",
+        "summary": "Get Groups for Dataset",
+        "description": "Get Groups for Dataset\n\nFetch the groups which belong to a dataset specified by its id.",
         "operationId": "get_specific_dataset_chunk_groups",
         "parameters": [
           {
@@ -2084,11 +2178,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -2098,8 +2187,8 @@
         "tags": [
           "dataset"
         ],
-        "summary": "get_organization_datasets",
-        "description": "get_organization_datasets\n\nGet all datasets for an organization. The auth'ed user must be an admin or owner of the organization to get its datasets.",
+        "summary": "Get Datasets from Organization",
+        "description": "Get Datasets from Organization\n\nGet all datasets for an organization. The auth'ed user must be an admin or owner of the organization to get its datasets.",
         "operationId": "get_datasets_from_organization",
         "parameters": [
           {
@@ -2152,11 +2241,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       }
@@ -2166,8 +2250,8 @@
         "tags": [
           "dataset"
         ],
-        "summary": "get_dataset",
-        "description": "get_dataset\n\nGet a dataset by id. The auth'ed user must be an admin or owner of the organization to get a dataset.",
+        "summary": "Get Dataset",
+        "description": "Get Dataset\n\nGet a dataset by id. The auth'ed user must be an admin or owner of the organization to get a dataset.",
         "operationId": "get_dataset",
         "parameters": [
           {
@@ -2226,22 +2310,17 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       }
     },
-    "/api/events/{page}": {
-      "get": {
+    "/api/events": {
+      "post": {
         "tags": [
           "events"
         ],
-        "summary": "get_events",
-        "description": "get_events\n\nGet events for the auth'ed user. Currently, this is only for events belonging to the auth'ed user. Soon, we plan to associate events to datasets instead of users. Each page contains 10 events.",
+        "summary": "Get events for the dataset",
+        "description": "Get events for the dataset\n\nGet events for the auth'ed user. Currently, this is only for events belonging to the auth'ed user. Soon, we plan to associate events to datasets instead of users.",
         "operationId": "get_events",
         "parameters": [
           {
@@ -2252,18 +2331,19 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "page",
-            "in": "path",
-            "description": "Page number of events to get",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
           }
         ],
+        "requestBody": {
+          "description": "JSON request payload to get events for a dataset",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetEventsData"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "Events for the dataset",
@@ -2291,11 +2371,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -2305,8 +2380,8 @@
         "tags": [
           "file"
         ],
-        "summary": "upload_file",
-        "description": "upload_file\n\nUpload a file to S3 attached to the server. The file will be converted to HTML with tika and chunked algorithmically, images will be OCR'ed with tesseract. The resulting chunks will be indexed and searchable. Optionally, you can only upload the file and manually create chunks associated to the file after. See docs.trieve.ai and/or contact us for more details and tips. Auth'ed user must be an admin or owner of the dataset's organization to upload a file.",
+        "summary": "Upload File",
+        "description": "Upload File\n\nUpload a file to S3 attached to the server. The file will be converted to HTML with tika and chunked algorithmically, images will be OCR'ed with tesseract. The resulting chunks will be indexed and searchable. Optionally, you can only upload the file and manually create chunks associated to the file after. See docs.trieve.ai and/or contact us for more details and tips. Auth'ed user must be an admin or owner of the dataset's organization to upload a file.",
         "operationId": "upload_file_handler",
         "parameters": [
           {
@@ -2357,11 +2432,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       }
@@ -2371,8 +2441,8 @@
         "tags": [
           "file"
         ],
-        "summary": "get_file",
-        "description": "get_file\n\nDownload a file from S3 attached to the server based on its id. We plan to add support for getting signed S3 URLs to download from S3 directly in a release soon.",
+        "summary": "Get File",
+        "description": "Get File\n\nDownload a file from S3 attached to the server based on its id. We plan to add support for getting signed S3 URLs to download from S3 directly in a release soon.",
         "operationId": "get_file_handler",
         "parameters": [
           {
@@ -2422,11 +2492,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       },
@@ -2434,8 +2499,8 @@
         "tags": [
           "file"
         ],
-        "summary": "delete_file",
-        "description": "delete_file\n\nDelete a file from S3 attached to the server based on its id. This will disassociate chunks from the file, but will not delete the chunks. We plan to add support for deleting chunks in a release soon. Auth'ed user must be an admin or owner of the dataset's organization to upload a file.",
+        "summary": "Delete File",
+        "description": "Delete File\n\nDelete a file from S3 attached to the server based on its id. This will disassociate chunks from the file, but will not delete the chunks. We plan to add support for deleting chunks in a release soon. Auth'ed user must be an admin or owner of the dataset's organization to upload a file.",
         "operationId": "delete_file_handler",
         "parameters": [
           {
@@ -2487,11 +2552,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       }
@@ -2501,6 +2561,8 @@
         "tags": [
           "health"
         ],
+        "summary": "Health Check",
+        "description": "Health Check\n\nConfirmation that the service is healthy and can make embedding vectors",
         "operationId": "health_check",
         "responses": {
           "200": {
@@ -2524,8 +2586,8 @@
         "tags": [
           "invitation"
         ],
-        "summary": "send_invitation",
-        "description": "send_invitation\n\nInvitations act as a way to invite users to join an organization. After a user is invited, they will automatically be added to the organization with the role specified in the invitation once they set their.",
+        "summary": "Send Invitation",
+        "description": "Send Invitation\n\nInvitations act as a way to invite users to join an organization. After a user is invited, they will automatically be added to the organization with the role specified in the invitation once they set their.",
         "operationId": "post_invitation",
         "parameters": [
           {
@@ -2569,11 +2631,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       }
@@ -2583,8 +2640,8 @@
         "tags": [
           "message"
         ],
-        "summary": "create_message",
-        "description": "create_message\n\nCreate a message. Messages are attached to topics in order to coordinate memory of gen-AI chat sessions. We are considering refactoring this resource of the API soon. Currently, you can only send user messages. If the topic is a RAG topic then the response will include Chunks first on the stream. The structure will look like `[chunks]||mesage`. See docs.trieve.ai for more information.",
+        "summary": "Create a message",
+        "description": "Create a message\n\nCreate a message. Messages are attached to topics in order to coordinate memory of gen-AI chat sessions. We are considering refactoring this resource of the API soon. Currently, you can only send user messages. If the topic is a RAG topic then the response will include Chunks first on the stream. The structure will look like `[chunks]||mesage`. See docs.trieve.ai for more information.",
         "operationId": "create_message_completion_handler",
         "parameters": [
           {
@@ -2635,11 +2692,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       },
@@ -2647,8 +2699,8 @@
         "tags": [
           "message"
         ],
-        "summary": "edit_message",
-        "description": "edit_message\n\nEdit a message which exists within the topic's chat history. This will delete the message and replace it with a new message. The new message will be generated by the AI based on the new content provided in the request body. The response will include Chunks first on the stream if the topic is using RAG. The structure will look like `[chunks]||mesage`. See docs.trieve.ai for more information.",
+        "summary": "Edit a message",
+        "description": "Edit a message\n\nEdit a message which exists within the topic's chat history. This will delete the message and replace it with a new message. The new message will be generated by the AI based on the new content provided in the request body. The response will include Chunks first on the stream if the topic is using RAG. The structure will look like `[chunks]||mesage`. See docs.trieve.ai for more information.",
         "operationId": "edit_message_handler",
         "parameters": [
           {
@@ -2692,11 +2744,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       },
@@ -2704,8 +2751,8 @@
         "tags": [
           "message"
         ],
-        "summary": "regenerate_message",
-        "description": "regenerate_message\n\nRegenerate the assistant response to the last user message of a topic. This will delete the last message and replace it with a new message. The response will include Chunks first on the stream if the topic is using RAG. The structure will look like `[chunks]||mesage`. See docs.trieve.ai for more information.",
+        "summary": "Regenerate message",
+        "description": "Regenerate message\n\nRegenerate the assistant response to the last user message of a topic. This will delete the last message and replace it with a new message. The response will include Chunks first on the stream if the topic is using RAG. The structure will look like `[chunks]||mesage`. See docs.trieve.ai for more information.",
         "operationId": "regenerate_message_handler",
         "parameters": [
           {
@@ -2756,11 +2803,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -2770,8 +2812,8 @@
         "tags": [
           "message"
         ],
-        "summary": "get_all_messages",
-        "description": "get_all_messages\n\nGet all messages for a given topic. If the topic is a RAG topic then the response will include Chunks first on each message. The structure will look like `[chunks]||mesage`. See docs.trieve.ai for more information.",
+        "summary": "Get all messages for a given topic",
+        "description": "Get all messages for a given topic\n\nGet all messages for a given topic. If the topic is a RAG topic then the response will include Chunks first on each message. The structure will look like `[chunks]||mesage`. See docs.trieve.ai for more information.",
         "operationId": "get_all_topic_messages",
         "parameters": [
           {
@@ -2824,11 +2866,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -2838,8 +2875,8 @@
         "tags": [
           "organization"
         ],
-        "summary": "create_organization",
-        "description": "create_organization\n\nCreate a new organization. The auth'ed user who creates the organization will be the default owner of the organization.",
+        "summary": "Create Organization",
+        "description": "Create Organization\n\nCreate a new organization. The auth'ed user who creates the organization will be the default owner of the organization.",
         "operationId": "create_organization",
         "requestBody": {
           "description": "The organization data that you want to create",
@@ -2879,11 +2916,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       },
@@ -2891,8 +2923,8 @@
         "tags": [
           "organization"
         ],
-        "summary": "update_organization",
-        "description": "update_organization\n\nUpdate an organization. Only the owner of the organization can update it.",
+        "summary": "Update Organization",
+        "description": "Update Organization\n\nUpdate an organization. Only the owner of the organization can update it.",
         "operationId": "update_organization",
         "parameters": [
           {
@@ -2943,11 +2975,6 @@
             "ApiKey": [
               "owner"
             ]
-          },
-          {
-            "Cookie": [
-              "owner"
-            ]
           }
         ]
       }
@@ -2957,8 +2984,8 @@
         "tags": [
           "organization"
         ],
-        "summary": "get_organization_usage",
-        "description": "get_organization_usage\n\nFetch the current usage specification of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.",
+        "summary": "Get Organization Usage",
+        "description": "Get Organization Usage\n\nFetch the current usage specification of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.",
         "operationId": "get_organization_usage",
         "parameters": [
           {
@@ -3008,11 +3035,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       }
@@ -3022,8 +3044,8 @@
         "tags": [
           "organization"
         ],
-        "summary": "get_organization_users",
-        "description": "get_organization_users\n\nFetch the users of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.",
+        "summary": "Get Organization Users",
+        "description": "Get Organization Users\n\nFetch the users of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.",
         "operationId": "get_organization_users",
         "parameters": [
           {
@@ -3076,11 +3098,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       }
@@ -3090,8 +3107,8 @@
         "tags": [
           "organization"
         ],
-        "summary": "get_organization",
-        "description": "get_organization\n\nFetch the details of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.",
+        "summary": "Get Organization",
+        "description": "Get Organization\n\nFetch the details of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.",
         "operationId": "get_organization_by_id",
         "parameters": [
           {
@@ -3141,11 +3158,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       },
@@ -3153,8 +3165,8 @@
         "tags": [
           "organization"
         ],
-        "summary": "delete_organization",
-        "description": "delete_organization\n\nDelete an organization by its id. The auth'ed user must be an owner of the organization to delete it.",
+        "summary": "Delete Organization",
+        "description": "Delete Organization\n\nDelete an organization by its id. The auth'ed user must be an owner of the organization to delete it.",
         "operationId": "delete_organization_by_id",
         "parameters": [
           {
@@ -3204,11 +3216,6 @@
             "ApiKey": [
               "admin"
             ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
           }
         ]
       }
@@ -3218,6 +3225,8 @@
         "tags": [
           "stripe"
         ],
+        "summary": "Checkout",
+        "description": "Checkout\n\nGet a direct link to the stripe checkout page for the plan and organization",
         "operationId": "direct_to_payment_link",
         "parameters": [
           {
@@ -3263,6 +3272,8 @@
         "tags": [
           "stripe"
         ],
+        "summary": "Get All Plans",
+        "description": "Get All Plans\n\nGet a list of all plans",
         "operationId": "get_all_plans",
         "responses": {
           "200": {
@@ -3296,6 +3307,8 @@
         "tags": [
           "stripe"
         ],
+        "summary": "Cancel Subscription",
+        "description": "Cancel Subscription\n\nCancel a subscription by its id",
         "operationId": "cancel_subscription",
         "parameters": [
           {
@@ -3338,11 +3351,6 @@
             "ApiKey": [
               "owner"
             ]
-          },
-          {
-            "Cookie": [
-              "owner"
-            ]
           }
         ]
       }
@@ -3352,6 +3360,8 @@
         "tags": [
           "stripe"
         ],
+        "summary": "Update Subscription Plan",
+        "description": "Update Subscription Plan\n\nUpdate a subscription to a new plan",
         "operationId": "update_subscription_plan",
         "parameters": [
           {
@@ -3404,11 +3414,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -3418,8 +3423,8 @@
         "tags": [
           "topic"
         ],
-        "summary": "create_topic",
-        "description": "create_topic\n\nCreate a new chat topic. Topics are attached to a user and act as a coordinator for memory of gen-AI chat sessions. We are considering refactoring this resource of the API soon.",
+        "summary": "Create Topic",
+        "description": "Create Topic\n\nCreate a new chat topic. Topics are attached to a user and act as a coordinator for memory of gen-AI chat sessions. We are considering refactoring this resource of the API soon.",
         "operationId": "create_topic",
         "parameters": [
           {
@@ -3470,11 +3475,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       },
@@ -3482,8 +3482,8 @@
         "tags": [
           "topic"
         ],
-        "summary": "update_topic",
-        "description": "update_topic\n\nUpdate an existing chat topic. Currently, only the name of the topic can be updated.",
+        "summary": "Update Topic",
+        "description": "Update Topic\n\nUpdate an existing chat topic. Currently, only the name of the topic can be updated.",
         "operationId": "update_topic",
         "parameters": [
           {
@@ -3527,11 +3527,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       },
@@ -3539,8 +3534,8 @@
         "tags": [
           "topic"
         ],
-        "summary": "delete_topic",
-        "description": "delete_topic\n\nDelete an existing chat topic. When a topic is deleted, all associated chat messages are also deleted.",
+        "summary": "Delete Topic",
+        "description": "Delete Topic\n\nDelete an existing chat topic. When a topic is deleted, all associated chat messages are also deleted.",
         "operationId": "delete_topic",
         "parameters": [
           {
@@ -3584,11 +3579,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -3598,8 +3588,8 @@
         "tags": [
           "topic"
         ],
-        "summary": "get_all_topics_for_user",
-        "description": "get_all_topics_for_user\n\nGet all topics belonging to a the auth'ed user. Soon, we plan to allow specification of the user for this route and include pagination.",
+        "summary": "Get All Topics for User",
+        "description": "Get All Topics for User\n\nGet all topics belonging to a the auth'ed user. Soon, we plan to allow specification of the user for this route and include pagination.",
         "operationId": "get_all_topics_for_user",
         "parameters": [
           {
@@ -3652,11 +3642,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -3666,8 +3651,8 @@
         "tags": [
           "user"
         ],
-        "summary": "update_user",
-        "description": "update_user\n\nUpdate a user's information. If the user_id is not provided, the auth'ed user will be updated. If the user_id is provided, the auth'ed user must be an admin (1) or owner (2) of the organization.",
+        "summary": "Update User",
+        "description": "Update User\n\nUpdate a user's information. If the user_id is not provided, the auth'ed user will be updated. If the user_id is provided, the auth'ed user must be an admin (1) or owner (2) of the organization.",
         "operationId": "update_user",
         "requestBody": {
           "description": "JSON request payload to update user information for the auth'ed user",
@@ -3707,11 +3692,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -3721,8 +3701,8 @@
         "tags": [
           "user"
         ],
-        "summary": "delete_user_api_key",
-        "description": "delete_user_api_key\n\nDelete an api key for the auth'ed user.",
+        "summary": "Delete User Api Key",
+        "description": "Delete User Api Key\n\nDelete an api key for the auth'ed user.",
         "operationId": "delete_user_api_key",
         "requestBody": {
           "description": "JSON request payload to delete a user api key",
@@ -3765,11 +3745,6 @@
             "ApiKey": [
               "readonly"
             ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
           }
         ]
       }
@@ -3779,8 +3754,8 @@
         "tags": [
           "user"
         ],
-        "summary": "set_user_api_key",
-        "description": "set_user_api_key\n\nCreate a new api key for the auth'ed user. Successful response will contain the newly created api key. If a write role is assigned the api key will have permission level of the auth'ed user who calls this endpoint.",
+        "summary": "Set User Api Key",
+        "description": "Set User Api Key\n\nCreate a new api key for the auth'ed user. Successful response will contain the newly created api key. If a write role is assigned the api key will have permission level of the auth'ed user who calls this endpoint.",
         "operationId": "set_user_api_key",
         "requestBody": {
           "description": "JSON request payload to create a new user api key",
@@ -3819,238 +3794,6 @@
           {
             "ApiKey": [
               "readonly"
-            ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
-          }
-        ]
-      }
-    },
-    "/api/{tracking_or_chunk}/{chunk_id}": {
-      "get": {
-        "tags": [
-          "chunk"
-        ],
-        "summary": "get_chunk",
-        "description": "get_chunk\n\nGet a singular chunk by id.",
-        "operationId": "get_chunk_by_id",
-        "parameters": [
-          {
-            "name": "TR-Dataset",
-            "in": "header",
-            "description": "The dataset id to use for the request",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "chunk_id",
-            "in": "path",
-            "description": "Id of the chunk you want to fetch. This can be either the chunk_id or the tracking_id.",
-            "required": true,
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/uuid"
-                }
-              ],
-              "nullable": true
-            }
-          },
-          {
-            "name": "tracking_or_chunk",
-            "in": "path",
-            "description": "The type of id you are using to search for the chunk. This can be either 'chunk' or 'tracking_id'",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "chunk with the id that you were searching for",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ChunkMetadata"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error relating to fidning a chunk by tracking_id",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseBody"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "ApiKey": [
-              "readonly"
-            ]
-          },
-          {
-            "Cookie": [
-              "readonly"
-            ]
-          }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "chunk"
-        ],
-        "summary": "delete_chunk",
-        "description": "delete_chunk\n\nDelete a chunk by its id. If deleting a root chunk which has a collision, the most recently created collision will become a new root chunk.",
-        "operationId": "delete_chunk",
-        "parameters": [
-          {
-            "name": "TR-Dataset",
-            "in": "header",
-            "description": "The dataset id to use for the request",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "chunk_id",
-            "in": "path",
-            "description": "Id of the chunk you want to fetch. This can be either the chunk_id or the tracking_id.",
-            "required": true,
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/uuid"
-                }
-              ],
-              "nullable": true
-            }
-          },
-          {
-            "name": "tracking_or_chunk",
-            "in": "path",
-            "description": "The type of id you are using to search for the chunk. This can be either 'chunk' or 'tracking_id'",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Confirmation that the chunk with the id specified was deleted"
-          },
-          "400": {
-            "description": "Service error relating to finding a chunk by tracking_id",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseBody"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "ApiKey": [
-              "admin"
-            ]
-          },
-          {
-            "Cookie": [
-              "admin"
-            ]
-          }
-        ]
-      }
-    },
-    "/api/{tracking_or_chunk}/{group_id}": {
-      "delete": {
-        "tags": [
-          "chunk_group"
-        ],
-        "summary": "delete_chunk_group",
-        "description": "delete_chunk_group\n\nThis will delete a chunk_group. This will not delete the chunks that are in the group. We will soon support deleting a chunk_group along with its member chunks.",
-        "operationId": "delete_chunk_group",
-        "parameters": [
-          {
-            "name": "TR-Dataset",
-            "in": "header",
-            "description": "The dataset id to use for the request",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "group_id",
-            "in": "path",
-            "description": "Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used.",
-            "required": true,
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/uuid"
-                }
-              ],
-              "nullable": true
-            }
-          },
-          {
-            "name": "tracking_or_chunk",
-            "in": "path",
-            "description": "The type of id you are using to search for the group. This can be either 'chunk' or 'tracking_id'",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "delete_chunks",
-            "in": "query",
-            "description": "Delete the chunks within the group",
-            "required": true,
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Confirmation that the chunkGroup was deleted"
-          },
-          "400": {
-            "description": "Service error relating to deleting the chunkGroup",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseBody"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "ApiKey": [
-              "admin"
-            ]
-          },
-          {
-            "Cookie": [
-              "admin"
             ]
           }
         ]
@@ -4106,6 +3849,14 @@
             "type": "string",
             "format": "uuid"
           }
+        },
+        "example": {
+          "created_at": "2021-01-01T00:00:00",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "name": "Trieve",
+          "role": 1,
+          "updated_at": "2021-01-01T00:00:00",
+          "user_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3"
         }
       },
       "AuthQuery": {
@@ -4128,6 +3879,78 @@
             "description": "URL to redirect to after successful login",
             "nullable": true
           }
+        },
+        "example": {
+          "inv_code": "00000000-0000-0000-0000-000000000000",
+          "organization_id": "00000000-0000-0000-0000-000000000000",
+          "redirect_uri": "https://api.trieve.ai"
+        }
+      },
+      "BatchQueuedChunkResponse": {
+        "type": "object",
+        "required": [
+          "chunk_metadata",
+          "pos_in_queue"
+        ],
+        "properties": {
+          "chunk_metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChunkMetadata"
+            }
+          },
+          "pos_in_queue": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The current position the last access item is in the queue"
+          }
+        },
+        "example": {
+          "chunk_metadata": [
+            {
+              "chunk_vector": [
+                0.1,
+                0.2,
+                0.3
+              ],
+              "content": "Some content",
+              "file_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+              "link": "https://example.com",
+              "metadata": {
+                "key1": "value1",
+                "key2": "value2"
+              },
+              "tag_set": [
+                "tag1",
+                "tag2"
+              ],
+              "time_stamp": "2021-01-01T00:00:00",
+              "tracking_id": "tracking_id",
+              "weight": 0.5
+            },
+            {
+              "chunk_vector": [
+                0.1,
+                0.2,
+                0.3
+              ],
+              "content": "Some content",
+              "file_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+              "link": "https://example.com",
+              "metadata": {
+                "key1": "value1",
+                "key2": "value2"
+              },
+              "tag_set": [
+                "tag1",
+                "tag2"
+              ],
+              "time_stamp": "2021-01-01T00:00:00",
+              "tracking_id": "tracking_id",
+              "weight": 0.5
+            }
+          ],
+          "pos_in_queue": 2
         }
       },
       "BookmarkData": {
@@ -4185,306 +4008,13 @@
           "role": {
             "type": "string"
           }
+        },
+        "example": {
+          "content": "Hello, world!",
+          "role": "user"
         }
       },
-      "ChunkFilter": {
-        "type": "object",
-        "properties": {
-          "must": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FieldCondition"
-            },
-            "description": "All of these field conditions have to match for the chunk to be included in the result set.",
-            "nullable": true
-          },
-          "must_not": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FieldCondition"
-            },
-            "description": "None of these field conditions can match for the chunk to be included in the result set.",
-            "nullable": true
-          },
-          "should": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FieldCondition"
-            },
-            "description": "Only one of these field conditions has to match for the chunk to be included in the result set.",
-            "nullable": true
-          }
-        }
-      },
-      "ChunkGroup": {
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "description",
-          "created_at",
-          "updated_at",
-          "dataset_id"
-        ],
-        "properties": {
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "dataset_id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string"
-          },
-          "tracking_id": {
-            "type": "string",
-            "nullable": true
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "ChunkGroupAndFile": {
-        "type": "object",
-        "required": [
-          "id",
-          "dataset_id",
-          "name",
-          "description",
-          "created_at",
-          "updated_at"
-        ],
-        "properties": {
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "dataset_id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "description": {
-            "type": "string"
-          },
-          "file_id": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string"
-          },
-          "tracking_id": {
-            "type": "string",
-            "nullable": true
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "ChunkMetadata": {
-        "type": "object",
-        "required": [
-          "id",
-          "content",
-          "created_at",
-          "updated_at",
-          "dataset_id",
-          "weight"
-        ],
-        "properties": {
-          "chunk_html": {
-            "type": "string",
-            "nullable": true
-          },
-          "content": {
-            "type": "string"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "dataset_id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "link": {
-            "type": "string",
-            "nullable": true
-          },
-          "metadata": {
-            "nullable": true
-          },
-          "qdrant_point_id": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "tag_set": {
-            "type": "string",
-            "nullable": true
-          },
-          "time_stamp": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "tracking_id": {
-            "type": "string",
-            "nullable": true
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "weight": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "ChunkMetadataWithFileData": {
-        "type": "object",
-        "required": [
-          "id",
-          "content",
-          "qdrant_point_id",
-          "created_at",
-          "updated_at",
-          "weight"
-        ],
-        "properties": {
-          "chunk_html": {
-            "type": "string",
-            "nullable": true
-          },
-          "content": {
-            "type": "string"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "file_id": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "file_name": {
-            "type": "string",
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "link": {
-            "type": "string",
-            "nullable": true
-          },
-          "metadata": {
-            "nullable": true
-          },
-          "qdrant_point_id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "tag_set": {
-            "type": "string",
-            "nullable": true
-          },
-          "time_stamp": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "tracking_id": {
-            "type": "string",
-            "nullable": true
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "weight": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "ClientDatasetConfiguration": {
-        "type": "object",
-        "required": [
-          "FILE_NAME_KEY"
-        ],
-        "properties": {
-          "CREATE_CHUNK_FEATURE": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "DATE_RANGE_VALUE": {
-            "type": "string",
-            "nullable": true
-          },
-          "DOCUMENT_UPLOAD_FEATURE": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "FILE_NAME_KEY": {
-            "type": "string"
-          },
-          "FILTER_ITEMS": {
-            "nullable": true
-          },
-          "FRONTMATTER_VALS": {
-            "type": "string",
-            "nullable": true
-          },
-          "IMAGE_RANGE_END_KEY": {
-            "type": "string",
-            "nullable": true
-          },
-          "IMAGE_RANGE_START_KEY": {
-            "type": "string",
-            "nullable": true
-          },
-          "LINES_BEFORE_SHOW_MORE": {
-            "type": "integer",
-            "nullable": true,
-            "minimum": 0
-          },
-          "SEARCH_QUERIES": {
-            "type": "string",
-            "nullable": true
-          },
-          "SUGGESTED_QUERIES": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "CreateChunkData": {
+      "ChunkData": {
         "type": "object",
         "properties": {
           "chunk_html": {
@@ -4567,7 +4097,522 @@
             "description": "Weight is a float which can be used to bias search results. This is useful for when you want to bias search results for a chunk. The magnitude only matters relative to other chunks in the chunk's dataset dataset.",
             "nullable": true
           }
+        },
+        "example": {
+          "chunk_html": "<p>Some HTML content</p>",
+          "chunk_vector": [
+            0.1,
+            0.2,
+            0.3
+          ],
+          "file_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+          "group_ids": [
+            "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          ],
+          "group_tracking_ids": [
+            "group_tracking_id"
+          ],
+          "link": "https://example.com",
+          "metadata": {
+            "key1": "value1",
+            "key2": "value2"
+          },
+          "split_avg": false,
+          "tag_set": [
+            "tag1",
+            "tag2"
+          ],
+          "time_stamp": "2021-01-01T00:00:00",
+          "tracking_id": "tracking_id",
+          "upsert_by_tracking_id": true,
+          "weight": 0.5
         }
+      },
+      "ChunkFilter": {
+        "type": "object",
+        "properties": {
+          "must": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldCondition"
+            },
+            "description": "All of these field conditions have to match for the chunk to be included in the result set.",
+            "nullable": true
+          },
+          "must_not": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldCondition"
+            },
+            "description": "None of these field conditions can match for the chunk to be included in the result set.",
+            "nullable": true
+          },
+          "should": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldCondition"
+            },
+            "description": "Only one of these field conditions has to match for the chunk to be included in the result set.",
+            "nullable": true
+          }
+        },
+        "example": {
+          "must": [
+            {
+              "field": "metadata.key2",
+              "match": [
+                "value3",
+                "value4"
+              ],
+              "range": {
+                "gt": 0,
+                "gte": 0,
+                "lt": 1,
+                "lte": 1
+              }
+            }
+          ],
+          "must_not": [
+            {
+              "field": "metadata.key3",
+              "match": [
+                "value5",
+                "value6"
+              ],
+              "range": {
+                "gt": 0,
+                "gte": 0,
+                "lt": 1,
+                "lte": 1
+              }
+            }
+          ],
+          "should": [
+            {
+              "field": "metadata.key1",
+              "match": [
+                "value1",
+                "value2"
+              ],
+              "range": {
+                "gt": 0,
+                "gte": 0,
+                "lt": 1,
+                "lte": 1
+              }
+            }
+          ]
+        }
+      },
+      "ChunkGroup": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "created_at",
+          "updated_at",
+          "dataset_id"
+        ],
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataset_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "tracking_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "example": {
+          "created_at": "2021-01-01T00:00:00",
+          "dataset_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "name": "Trieve",
+          "tracking_id": "3",
+          "updated_at": "2021-01-01T00:00:00"
+        }
+      },
+      "ChunkGroupAndFile": {
+        "type": "object",
+        "required": [
+          "id",
+          "dataset_id",
+          "name",
+          "description",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataset_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "tracking_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "example": {
+          "created_at": "2021-01-01T00:00:00",
+          "dataset_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "description": "A group of chunks",
+          "file_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "name": "Trieve",
+          "tracking_id": "3",
+          "updated_at": "2021-01-01T00:00:00"
+        }
+      },
+      "ChunkMetadata": {
+        "type": "object",
+        "required": [
+          "id",
+          "content",
+          "created_at",
+          "updated_at",
+          "dataset_id",
+          "weight"
+        ],
+        "properties": {
+          "chunk_html": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataset_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "link": {
+            "type": "string",
+            "nullable": true
+          },
+          "metadata": {
+            "nullable": true
+          },
+          "qdrant_point_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tag_set": {
+            "type": "string",
+            "nullable": true
+          },
+          "time_stamp": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "tracking_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "weight": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "example": {
+          "chunk_html": "<p>Hello, world!</p>",
+          "content": "Hello, world!",
+          "created_at": "2021-01-01T00:00:00",
+          "dataset_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "link": "https://trieve.ai",
+          "metadata": {
+            "key": "value"
+          },
+          "qdrant_point_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "tag_set": "tag1,tag2",
+          "time_stamp": "2021-01-01T00:00:00",
+          "tracking_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "updated_at": "2021-01-01T00:00:00",
+          "weight": 0.5
+        }
+      },
+      "ChunkMetadataWithFileData": {
+        "type": "object",
+        "required": [
+          "id",
+          "content",
+          "qdrant_point_id",
+          "created_at",
+          "updated_at",
+          "weight"
+        ],
+        "properties": {
+          "chunk_html": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "file_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "file_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "link": {
+            "type": "string",
+            "nullable": true
+          },
+          "metadata": {
+            "nullable": true
+          },
+          "qdrant_point_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tag_set": {
+            "type": "string",
+            "nullable": true
+          },
+          "time_stamp": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "tracking_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "weight": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "example": {
+          "chunk_html": "<p>Hello, world!</p>",
+          "content": "Hello, world!",
+          "created_at": "2021-01-01T00:00:00",
+          "file_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "file_name": "file.txt",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "link": "https://trieve.ai",
+          "metadata": {
+            "key": "value"
+          },
+          "qdrant_point_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "tag_set": "tag1,tag2",
+          "time_stamp": "2021-01-01T00:00:00",
+          "tracking_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "updated_at": "2021-01-01T00:00:00",
+          "weight": 0.5
+        }
+      },
+      "ClientDatasetConfiguration": {
+        "type": "object",
+        "required": [
+          "FILE_NAME_KEY"
+        ],
+        "properties": {
+          "CREATE_CHUNK_FEATURE": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "DATE_RANGE_VALUE": {
+            "type": "string",
+            "nullable": true
+          },
+          "DOCUMENT_UPLOAD_FEATURE": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "FILE_NAME_KEY": {
+            "type": "string"
+          },
+          "FILTER_ITEMS": {
+            "nullable": true
+          },
+          "FRONTMATTER_VALS": {
+            "type": "string",
+            "nullable": true
+          },
+          "IMAGE_RANGE_END_KEY": {
+            "type": "string",
+            "nullable": true
+          },
+          "IMAGE_RANGE_START_KEY": {
+            "type": "string",
+            "nullable": true
+          },
+          "LINES_BEFORE_SHOW_MORE": {
+            "type": "integer",
+            "nullable": true,
+            "minimum": 0
+          },
+          "SEARCH_QUERIES": {
+            "type": "string",
+            "nullable": true
+          },
+          "SUGGESTED_QUERIES": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "example": {
+          "CREATE_CHUNK_FEATURE": true,
+          "DATE_RANGE_VALUE": "date range value",
+          "DOCUMENT_UPLOAD_FEATURE": true,
+          "FILE_NAME_KEY": "file_name_key",
+          "FILTER_ITEMS": [],
+          "FRONTMATTER_VALS": "frontmatter vals",
+          "IMAGE_RANGE_END_KEY": "image range end key",
+          "IMAGE_RANGE_START_KEY": "image range start key",
+          "LINES_BEFORE_SHOW_MORE": 10,
+          "SEARCH_QUERIES": "search queries",
+          "SUGGESTED_QUERIES": "suggested queries"
+        }
+      },
+      "CreateBatchChunkData": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ChunkData"
+        },
+        "example": [
+          {
+            "chunk_html": "<p>Some HTML content</p>",
+            "chunk_vector": [
+              0.1,
+              0.2,
+              0.3
+            ],
+            "file_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+            "group_ids": [
+              "d290f1ee-6c54-4b01-90e6-d701748f0851"
+            ],
+            "group_tracking_ids": [
+              "group_tracking_id"
+            ],
+            "link": "https://example.com",
+            "metadata": {
+              "key1": "value1",
+              "key2": "value2"
+            },
+            "split_avg": false,
+            "tag_set": [
+              "tag1",
+              "tag2"
+            ],
+            "time_stamp": "2021-01-01T00:00:00",
+            "tracking_id": "tracking_id",
+            "upsert_by_tracking_id": true,
+            "weight": 0.5
+          },
+          {
+            "chunk_html": "<p>Some more HTML content</p>",
+            "chunk_vector": [
+              0.1,
+              0.2,
+              0.3
+            ],
+            "file_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+            "group_ids": [
+              "d290f1ee-6c54-4b01-90e6-d701748f0851"
+            ],
+            "group_tracking_ids": [
+              "group_tracking_id"
+            ],
+            "link": "https://explain.com",
+            "metadata": {
+              "key1": "value1",
+              "key2": "value2"
+            },
+            "split_avg": false,
+            "tag_set": [
+              "tag3",
+              "tag4"
+            ],
+            "time_stamp": "2021-01-01T00:00:00",
+            "tracking_id": "tracking_id",
+            "upsert_by_tracking_id": true,
+            "weight": 0.5
+          }
+        ]
+      },
+      "CreateChunkData": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/CreateSingleChunkData"
+          },
+          {
+            "$ref": "#/components/schemas/CreateBatchChunkData"
+          }
+        ]
       },
       "CreateChunkGroupData": {
         "type": "object",
@@ -4615,6 +4660,12 @@
           "server_configuration": {
             "description": "Server configuration for the dataset, can be arbitrary JSON. We recommend setting to `{}` to start. See docs.trieve.ai for more information or adjust with the admin dashboard."
           }
+        },
+        "example": {
+          "client_configuration": {},
+          "dataset_name": "My Dataset",
+          "organization_id": "00000000-0000-0000-0000-000000000000",
+          "server_configuration": {}
         }
       },
       "CreateMessageData": {
@@ -4670,6 +4721,9 @@
           }
         }
       },
+      "CreateSingleChunkData": {
+        "$ref": "#/components/schemas/ChunkData"
+      },
       "CreateTopicData": {
         "type": "object",
         "properties": {
@@ -4723,6 +4777,19 @@
             "type": "string",
             "format": "date-time"
           }
+        },
+        "example": {
+          "client_configuration": {
+            "key": "value"
+          },
+          "created_at": "2021-01-01T00:00:00",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "name": "Trieve",
+          "organization_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "server_configuration": {
+            "key": "value"
+          },
+          "updated_at": "2021-01-01T00:00:00"
         }
       },
       "DatasetAndUsage": {
@@ -4737,6 +4804,23 @@
           },
           "dataset_usage": {
             "$ref": "#/components/schemas/DatasetUsageCount"
+          }
+        },
+        "example": {
+          "dataset": {
+            "client_configuration": {
+              "key": "value"
+            },
+            "created_at": "2021-01-01T00:00:00",
+            "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+            "name": "Trieve",
+            "organization_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+            "updated_at": "2021-01-01T00:00:00"
+          },
+          "dataset_usage": {
+            "chunk_count": 100,
+            "dataset_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+            "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3"
           }
         }
       },
@@ -4771,6 +4855,16 @@
             "type": "string",
             "format": "date-time"
           }
+        },
+        "example": {
+          "client_configuration": {
+            "key": "value"
+          },
+          "created_at": "2021-01-01T00:00:00",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "name": "Trieve",
+          "organization_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "updated_at": "2021-01-01T00:00:00"
         }
       },
       "DatasetUsageCount": {
@@ -4793,6 +4887,11 @@
             "type": "string",
             "format": "uuid"
           }
+        },
+        "example": {
+          "chunk_count": 100,
+          "dataset_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3"
         }
       },
       "DeleteDatasetRequest": {
@@ -4890,6 +4989,9 @@
           "message": {
             "type": "string"
           }
+        },
+        "example": {
+          "message": "Bad Request"
         }
       },
       "Event": {
@@ -4923,6 +5025,17 @@
             "type": "string",
             "format": "date-time"
           }
+        },
+        "example": {
+          "created_at": "2021-01-01T00:00:00",
+          "dataset_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "event_data": {
+            "file_name": "file.txt",
+            "group_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3"
+          },
+          "event_type": "file_uploaded",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "updated_at": "2021-01-01T00:00:00"
         }
       },
       "EventReturn": {
@@ -4969,6 +5082,19 @@
               }
             ],
             "nullable": true
+          }
+        },
+        "example": {
+          "field": "metadata.key1",
+          "match": [
+            "value1",
+            "value2"
+          ],
+          "range": {
+            "gt": 0,
+            "gte": 0,
+            "lt": 1,
+            "lte": 1
           }
         }
       },
@@ -5022,6 +5148,20 @@
             "type": "string",
             "format": "date-time"
           }
+        },
+        "example": {
+          "created_at": "2021-01-01T00:00:00",
+          "dataset_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "file_name": "file.txt",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "link": "https://trieve.ai",
+          "metadata": {
+            "key": "value"
+          },
+          "size": 1000,
+          "tag_set": "tag1,tag2",
+          "time_stamp": "2021-01-01T00:00:00",
+          "updated_at": "2021-01-01T00:00:00"
         }
       },
       "FileDTO": {
@@ -5064,6 +5204,18 @@
             "type": "string",
             "format": "date-time"
           }
+        },
+        "example": {
+          "created_at": "2021-01-01T00:00:00",
+          "file_name": "file.txt",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "link": "https://trieve.ai",
+          "metadata": {
+            "key": "value"
+          },
+          "s3_url": "https://trieve.ai",
+          "size": 1000,
+          "updated_at": "2021-01-01T00:00:00"
         }
       },
       "GenerateChunksRequest": {
@@ -5103,6 +5255,52 @@
             "description": "Whether or not to stream the response. If this is set to true or not included, the response will be a stream. If this is set to false, the response will be a normal JSON response. Default is true.",
             "nullable": true
           }
+        },
+        "example": {
+          "chunk_ids": [
+            "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          ],
+          "model": "text-embedding-small",
+          "prev_messages": [
+            {
+              "content": "I am going to provide several pieces of information (docs) for you to use in response to a request or question.",
+              "role": "user"
+            }
+          ],
+          "prompt": "Respond to the instruction and include the doc numbers that you used in square brackets at the end of the sentences that you used the docs for:",
+          "stream_response": true
+        }
+      },
+      "GetEventsData": {
+        "type": "object",
+        "properties": {
+          "event_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The type of events to get. Any combination of file_uploaded, card_uploaded, card_action_failed, or card_updated. Leave undefined to get all events.",
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The page number to get. Default is 1.",
+            "nullable": true
+          },
+          "page_size": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of items per page. Default is 10.",
+            "nullable": true
+          }
+        },
+        "example": {
+          "page": 1,
+          "page_size": 10,
+          "type": [
+            "card_action_failed"
+          ]
         }
       },
       "GetGroupsForChunksData": {
@@ -5260,6 +5458,19 @@
             "type": "string",
             "format": "date-time"
           }
+        },
+        "example": {
+          "completion_tokens": 300,
+          "content": "Hello, world!",
+          "created_at": "2021-01-01T00:00:00",
+          "dataset_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "deleted": false,
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "prompt_tokens": 300,
+          "role": "user",
+          "sort_order": 1,
+          "topic_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "updated_at": "2021-01-01T00:00:00"
         }
       },
       "Organization": {
@@ -5290,6 +5501,13 @@
             "type": "string",
             "format": "date-time"
           }
+        },
+        "example": {
+          "created_at": "2021-01-01T00:00:00",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "name": "Trieve",
+          "registerable": true,
+          "updated_at": "2021-01-01T00:00:00"
         }
       },
       "OrganizationUsageCount": {
@@ -5327,6 +5545,14 @@
             "type": "integer",
             "format": "int32"
           }
+        },
+        "example": {
+          "dataset_count": 1,
+          "file_storage": 512,
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "message_count": 1000,
+          "org_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "user_count": 5
         }
       },
       "Range": {
@@ -5352,6 +5578,12 @@
             "format": "double",
             "nullable": true
           }
+        },
+        "example": {
+          "gt": 0,
+          "gte": 0,
+          "lt": 1,
+          "lte": 1
         }
       },
       "ReccomendGroupChunksRequest": {
@@ -5506,20 +5738,14 @@
         }
       },
       "ReturnQueuedChunk": {
-        "type": "object",
-        "required": [
-          "chunk_metadata",
-          "pos_in_queue"
-        ],
-        "properties": {
-          "chunk_metadata": {
-            "$ref": "#/components/schemas/ChunkMetadata"
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/SingleQueuedChunkResponse"
           },
-          "pos_in_queue": {
-            "type": "integer",
-            "format": "int32"
+          {
+            "$ref": "#/components/schemas/BatchQueuedChunkResponse"
           }
-        }
+        ]
       },
       "ScoreChunkDTO": {
         "type": "object",
@@ -5538,6 +5764,23 @@
             "type": "number",
             "format": "double"
           }
+        },
+        "example": {
+          "metadata": [
+            {
+              "chunk_html": "<p>Some HTML content</p>",
+              "content": "Some content",
+              "id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+              "link": "https://example.com",
+              "metadata": {
+                "key1": "value1",
+                "key2": "value2"
+              },
+              "time_stamp": "2021-01-01T00:00:00",
+              "weight": 0.5
+            }
+          ],
+          "score": 0.5
         }
       },
       "SearchChunkData": {
@@ -5611,6 +5854,70 @@
             "description": "Set use_weights to true to use the weights of the chunks in the result set in order to sort them. If not specified, this defaults to true.",
             "nullable": true
           }
+        },
+        "example": {
+          "date_bias": true,
+          "filters": {
+            "must": [
+              {
+                "field": "metadata.key2",
+                "match": [
+                  "value3",
+                  "value4"
+                ],
+                "range": {
+                  "gt": 0,
+                  "gte": 0,
+                  "lt": 1,
+                  "lte": 1
+                }
+              }
+            ],
+            "must_not": [
+              {
+                "field": "metadata.key3",
+                "match": [
+                  "value5",
+                  "value6"
+                ],
+                "range": {
+                  "gt": 0,
+                  "gte": 0,
+                  "lt": 1,
+                  "lte": 1
+                }
+              }
+            ],
+            "should": [
+              {
+                "field": "metadata.key1",
+                "match": [
+                  "value1",
+                  "value2"
+                ],
+                "range": {
+                  "gt": 0,
+                  "gte": 0,
+                  "lt": 1,
+                  "lte": 1
+                }
+              }
+            ]
+          },
+          "get_collisions": true,
+          "highlight_delimiters": [
+            "?",
+            ",",
+            ".",
+            "!"
+          ],
+          "highlight_results": true,
+          "page": 1,
+          "page_size": 10,
+          "query": "Some search query",
+          "score_threshold": 0.5,
+          "search_type": "semantic",
+          "use_weights": true
         }
       },
       "SearchChunkQueryResponseBody": {
@@ -5852,6 +6159,49 @@
           }
         }
       },
+      "SingleQueuedChunkResponse": {
+        "type": "object",
+        "required": [
+          "chunk_metadata",
+          "pos_in_queue"
+        ],
+        "properties": {
+          "chunk_metadata": {
+            "$ref": "#/components/schemas/ChunkMetadata"
+          },
+          "pos_in_queue": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The current position the last access item is in the queue"
+          }
+        },
+        "example": {
+          "chunk_metadata": [
+            {
+              "chunk_vector": [
+                0.1,
+                0.2,
+                0.3
+              ],
+              "content": "Some content",
+              "file_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+              "link": "https://example.com",
+              "metadata": {
+                "key1": "value1",
+                "key2": "value2"
+              },
+              "tag_set": [
+                "tag1",
+                "tag2"
+              ],
+              "time_stamp": "2021-01-01T00:00:00",
+              "tracking_id": "tracking_id",
+              "weight": 0.5
+            }
+          ],
+          "pos_in_queue": 1
+        }
+      },
       "SlimGroup": {
         "type": "object",
         "required": [
@@ -5875,6 +6225,12 @@
           "of_current_dataset": {
             "type": "boolean"
           }
+        },
+        "example": {
+          "dataset_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "name": "Trieve",
+          "of_current_dataset": true
         }
       },
       "SlimUser": {
@@ -5921,6 +6277,33 @@
             "type": "string",
             "nullable": true
           }
+        },
+        "example": {
+          "email": "developers@trieve.ai",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "name": "Trieve",
+          "orgs": [
+            {
+              "created_at": "2021-01-01T00:00:00",
+              "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+              "name": "Trieve",
+              "registerable": true,
+              "updated_at": "2021-01-01T00:00:00"
+            }
+          ],
+          "user_orgs": [
+            {
+              "created_at": "2021-01-01T00:00:00",
+              "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+              "org_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+              "role": 0,
+              "updated_at": "2021-01-01T00:00:00",
+              "user_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3"
+            }
+          ],
+          "username": "trieve",
+          "visible_email": true,
+          "website": "https://trieve.ai"
         }
       },
       "StripePlan": {
@@ -5981,47 +6364,19 @@
             "type": "integer",
             "format": "int32"
           }
-        }
-      },
-      "StripeSubscription": {
-        "type": "object",
-        "required": [
-          "id",
-          "stripe_id",
-          "plan_id",
-          "organization_id",
-          "created_at",
-          "updated_at"
-        ],
-        "properties": {
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "current_period_end": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "organization_id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "plan_id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "stripe_id": {
-            "type": "string"
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time"
-          }
+        },
+        "example": {
+          "amount": 1000,
+          "chunk_count": 1000,
+          "created_at": "2021-01-01T00:00:00",
+          "dataset_count": 1,
+          "file_storage": 512,
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "message_count": 1000,
+          "name": "Free",
+          "stripe_id": "plan_123",
+          "updated_at": "2021-01-01T00:00:00",
+          "user_count": 5
         }
       },
       "SuggestedQueriesRequest": {
@@ -6088,6 +6443,15 @@
             "type": "string",
             "format": "uuid"
           }
+        },
+        "example": {
+          "created_at": "2021-01-01T00:00:00",
+          "dataset_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "deleted": false,
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "name": "Trieve",
+          "updated_at": "2021-01-01T00:00:00",
+          "user_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3"
         }
       },
       "UpdateChunkByTrackingIdData": {
@@ -6200,6 +6564,20 @@
             "description": "Weight is a float which can be used to bias search results. This is useful for when you want to bias search results for a chunk. The magnitude only matters relative to other chunks in the chunk's dataset dataset. If no weight is provided, the existing weight will be used.",
             "nullable": true
           }
+        },
+        "example": {
+          "chunk_html": "<p>Some HTML content</p>",
+          "chunk_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+          "group_ids": [
+            "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          ],
+          "link": "https://example.com",
+          "metadata": {
+            "key1": "value1",
+            "key2": "value2"
+          },
+          "time_stamp": "2021-01-01T00:00:00",
+          "weight": 0.5
         }
       },
       "UpdateChunkGroupData": {
@@ -6252,6 +6630,12 @@
             "description": "The new server configuration of the dataset, can be arbitrary JSON. See docs.trieve.ai for more information. If not provided, the server configuration will not be updated.",
             "nullable": true
           }
+        },
+        "example": {
+          "client_configuration": {},
+          "dataset_id": "00000000-0000-0000-0000-000000000000",
+          "dataset_name": "My Dataset",
+          "server_configuration": {}
         }
       },
       "UpdateGroupByTrackingIDData": {
@@ -6409,6 +6793,23 @@
             "description": "Time stamp should be an ISO 8601 combined date and time without timezone. Time_stamp is used for time window filtering and recency-biasing search results. Will be passed down to the file's chunks.",
             "nullable": true
           }
+        },
+        "example": {
+          "base64_file": "base64_encoded_file",
+          "create_chunks": true,
+          "description": "This is an example file",
+          "file_mime_type": "application/pdf",
+          "file_name": "example.pdf",
+          "link": "https://example.com",
+          "metadata": {
+            "key1": "value1",
+            "key2": "value2"
+          },
+          "tag_set": [
+            "tag1",
+            "tag2"
+          ],
+          "time_stamp": "2021-01-01T00:00:00Z"
         }
       },
       "UploadFileResult": {
@@ -6457,6 +6858,14 @@
             "type": "string",
             "format": "uuid"
           }
+        },
+        "example": {
+          "created_at": "2021-01-01T00:00:00",
+          "id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "organization_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3",
+          "role": 2,
+          "updated_at": "2021-01-01T00:00:00",
+          "user_id": "e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3"
         }
       }
     },

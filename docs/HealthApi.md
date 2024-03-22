@@ -1,17 +1,19 @@
 # TrieveRubyClient::HealthApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8090*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**health_check**](HealthApi.md#health_check) | **GET** /api/health |  |
+| [**health_check**](HealthApi.md#health_check) | **GET** /api/health | Health Check |
 
 
 ## health_check
 
 > health_check
 
+Health Check
 
+Health Check  Confirmation that the service is healthy and can make embedding vectors
 
 ### Examples
 
@@ -22,7 +24,7 @@ require 'trieve_ruby_client'
 api_instance = TrieveRubyClient::HealthApi.new
 
 begin
-  
+  # Health Check
   api_instance.health_check
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling HealthApi->health_check: #{e}"
@@ -37,7 +39,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  
+  # Health Check
   data, status_code, headers = api_instance.health_check_with_http_info
   p status_code # => 2xx
   p headers # => { ... }

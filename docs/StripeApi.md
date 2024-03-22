@@ -1,20 +1,22 @@
 # TrieveRubyClient::StripeApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8090*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**cancel_subscription**](StripeApi.md#cancel_subscription) | **DELETE** /api/stripe/subscription/{subscription_id} |  |
-| [**direct_to_payment_link**](StripeApi.md#direct_to_payment_link) | **GET** /api/stripe/payment_link/{plan_id}/{organization_id} |  |
-| [**get_all_plans**](StripeApi.md#get_all_plans) | **GET** /api/stripe/plans |  |
-| [**update_subscription_plan**](StripeApi.md#update_subscription_plan) | **PATCH** /api/stripe/subscription_plan/{subscription_id}/{plan_id} |  |
+| [**cancel_subscription**](StripeApi.md#cancel_subscription) | **DELETE** /api/stripe/subscription/{subscription_id} | Cancel Subscription |
+| [**direct_to_payment_link**](StripeApi.md#direct_to_payment_link) | **GET** /api/stripe/payment_link/{plan_id}/{organization_id} | Checkout |
+| [**get_all_plans**](StripeApi.md#get_all_plans) | **GET** /api/stripe/plans | Get All Plans |
+| [**update_subscription_plan**](StripeApi.md#update_subscription_plan) | **PATCH** /api/stripe/subscription_plan/{subscription_id}/{plan_id} | Update Subscription Plan |
 
 
 ## cancel_subscription
 
 > cancel_subscription(tr_organization, subscription_id)
 
+Cancel Subscription
 
+Cancel Subscription  Cancel a subscription by its id
 
 ### Examples
 
@@ -34,7 +36,7 @@ tr_organization = 'tr_organization_example' # String | The organization id to us
 subscription_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the subscription you want to cancel
 
 begin
-  
+  # Cancel Subscription
   api_instance.cancel_subscription(tr_organization, subscription_id)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling StripeApi->cancel_subscription: #{e}"
@@ -49,7 +51,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  
+  # Cancel Subscription
   data, status_code, headers = api_instance.cancel_subscription_with_http_info(tr_organization, subscription_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -84,7 +86,9 @@ nil (empty response body)
 
 > direct_to_payment_link(plan_id, organization_id)
 
+Checkout
 
+Checkout  Get a direct link to the stripe checkout page for the plan and organization
 
 ### Examples
 
@@ -97,7 +101,7 @@ plan_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the plan you w
 organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the organization you want to subscribe to the plan
 
 begin
-  
+  # Checkout
   api_instance.direct_to_payment_link(plan_id, organization_id)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling StripeApi->direct_to_payment_link: #{e}"
@@ -112,7 +116,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  
+  # Checkout
   data, status_code, headers = api_instance.direct_to_payment_link_with_http_info(plan_id, organization_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -147,7 +151,9 @@ No authorization required
 
 > <Array<StripePlan>> get_all_plans
 
+Get All Plans
 
+Get All Plans  Get a list of all plans
 
 ### Examples
 
@@ -158,7 +164,7 @@ require 'trieve_ruby_client'
 api_instance = TrieveRubyClient::StripeApi.new
 
 begin
-  
+  # Get All Plans
   result = api_instance.get_all_plans
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -174,7 +180,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  
+  # Get All Plans
   data, status_code, headers = api_instance.get_all_plans_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
@@ -206,7 +212,9 @@ No authorization required
 
 > update_subscription_plan(tr_organization, subscription_id, plan_id)
 
+Update Subscription Plan
 
+Update Subscription Plan  Update a subscription to a new plan
 
 ### Examples
 
@@ -227,7 +235,7 @@ subscription_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the su
 plan_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the plan you want to subscribe to
 
 begin
-  
+  # Update Subscription Plan
   api_instance.update_subscription_plan(tr_organization, subscription_id, plan_id)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling StripeApi->update_subscription_plan: #{e}"
@@ -242,7 +250,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  
+  # Update Subscription Plan
   data, status_code, headers = api_instance.update_subscription_plan_with_http_info(tr_organization, subscription_id, plan_id)
   p status_code # => 2xx
   p headers # => { ... }

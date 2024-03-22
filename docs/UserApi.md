@@ -1,21 +1,21 @@
 # TrieveRubyClient::UserApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8090*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**delete_user_api_key**](UserApi.md#delete_user_api_key) | **DELETE** /api/user/delete_api_key | delete_user_api_key |
-| [**set_user_api_key**](UserApi.md#set_user_api_key) | **POST** /api/user/set_api_key | set_user_api_key |
-| [**update_user**](UserApi.md#update_user) | **PUT** /api/user | update_user |
+| [**delete_user_api_key**](UserApi.md#delete_user_api_key) | **DELETE** /api/user/delete_api_key | Delete User Api Key |
+| [**set_user_api_key**](UserApi.md#set_user_api_key) | **POST** /api/user/set_api_key | Set User Api Key |
+| [**update_user**](UserApi.md#update_user) | **PUT** /api/user | Update User |
 
 
 ## delete_user_api_key
 
 > <Array<ApiKeyDTO>> delete_user_api_key(delete_user_api_key_request)
 
-delete_user_api_key
+Delete User Api Key
 
-delete_user_api_key  Delete an api key for the auth'ed user.
+Delete User Api Key  Delete an api key for the auth'ed user.
 
 ### Examples
 
@@ -34,7 +34,7 @@ api_instance = TrieveRubyClient::UserApi.new
 delete_user_api_key_request = TrieveRubyClient::DeleteUserApiKeyRequest.new({api_key_id: 'api_key_id_example'}) # DeleteUserApiKeyRequest | JSON request payload to delete a user api key
 
 begin
-  # delete_user_api_key
+  # Delete User Api Key
   result = api_instance.delete_user_api_key(delete_user_api_key_request)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -50,7 +50,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # delete_user_api_key
+  # Delete User Api Key
   data, status_code, headers = api_instance.delete_user_api_key_with_http_info(delete_user_api_key_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -84,9 +84,9 @@ end
 
 > <SetUserApiKeyResponse> set_user_api_key(set_user_api_key_request)
 
-set_user_api_key
+Set User Api Key
 
-set_user_api_key  Create a new api key for the auth'ed user. Successful response will contain the newly created api key. If a write role is assigned the api key will have permission level of the auth'ed user who calls this endpoint.
+Set User Api Key  Create a new api key for the auth'ed user. Successful response will contain the newly created api key. If a write role is assigned the api key will have permission level of the auth'ed user who calls this endpoint.
 
 ### Examples
 
@@ -105,7 +105,7 @@ api_instance = TrieveRubyClient::UserApi.new
 set_user_api_key_request = TrieveRubyClient::SetUserApiKeyRequest.new({name: 'name_example', role: 37}) # SetUserApiKeyRequest | JSON request payload to create a new user api key
 
 begin
-  # set_user_api_key
+  # Set User Api Key
   result = api_instance.set_user_api_key(set_user_api_key_request)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -121,7 +121,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # set_user_api_key
+  # Set User Api Key
   data, status_code, headers = api_instance.set_user_api_key_with_http_info(set_user_api_key_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -155,9 +155,9 @@ end
 
 > <SlimUser> update_user(update_user_data)
 
-update_user
+Update User
 
-update_user  Update a user's information. If the user_id is not provided, the auth'ed user will be updated. If the user_id is provided, the auth'ed user must be an admin (1) or owner (2) of the organization.
+Update User  Update a user's information. If the user_id is not provided, the auth'ed user will be updated. If the user_id is provided, the auth'ed user must be an admin (1) or owner (2) of the organization.
 
 ### Examples
 
@@ -176,7 +176,7 @@ api_instance = TrieveRubyClient::UserApi.new
 update_user_data = TrieveRubyClient::UpdateUserData.new({organization_id: 'organization_id_example'}) # UpdateUserData | JSON request payload to update user information for the auth'ed user
 
 begin
-  # update_user
+  # Update User
   result = api_instance.update_user(update_user_data)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -192,7 +192,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # update_user
+  # Update User
   data, status_code, headers = api_instance.update_user_with_http_info(update_user_data)
   p status_code # => 2xx
   p headers # => { ... }

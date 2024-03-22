@@ -1,24 +1,24 @@
 # TrieveRubyClient::DatasetApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8090*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**create_dataset**](DatasetApi.md#create_dataset) | **POST** /api/dataset | create_dataset |
-| [**delete_dataset**](DatasetApi.md#delete_dataset) | **DELETE** /api/dataset | delete_dataset |
-| [**get_client_dataset_config**](DatasetApi.md#get_client_dataset_config) | **GET** /api/dataset/envs | get_client_dataset_config |
-| [**get_dataset**](DatasetApi.md#get_dataset) | **GET** /api/dataset/{dataset_id} | get_dataset |
-| [**get_datasets_from_organization**](DatasetApi.md#get_datasets_from_organization) | **GET** /api/dataset/organization/{organization_id} | get_organization_datasets |
-| [**update_dataset**](DatasetApi.md#update_dataset) | **PUT** /api/dataset | update_dataset |
+| [**create_dataset**](DatasetApi.md#create_dataset) | **POST** /api/dataset | Create dataset |
+| [**delete_dataset**](DatasetApi.md#delete_dataset) | **DELETE** /api/dataset | Delete Dataset |
+| [**get_client_dataset_config**](DatasetApi.md#get_client_dataset_config) | **GET** /api/dataset/envs | Get Client Configuration |
+| [**get_dataset**](DatasetApi.md#get_dataset) | **GET** /api/dataset/{dataset_id} | Get Dataset |
+| [**get_datasets_from_organization**](DatasetApi.md#get_datasets_from_organization) | **GET** /api/dataset/organization/{organization_id} | Get Datasets from Organization |
+| [**update_dataset**](DatasetApi.md#update_dataset) | **PUT** /api/dataset | Update Dataset |
 
 
 ## create_dataset
 
 > <Dataset> create_dataset(tr_organization, create_dataset_request)
 
-create_dataset
+Create dataset
 
-create_dataset  Create a new dataset. The auth'ed user must be an owner of the organization to create a dataset.
+Create dataset  Create a new dataset. The auth'ed user must be an owner of the organization to create a dataset.
 
 ### Examples
 
@@ -38,7 +38,7 @@ tr_organization = 'tr_organization_example' # String | The organization id to us
 create_dataset_request = TrieveRubyClient::CreateDatasetRequest.new({client_configuration: 3.56, dataset_name: 'dataset_name_example', organization_id: 'organization_id_example', server_configuration: 3.56}) # CreateDatasetRequest | JSON request payload to create a new dataset
 
 begin
-  # create_dataset
+  # Create dataset
   result = api_instance.create_dataset(tr_organization, create_dataset_request)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -54,7 +54,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # create_dataset
+  # Create dataset
   data, status_code, headers = api_instance.create_dataset_with_http_info(tr_organization, create_dataset_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -89,9 +89,9 @@ end
 
 > delete_dataset(tr_organization, delete_dataset_request)
 
-delete_dataset
+Delete Dataset
 
-delete_dataset  Delete a dataset. The auth'ed user must be an owner of the organization to delete a dataset.
+Delete Dataset  Delete a dataset. The auth'ed user must be an owner of the organization to delete a dataset.
 
 ### Examples
 
@@ -111,7 +111,7 @@ tr_organization = 'tr_organization_example' # String | The organization id to us
 delete_dataset_request = TrieveRubyClient::DeleteDatasetRequest.new({dataset_id: 'dataset_id_example'}) # DeleteDatasetRequest | JSON request payload to delete a dataset
 
 begin
-  # delete_dataset
+  # Delete Dataset
   api_instance.delete_dataset(tr_organization, delete_dataset_request)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->delete_dataset: #{e}"
@@ -126,7 +126,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # delete_dataset
+  # Delete Dataset
   data, status_code, headers = api_instance.delete_dataset_with_http_info(tr_organization, delete_dataset_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -161,9 +161,9 @@ nil (empty response body)
 
 > <ClientDatasetConfiguration> get_client_dataset_config(tr_dataset)
 
-get_client_dataset_config
+Get Client Configuration
 
-get_client_dataset_config  Get the client configuration for a dataset. Will use the TR-D
+Get Client Configuration  Get the client configuration for a dataset. Will use the TR-D
 
 ### Examples
 
@@ -182,7 +182,7 @@ api_instance = TrieveRubyClient::DatasetApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 
 begin
-  # get_client_dataset_config
+  # Get Client Configuration
   result = api_instance.get_client_dataset_config(tr_dataset)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -198,7 +198,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # get_client_dataset_config
+  # Get Client Configuration
   data, status_code, headers = api_instance.get_client_dataset_config_with_http_info(tr_dataset)
   p status_code # => 2xx
   p headers # => { ... }
@@ -232,9 +232,9 @@ end
 
 > <Dataset> get_dataset(tr_organization, tr_dataset, dataset_id)
 
-get_dataset
+Get Dataset
 
-get_dataset  Get a dataset by id. The auth'ed user must be an admin or owner of the organization to get a dataset.
+Get Dataset  Get a dataset by id. The auth'ed user must be an admin or owner of the organization to get a dataset.
 
 ### Examples
 
@@ -255,7 +255,7 @@ tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the reque
 dataset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the dataset you want to retrieve.
 
 begin
-  # get_dataset
+  # Get Dataset
   result = api_instance.get_dataset(tr_organization, tr_dataset, dataset_id)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -271,7 +271,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # get_dataset
+  # Get Dataset
   data, status_code, headers = api_instance.get_dataset_with_http_info(tr_organization, tr_dataset, dataset_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -307,9 +307,9 @@ end
 
 > <Array<DatasetAndUsage>> get_datasets_from_organization(tr_organization, organization_id)
 
-get_organization_datasets
+Get Datasets from Organization
 
-get_organization_datasets  Get all datasets for an organization. The auth'ed user must be an admin or owner of the organization to get its datasets.
+Get Datasets from Organization  Get all datasets for an organization. The auth'ed user must be an admin or owner of the organization to get its datasets.
 
 ### Examples
 
@@ -329,7 +329,7 @@ tr_organization = 'tr_organization_example' # String | The organization id to us
 organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the organization you want to retrieve datasets for
 
 begin
-  # get_organization_datasets
+  # Get Datasets from Organization
   result = api_instance.get_datasets_from_organization(tr_organization, organization_id)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -345,7 +345,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # get_organization_datasets
+  # Get Datasets from Organization
   data, status_code, headers = api_instance.get_datasets_from_organization_with_http_info(tr_organization, organization_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -380,9 +380,9 @@ end
 
 > <Dataset> update_dataset(tr_organization, update_dataset_request)
 
-update_dataset
+Update Dataset
 
-update_dataset  Update a dataset. The auth'ed user must be an owner of the organization to update a dataset.
+Update Dataset  Update a dataset. The auth'ed user must be an owner of the organization to update a dataset.
 
 ### Examples
 
@@ -402,7 +402,7 @@ tr_organization = 'tr_organization_example' # String | The organization id to us
 update_dataset_request = TrieveRubyClient::UpdateDatasetRequest.new({dataset_id: 'dataset_id_example'}) # UpdateDatasetRequest | JSON request payload to update a dataset
 
 begin
-  # update_dataset
+  # Update Dataset
   result = api_instance.update_dataset(tr_organization, update_dataset_request)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -418,7 +418,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # update_dataset
+  # Update Dataset
   data, status_code, headers = api_instance.update_dataset_with_http_info(tr_organization, update_dataset_request)
   p status_code # => 2xx
   p headers # => { ... }

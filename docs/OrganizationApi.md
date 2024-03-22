@@ -1,24 +1,24 @@
 # TrieveRubyClient::OrganizationApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8090*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**create_organization**](OrganizationApi.md#create_organization) | **POST** /api/organization | create_organization |
-| [**delete_organization_by_id**](OrganizationApi.md#delete_organization_by_id) | **DELETE** /api/organization/{organization_id} | delete_organization |
-| [**get_organization_by_id**](OrganizationApi.md#get_organization_by_id) | **GET** /api/organization/{organization_id} | get_organization |
-| [**get_organization_usage**](OrganizationApi.md#get_organization_usage) | **GET** /api/organization/usage/{organization_id} | get_organization_usage |
-| [**get_organization_users**](OrganizationApi.md#get_organization_users) | **GET** /api/organization/users/{organization_id} | get_organization_users |
-| [**update_organization**](OrganizationApi.md#update_organization) | **PUT** /api/organization | update_organization |
+| [**create_organization**](OrganizationApi.md#create_organization) | **POST** /api/organization | Create Organization |
+| [**delete_organization_by_id**](OrganizationApi.md#delete_organization_by_id) | **DELETE** /api/organization/{organization_id} | Delete Organization |
+| [**get_organization_by_id**](OrganizationApi.md#get_organization_by_id) | **GET** /api/organization/{organization_id} | Get Organization |
+| [**get_organization_usage**](OrganizationApi.md#get_organization_usage) | **GET** /api/organization/usage/{organization_id} | Get Organization Usage |
+| [**get_organization_users**](OrganizationApi.md#get_organization_users) | **GET** /api/organization/users/{organization_id} | Get Organization Users |
+| [**update_organization**](OrganizationApi.md#update_organization) | **PUT** /api/organization | Update Organization |
 
 
 ## create_organization
 
 > <Organization> create_organization(create_organization_data)
 
-create_organization
+Create Organization
 
-create_organization  Create a new organization. The auth'ed user who creates the organization will be the default owner of the organization.
+Create Organization  Create a new organization. The auth'ed user who creates the organization will be the default owner of the organization.
 
 ### Examples
 
@@ -37,7 +37,7 @@ api_instance = TrieveRubyClient::OrganizationApi.new
 create_organization_data = TrieveRubyClient::CreateOrganizationData.new({name: 'name_example'}) # CreateOrganizationData | The organization data that you want to create
 
 begin
-  # create_organization
+  # Create Organization
   result = api_instance.create_organization(create_organization_data)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -53,7 +53,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # create_organization
+  # Create Organization
   data, status_code, headers = api_instance.create_organization_with_http_info(create_organization_data)
   p status_code # => 2xx
   p headers # => { ... }
@@ -87,9 +87,9 @@ end
 
 > <Organization> delete_organization_by_id(tr_organization, organization_id)
 
-delete_organization
+Delete Organization
 
-delete_organization  Delete an organization by its id. The auth'ed user must be an owner of the organization to delete it.
+Delete Organization  Delete an organization by its id. The auth'ed user must be an owner of the organization to delete it.
 
 ### Examples
 
@@ -109,7 +109,7 @@ tr_organization = 'tr_organization_example' # String | The organization id to us
 organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the organization you want to fetch.
 
 begin
-  # delete_organization
+  # Delete Organization
   result = api_instance.delete_organization_by_id(tr_organization, organization_id)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -125,7 +125,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # delete_organization
+  # Delete Organization
   data, status_code, headers = api_instance.delete_organization_by_id_with_http_info(tr_organization, organization_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -160,9 +160,9 @@ end
 
 > <Organization> get_organization_by_id(tr_organization, organization_id)
 
-get_organization
+Get Organization
 
-get_organization  Fetch the details of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.
+Get Organization  Fetch the details of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.
 
 ### Examples
 
@@ -182,7 +182,7 @@ tr_organization = 'tr_organization_example' # String | The organization id to us
 organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the organization you want to fetch.
 
 begin
-  # get_organization
+  # Get Organization
   result = api_instance.get_organization_by_id(tr_organization, organization_id)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -198,7 +198,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # get_organization
+  # Get Organization
   data, status_code, headers = api_instance.get_organization_by_id_with_http_info(tr_organization, organization_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -233,9 +233,9 @@ end
 
 > <OrganizationUsageCount> get_organization_usage(tr_organization, organization_id)
 
-get_organization_usage
+Get Organization Usage
 
-get_organization_usage  Fetch the current usage specification of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.
+Get Organization Usage  Fetch the current usage specification of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.
 
 ### Examples
 
@@ -255,7 +255,7 @@ tr_organization = 'tr_organization_example' # String | The organization id to us
 organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the organization you want to fetch the usage of.
 
 begin
-  # get_organization_usage
+  # Get Organization Usage
   result = api_instance.get_organization_usage(tr_organization, organization_id)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -271,7 +271,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # get_organization_usage
+  # Get Organization Usage
   data, status_code, headers = api_instance.get_organization_usage_with_http_info(tr_organization, organization_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -306,9 +306,9 @@ end
 
 > <Array<SlimUser>> get_organization_users(tr_organization, organization_id)
 
-get_organization_users
+Get Organization Users
 
-get_organization_users  Fetch the users of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.
+Get Organization Users  Fetch the users of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.
 
 ### Examples
 
@@ -328,7 +328,7 @@ tr_organization = 'tr_organization_example' # String | The organization id to us
 organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the organization you want to fetch the users of.
 
 begin
-  # get_organization_users
+  # Get Organization Users
   result = api_instance.get_organization_users(tr_organization, organization_id)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -344,7 +344,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # get_organization_users
+  # Get Organization Users
   data, status_code, headers = api_instance.get_organization_users_with_http_info(tr_organization, organization_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -379,9 +379,9 @@ end
 
 > <Organization> update_organization(tr_organization, update_organization_data)
 
-update_organization
+Update Organization
 
-update_organization  Update an organization. Only the owner of the organization can update it.
+Update Organization  Update an organization. Only the owner of the organization can update it.
 
 ### Examples
 
@@ -401,7 +401,7 @@ tr_organization = 'tr_organization_example' # String | The organization id to us
 update_organization_data = TrieveRubyClient::UpdateOrganizationData.new({organization_id: 'organization_id_example'}) # UpdateOrganizationData | The organization data that you want to update
 
 begin
-  # update_organization
+  # Update Organization
   result = api_instance.update_organization(tr_organization, update_organization_data)
   p result
 rescue TrieveRubyClient::ApiError => e
@@ -417,7 +417,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # update_organization
+  # Update Organization
   data, status_code, headers = api_instance.update_organization_with_http_info(tr_organization, update_organization_data)
   p status_code # => 2xx
   p headers # => { ... }
