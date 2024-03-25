@@ -12,7 +12,7 @@
       "name": "BSL",
       "url": "https://github.com/devflowinc/trieve/blob/main/LICENSE.txt"
     },
-    "version": "0.4.0"
+    "version": "0.5.0"
   },
   "servers": [
     {
@@ -150,8 +150,8 @@
         "tags": [
           "chunk"
         ],
-        "summary": "Create Chunk",
-        "description": "Create Chunk\n\nCreate a new chunk. If the chunk has the same tracking_id as an existing chunk, the request will fail. Once a chunk is created, it can be searched for using the search endpoint.",
+        "summary": "Create or Upsert Chunk or Chunks",
+        "description": "Create or Upsert Chunk or Chunks\n\nCreate a new chunk. If the chunk has the same tracking_id as an existing chunk, the request will fail. Once a chunk is created, it can be searched for using the search endpoint.",
         "operationId": "create_chunk",
         "parameters": [
           {
@@ -198,6 +198,58 @@
           },
           "426": {
             "description": "Error when upgrade is needed to process more chunks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [
+              "admin"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "chunk"
+        ],
+        "summary": "Update Chunk",
+        "description": "Update Chunk\n\nUpdate a chunk. If you try to change the tracking_id of the chunk to have the same tracking_id as an existing chunk, the request will fail.",
+        "operationId": "update_chunk",
+        "parameters": [
+          {
+            "name": "TR-Dataset",
+            "in": "header",
+            "description": "The dataset id to use for the request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "JSON request payload to update a chunk (chunk)",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateChunkData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No content Ok response indicating the chunk was updated as requested"
+          },
+          "400": {
+            "description": "Service error relating to to updating chunk, likely due to conflicting tracking_id",
             "content": {
               "application/json": {
                 "schema": {
@@ -282,8 +334,8 @@
         "tags": [
           "chunk"
         ],
-        "summary": "RAG on User Defined Chunks",
-        "description": "RAG on User Defined Chunks\n\nThis endpoint exists as an alternative to the topic+message concept where our API handles chat memory. With this endpoint, the user is responsible for providing the context window and the prompt. See more in the \"search before generate\" page at docs.trieve.ai.",
+        "summary": "RAG on Specified Chunks",
+        "description": "RAG on Specified Chunks\n\nThis endpoint exists as an alternative to the topic+message concept where our API handles chat memory. With this endpoint, the user is responsible for providing the context window and the prompt. See more in the \"search before generate\" page at docs.trieve.ai.",
         "operationId": "generate_off_chunks",
         "parameters": [
           {
@@ -508,7 +560,6 @@
             }
           }
         },
-        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -568,7 +619,6 @@
             }
           }
         },
-        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -619,7 +669,6 @@
             }
           }
         },
-        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -629,61 +678,7 @@
         ]
       }
     },
-    "/api/chunk/update": {
-      "put": {
-        "tags": [
-          "chunk"
-        ],
-        "summary": "Update Chunk",
-        "description": "Update Chunk\n\nUpdate a chunk. If you try to change the tracking_id of the chunk to have the same tracking_id as an existing chunk, the request will fail.",
-        "operationId": "update_chunk",
-        "parameters": [
-          {
-            "name": "TR-Dataset",
-            "in": "header",
-            "description": "The dataset id to use for the request",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "JSON request payload to update a chunk (chunk)",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateChunkData"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "204": {
-            "description": "No content Ok response indicating the chunk was updated as requested"
-          },
-          "400": {
-            "description": "Service error relating to to updating chunk, likely due to conflicting tracking_id",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseBody"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "ApiKey": [
-              "admin"
-            ]
-          }
-        ]
-      }
-    },
-    "/api/chunk/{tracking_or_chunk}/{chunk_id}": {
+    "/api/chunk/{chunk_id}": {
       "get": {
         "tags": [
           "chunk"
@@ -702,23 +697,13 @@
             }
           },
           {
-            "name": "tracking_or_chunk",
-            "in": "path",
-            "description": "The type of id you are using to search for the chunk. This can be either 'chunk' or 'tracking_id'",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "chunk_id",
             "in": "path",
-            "description": "Id of the chunk you want to fetch. This can be either the chunk_id or the tracking_id.",
+            "description": "Id of the chunk you want to fetch.",
             "required": true,
             "schema": {
               "type": "string",
-              "format": "uuid",
-              "nullable": true
+              "format": "uuid"
             }
           }
         ],
@@ -770,23 +755,13 @@
             }
           },
           {
-            "name": "tracking_or_chunk",
-            "in": "path",
-            "description": "The type of id you are using to search for the chunk. This can be either 'chunk' or 'tracking_id'",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "chunk_id",
             "in": "path",
-            "description": "Id of the chunk you want to fetch. This can be either the chunk_id or the tracking_id.",
+            "description": "Id of the chunk you want to fetch.",
             "required": true,
             "schema": {
               "type": "string",
-              "format": "uuid",
-              "nullable": true
+              "format": "uuid"
             }
           }
         ],
@@ -820,7 +795,7 @@
           "chunk_group"
         ],
         "summary": "Create Chunk Group",
-        "description": "Create Chunk Group\n\nCreate a new chunk_group.",
+        "description": "Create Chunk Group\n\nCreate a new chunk_group. This is a way to group chunks together. If you try to create a chunk_group with the same tracking_id as an existing chunk_group, this operation will fail.",
         "operationId": "create_chunk_group",
         "parameters": [
           {
@@ -879,7 +854,7 @@
           "chunk_group"
         ],
         "summary": "Update Group",
-        "description": "Update Group\n\nUpdate a chunk_group.",
+        "description": "Update Group\n\nUpdate a chunk_group. If you try to change the tracking_id to one that already exists, this operation will fail.",
         "operationId": "update_chunk_group",
         "parameters": [
           {
@@ -933,7 +908,7 @@
           "chunk_group"
         ],
         "summary": "Add Chunk to Group",
-        "description": "Add Chunk to Group\n\nRoute to add a chunk to a group",
+        "description": "Add Chunk to Group\n\nRoute to add a chunk to a group.",
         "operationId": "add_chunk_to_group",
         "parameters": [
           {
@@ -982,7 +957,6 @@
             }
           }
         },
-        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -1045,7 +1019,6 @@
             }
           }
         },
-        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -1311,8 +1284,7 @@
             "description": "The id of the group to get the chunks from",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "type": "string"
             }
           },
           {
@@ -1349,7 +1321,6 @@
             }
           }
         },
-        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -1409,7 +1380,6 @@
             }
           }
         },
-        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -1423,7 +1393,7 @@
           "chunk_group"
         ],
         "summary": "Add Chunk to Group by Tracking ID",
-        "description": "Add Chunk to Group by Tracking ID\n\nRoute to add a chunk to a group by tracking id. Think of a bookmark as a chunk which is a member of a group.",
+        "description": "Add Chunk to Group by Tracking ID\n\nRoute to add a chunk to a group by tracking id.",
         "operationId": "add_chunk_to_group_by_tracking_id",
         "parameters": [
           {
@@ -1471,7 +1441,6 @@
             }
           }
         },
-        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -1534,7 +1503,6 @@
             }
           }
         },
-        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -1585,7 +1553,6 @@
             }
           }
         },
-        "deprecated": true,
         "security": [
           {
             "ApiKey": [
@@ -1595,7 +1562,7 @@
         ]
       }
     },
-    "/api/chunk_group/{tracking_or_chunk}/{group_id}": {
+    "/api/chunk_group/{group_id}": {
       "get": {
         "tags": [
           "chunk_group"
@@ -1614,23 +1581,13 @@
             }
           },
           {
-            "name": "tracking_or_chunk",
-            "in": "path",
-            "description": "The type of id you are using to search for the group. This can be either 'chunk' or 'tracking_id'",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "group_id",
             "in": "path",
-            "description": "Id of the group you want to fetch. This can be either the group_id or the tracking_id.",
+            "description": "Id of the group you want to fetch.",
             "required": true,
             "schema": {
               "type": "string",
-              "format": "uuid",
-              "nullable": true
+              "format": "uuid"
             }
           }
         ],
@@ -1682,23 +1639,13 @@
             }
           },
           {
-            "name": "tracking_or_chunk",
-            "in": "path",
-            "description": "The type of id you are using to search for the group. This can be either 'chunk' or 'tracking_id'",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "group_id",
             "in": "path",
-            "description": "Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used.",
+            "description": "Id of the group you want to fetch.",
             "required": true,
             "schema": {
               "type": "string",
-              "format": "uuid",
-              "nullable": true
+              "format": "uuid"
             }
           },
           {
@@ -1735,7 +1682,7 @@
         ]
       }
     },
-    "/api/chunk_group/{tracking_or_chunk}/{group_id}/{page}": {
+    "/api/chunk_group/{group_id}/{page}": {
       "get": {
         "tags": [
           "chunk_group"
@@ -1754,23 +1701,13 @@
             }
           },
           {
-            "name": "tracking_or_chunk",
-            "in": "path",
-            "description": "The type of id you are using to search for the group. This can be either 'chunk' or 'tracking_id'",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "group_id",
             "in": "path",
-            "description": "Id of the group you want to fetch. This can be either the group_id or the tracking_id. If both are provided, the group_id will be used.",
+            "description": "Id of the group you want to fetch.",
             "required": true,
             "schema": {
               "type": "string",
-              "format": "uuid",
-              "nullable": true
+              "format": "uuid"
             }
           },
           {
@@ -1781,6 +1718,7 @@
             "schema": {
               "type": "integer",
               "format": "int64",
+              "nullable": true,
               "minimum": 0
             }
           }
@@ -3811,7 +3749,7 @@
           "chunk_id": {
             "type": "string",
             "format": "uuid",
-            "description": "Id of the chunk to make a member of the group. Think of this as \"bookmark\"ing a chunk."
+            "description": "Id of the chunk to make a member of the group."
           }
         }
       },
@@ -4165,10 +4103,10 @@
                 "value4"
               ],
               "range": {
-                "gt": 0,
-                "gte": 0,
-                "lt": 1,
-                "lte": 1
+                "gt": 0.0,
+                "gte": 0.0,
+                "lt": 1.0,
+                "lte": 1.0
               }
             }
           ],
@@ -4180,10 +4118,10 @@
                 "value6"
               ],
               "range": {
-                "gt": 0,
-                "gte": 0,
-                "lt": 1,
-                "lte": 1
+                "gt": 0.0,
+                "gte": 0.0,
+                "lt": 1.0,
+                "lte": 1.0
               }
             }
           ],
@@ -4195,10 +4133,10 @@
                 "value2"
               ],
               "range": {
-                "gt": 0,
-                "gte": 0,
-                "lt": 1,
-                "lte": 1
+                "gt": 0.0,
+                "gte": 0.0,
+                "lt": 1.0,
+                "lte": 1.0
               }
             }
           ]
@@ -5091,10 +5029,10 @@
             "value2"
           ],
           "range": {
-            "gt": 0,
-            "gte": 0,
-            "lt": 1,
-            "lte": 1
+            "gt": 0.0,
+            "gte": 0.0,
+            "lt": 1.0,
+            "lte": 1.0
           }
         }
       },
@@ -5279,7 +5217,7 @@
             "items": {
               "type": "string"
             },
-            "description": "The type of events to get. Any combination of file_uploaded, card_uploaded, card_action_failed, or card_updated. Leave undefined to get all events.",
+            "description": "The types of events to get. Any combination of file_uploaded, card_uploaded, card_action_failed, or card_updated. Leave undefined to get all events.",
             "nullable": true
           },
           "page": {
@@ -5580,10 +5518,10 @@
           }
         },
         "example": {
-          "gt": 0,
-          "gte": 0,
-          "lt": 1,
-          "lte": 1
+          "gt": 0.0,
+          "gte": 0.0,
+          "lt": 1.0,
+          "lte": 1.0
         }
       },
       "ReccomendGroupChunksRequest": {
@@ -5866,10 +5804,10 @@
                   "value4"
                 ],
                 "range": {
-                  "gt": 0,
-                  "gte": 0,
-                  "lt": 1,
-                  "lte": 1
+                  "gt": 0.0,
+                  "gte": 0.0,
+                  "lt": 1.0,
+                  "lte": 1.0
                 }
               }
             ],
@@ -5881,10 +5819,10 @@
                   "value6"
                 ],
                 "range": {
-                  "gt": 0,
-                  "gte": 0,
-                  "lt": 1,
-                  "lte": 1
+                  "gt": 0.0,
+                  "gte": 0.0,
+                  "lt": 1.0,
+                  "lte": 1.0
                 }
               }
             ],
@@ -5896,10 +5834,10 @@
                   "value2"
                 ],
                 "range": {
-                  "gt": 0,
-                  "gte": 0,
-                  "lt": 1,
-                  "lte": 1
+                  "gt": 0.0,
+                  "gte": 0.0,
+                  "lt": 1.0,
+                  "lte": 1.0
                 }
               }
             ]
