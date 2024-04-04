@@ -1,11 +1,11 @@
 # TrieveRubyClient::DatasetApi
 
-All URIs are relative to *http://localhost:8090*
+All URIs are relative to *https://api.trieve.ai*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**create_dataset**](DatasetApi.md#create_dataset) | **POST** /api/dataset | Create dataset |
-| [**delete_dataset**](DatasetApi.md#delete_dataset) | **DELETE** /api/dataset | Delete Dataset |
+| [**delete_dataset**](DatasetApi.md#delete_dataset) | **DELETE** /api/dataset/{dataset_id} | Delete Dataset |
 | [**get_client_dataset_config**](DatasetApi.md#get_client_dataset_config) | **GET** /api/dataset/envs | Get Client Configuration |
 | [**get_dataset**](DatasetApi.md#get_dataset) | **GET** /api/dataset/{dataset_id} | Get Dataset |
 | [**get_datasets_from_organization**](DatasetApi.md#get_datasets_from_organization) | **GET** /api/dataset/organization/{organization_id} | Get Datasets from Organization |
@@ -87,7 +87,7 @@ end
 
 ## delete_dataset
 
-> delete_dataset(tr_organization, delete_dataset_request)
+> delete_dataset(tr_organization, dataset_id)
 
 Delete Dataset
 
@@ -108,11 +108,11 @@ end
 
 api_instance = TrieveRubyClient::DatasetApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
-delete_dataset_request = TrieveRubyClient::DeleteDatasetRequest.new({dataset_id: 'dataset_id_example'}) # DeleteDatasetRequest | JSON request payload to delete a dataset
+dataset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the dataset you want to delete.
 
 begin
   # Delete Dataset
-  api_instance.delete_dataset(tr_organization, delete_dataset_request)
+  api_instance.delete_dataset(tr_organization, dataset_id)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->delete_dataset: #{e}"
 end
@@ -122,12 +122,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> delete_dataset_with_http_info(tr_organization, delete_dataset_request)
+> <Array(nil, Integer, Hash)> delete_dataset_with_http_info(tr_organization, dataset_id)
 
 ```ruby
 begin
   # Delete Dataset
-  data, status_code, headers = api_instance.delete_dataset_with_http_info(tr_organization, delete_dataset_request)
+  data, status_code, headers = api_instance.delete_dataset_with_http_info(tr_organization, dataset_id)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -141,7 +141,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_organization** | **String** | The organization id to use for the request |  |
-| **delete_dataset_request** | [**DeleteDatasetRequest**](DeleteDatasetRequest.md) | JSON request payload to delete a dataset |  |
+| **dataset_id** | **String** | The id of the dataset you want to delete. |  |
 
 ### Return type
 
@@ -153,7 +153,7 @@ nil (empty response body)
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 

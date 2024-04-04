@@ -1,6 +1,6 @@
 # TrieveRubyClient::ChunkApi
 
-All URIs are relative to *http://localhost:8090*
+All URIs are relative to *https://api.trieve.ai*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
@@ -528,7 +528,7 @@ end
 
 ## get_recommended_chunks
 
-> <Array<ChunkMetadataWithFileData>> get_recommended_chunks(tr_dataset, recommend_chunks_request)
+> <RecommendChunksResponseTypes> get_recommended_chunks(tr_dataset, recommend_chunks_request)
 
 Get Recommended Chunks
 
@@ -564,7 +564,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<ChunkMetadataWithFileData>>, Integer, Hash)> get_recommended_chunks_with_http_info(tr_dataset, recommend_chunks_request)
+> <Array(<RecommendChunksResponseTypes>, Integer, Hash)> get_recommended_chunks_with_http_info(tr_dataset, recommend_chunks_request)
 
 ```ruby
 begin
@@ -572,7 +572,7 @@ begin
   data, status_code, headers = api_instance.get_recommended_chunks_with_http_info(tr_dataset, recommend_chunks_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<ChunkMetadataWithFileData>>
+  p data # => <RecommendChunksResponseTypes>
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->get_recommended_chunks_with_http_info: #{e}"
 end
@@ -587,7 +587,7 @@ end
 
 ### Return type
 
-[**Array&lt;ChunkMetadataWithFileData&gt;**](ChunkMetadataWithFileData.md)
+[**RecommendChunksResponseTypes**](RecommendChunksResponseTypes.md)
 
 ### Authorization
 
@@ -601,7 +601,7 @@ end
 
 ## search_chunk
 
-> <SearchChunkQueryResponseBody> search_chunk(tr_dataset, search_chunk_data)
+> <SearchChunkResponseTypes> search_chunk(tr_dataset, search_chunk_data)
 
 Search
 
@@ -637,7 +637,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SearchChunkQueryResponseBody>, Integer, Hash)> search_chunk_with_http_info(tr_dataset, search_chunk_data)
+> <Array(<SearchChunkResponseTypes>, Integer, Hash)> search_chunk_with_http_info(tr_dataset, search_chunk_data)
 
 ```ruby
 begin
@@ -645,7 +645,7 @@ begin
   data, status_code, headers = api_instance.search_chunk_with_http_info(tr_dataset, search_chunk_data)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <SearchChunkQueryResponseBody>
+  p data # => <SearchChunkResponseTypes>
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->search_chunk_with_http_info: #{e}"
 end
@@ -660,7 +660,7 @@ end
 
 ### Return type
 
-[**SearchChunkQueryResponseBody**](SearchChunkQueryResponseBody.md)
+[**SearchChunkResponseTypes**](SearchChunkResponseTypes.md)
 
 ### Authorization
 

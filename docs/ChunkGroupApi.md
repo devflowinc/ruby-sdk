@@ -1,6 +1,6 @@
 # TrieveRubyClient::ChunkGroupApi
 
-All URIs are relative to *http://localhost:8090*
+All URIs are relative to *https://api.trieve.ai*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
@@ -761,7 +761,7 @@ end
 
 ## get_recommended_groups
 
-> <Array<GroupScoreChunkDTO>> get_recommended_groups(tr_dataset, reccomend_group_chunks_request)
+> <RecommendGroupChunkResponseTypes> get_recommended_groups(tr_dataset, reccomend_group_chunks_request)
 
 Get Recommended Groups
 
@@ -797,7 +797,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<GroupScoreChunkDTO>>, Integer, Hash)> get_recommended_groups_with_http_info(tr_dataset, reccomend_group_chunks_request)
+> <Array(<RecommendGroupChunkResponseTypes>, Integer, Hash)> get_recommended_groups_with_http_info(tr_dataset, reccomend_group_chunks_request)
 
 ```ruby
 begin
@@ -805,7 +805,7 @@ begin
   data, status_code, headers = api_instance.get_recommended_groups_with_http_info(tr_dataset, reccomend_group_chunks_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<GroupScoreChunkDTO>>
+  p data # => <RecommendGroupChunkResponseTypes>
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_recommended_groups_with_http_info: #{e}"
 end
@@ -820,7 +820,7 @@ end
 
 ### Return type
 
-[**Array&lt;GroupScoreChunkDTO&gt;**](GroupScoreChunkDTO.md)
+[**RecommendGroupChunkResponseTypes**](RecommendGroupChunkResponseTypes.md)
 
 ### Authorization
 
@@ -983,7 +983,7 @@ nil (empty response body)
 
 ## search_over_groups
 
-> <SearchOverGroupsResponseBody> search_over_groups(search_over_groups_data)
+> <SearchOverGroupsResponseTypes> search_over_groups(tr_dataset, search_over_groups_data)
 
 Search Over Groups
 
@@ -994,13 +994,21 @@ Search Over Groups  This route allows you to get groups as results instead of ch
 ```ruby
 require 'time'
 require 'trieve_ruby_client'
+# setup authorization
+TrieveRubyClient.configure do |config|
+  # Configure API key authorization: ApiKey
+  config.api_key['ApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKey'] = 'Bearer'
+end
 
 api_instance = TrieveRubyClient::ChunkGroupApi.new
+tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 search_over_groups_data = TrieveRubyClient::SearchOverGroupsData.new({query: 'query_example', search_type: 'search_type_example'}) # SearchOverGroupsData | JSON request payload to semantically search over groups
 
 begin
   # Search Over Groups
-  result = api_instance.search_over_groups(search_over_groups_data)
+  result = api_instance.search_over_groups(tr_dataset, search_over_groups_data)
   p result
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->search_over_groups: #{e}"
@@ -1011,15 +1019,15 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SearchOverGroupsResponseBody>, Integer, Hash)> search_over_groups_with_http_info(search_over_groups_data)
+> <Array(<SearchOverGroupsResponseTypes>, Integer, Hash)> search_over_groups_with_http_info(tr_dataset, search_over_groups_data)
 
 ```ruby
 begin
   # Search Over Groups
-  data, status_code, headers = api_instance.search_over_groups_with_http_info(search_over_groups_data)
+  data, status_code, headers = api_instance.search_over_groups_with_http_info(tr_dataset, search_over_groups_data)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <SearchOverGroupsResponseBody>
+  p data # => <SearchOverGroupsResponseTypes>
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->search_over_groups_with_http_info: #{e}"
 end
@@ -1029,15 +1037,16 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **tr_dataset** | **String** | The dataset id to use for the request |  |
 | **search_over_groups_data** | [**SearchOverGroupsData**](SearchOverGroupsData.md) | JSON request payload to semantically search over groups |  |
 
 ### Return type
 
-[**SearchOverGroupsResponseBody**](SearchOverGroupsResponseBody.md)
+[**SearchOverGroupsResponseTypes**](SearchOverGroupsResponseTypes.md)
 
 ### Authorization
 
-No authorization required
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -1047,7 +1056,7 @@ No authorization required
 
 ## search_within_group
 
-> <SearchGroupsResult> search_within_group(tr_dataset, search_within_group_data)
+> <SearchWithinGroupResponseTypes> search_within_group(tr_dataset, search_within_group_data)
 
 Search Within Group
 
@@ -1083,7 +1092,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SearchGroupsResult>, Integer, Hash)> search_within_group_with_http_info(tr_dataset, search_within_group_data)
+> <Array(<SearchWithinGroupResponseTypes>, Integer, Hash)> search_within_group_with_http_info(tr_dataset, search_within_group_data)
 
 ```ruby
 begin
@@ -1091,7 +1100,7 @@ begin
   data, status_code, headers = api_instance.search_within_group_with_http_info(tr_dataset, search_within_group_data)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <SearchGroupsResult>
+  p data # => <SearchWithinGroupResponseTypes>
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->search_within_group_with_http_info: #{e}"
 end
@@ -1106,7 +1115,7 @@ end
 
 ### Return type
 
-[**SearchGroupsResult**](SearchGroupsResult.md)
+[**SearchWithinGroupResponseTypes**](SearchWithinGroupResponseTypes.md)
 
 ### Authorization
 

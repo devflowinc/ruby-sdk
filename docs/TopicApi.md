@@ -1,11 +1,11 @@
 # TrieveRubyClient::TopicApi
 
-All URIs are relative to *http://localhost:8090*
+All URIs are relative to *https://api.trieve.ai*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**create_topic**](TopicApi.md#create_topic) | **POST** /api/topic | Create Topic |
-| [**delete_topic**](TopicApi.md#delete_topic) | **DELETE** /api/topic | Delete Topic |
+| [**delete_topic**](TopicApi.md#delete_topic) | **DELETE** /api/topic/{topic_id} | Delete Topic |
 | [**get_all_topics_for_user**](TopicApi.md#get_all_topics_for_user) | **GET** /api/topic/user/{user_id} | Get All Topics for User |
 | [**update_topic**](TopicApi.md#update_topic) | **PUT** /api/topic | Update Topic |
 
@@ -85,7 +85,7 @@ end
 
 ## delete_topic
 
-> delete_topic(tr_dataset, delete_topic_data)
+> delete_topic(tr_dataset, topic_id)
 
 Delete Topic
 
@@ -106,11 +106,11 @@ end
 
 api_instance = TrieveRubyClient::TopicApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-delete_topic_data = TrieveRubyClient::DeleteTopicData.new({topic_id: 'topic_id_example'}) # DeleteTopicData | JSON request payload to delete a chat topic
+topic_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the topic you want to delete.
 
 begin
   # Delete Topic
-  api_instance.delete_topic(tr_dataset, delete_topic_data)
+  api_instance.delete_topic(tr_dataset, topic_id)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling TopicApi->delete_topic: #{e}"
 end
@@ -120,12 +120,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> delete_topic_with_http_info(tr_dataset, delete_topic_data)
+> <Array(nil, Integer, Hash)> delete_topic_with_http_info(tr_dataset, topic_id)
 
 ```ruby
 begin
   # Delete Topic
-  data, status_code, headers = api_instance.delete_topic_with_http_info(tr_dataset, delete_topic_data)
+  data, status_code, headers = api_instance.delete_topic_with_http_info(tr_dataset, topic_id)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -139,7 +139,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **delete_topic_data** | [**DeleteTopicData**](DeleteTopicData.md) | JSON request payload to delete a chat topic |  |
+| **topic_id** | **String** | The id of the topic you want to delete. |  |
 
 ### Return type
 
@@ -151,7 +151,7 @@ nil (empty response body)
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
