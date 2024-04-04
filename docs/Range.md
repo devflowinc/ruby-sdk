@@ -4,10 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **gt** | **Float** |  | [optional] |
-| **gte** | **Float** |  | [optional] |
-| **lt** | **Float** |  | [optional] |
-| **lte** | **Float** |  | [optional] |
+| **gt** | [**RangeCondition**](RangeCondition.md) |  | [optional] |
+| **gte** | [**RangeCondition**](RangeCondition.md) |  | [optional] |
+| **lt** | [**RangeCondition**](RangeCondition.md) |  | [optional] |
+| **lte** | [**RangeCondition**](RangeCondition.md) |  | [optional] |
 
 ## Example
 

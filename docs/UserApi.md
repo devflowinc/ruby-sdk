@@ -1,17 +1,17 @@
 # TrieveRubyClient::UserApi
 
-All URIs are relative to *http://localhost:8090*
+All URIs are relative to *https://api.trieve.ai*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**delete_user_api_key**](UserApi.md#delete_user_api_key) | **DELETE** /api/user/delete_api_key | Delete User Api Key |
+| [**delete_user_api_key**](UserApi.md#delete_user_api_key) | **DELETE** /api/user/delete_api_key/{api_key_id} | Delete User Api Key |
 | [**set_user_api_key**](UserApi.md#set_user_api_key) | **POST** /api/user/set_api_key | Set User Api Key |
 | [**update_user**](UserApi.md#update_user) | **PUT** /api/user | Update User |
 
 
 ## delete_user_api_key
 
-> <Array<ApiKeyDTO>> delete_user_api_key(delete_user_api_key_request)
+> <Array<ApiKeyDTO>> delete_user_api_key(api_key_id)
 
 Delete User Api Key
 
@@ -31,11 +31,11 @@ TrieveRubyClient.configure do |config|
 end
 
 api_instance = TrieveRubyClient::UserApi.new
-delete_user_api_key_request = TrieveRubyClient::DeleteUserApiKeyRequest.new({api_key_id: 'api_key_id_example'}) # DeleteUserApiKeyRequest | JSON request payload to delete a user api key
+api_key_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the api key to delete
 
 begin
   # Delete User Api Key
-  result = api_instance.delete_user_api_key(delete_user_api_key_request)
+  result = api_instance.delete_user_api_key(api_key_id)
   p result
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling UserApi->delete_user_api_key: #{e}"
@@ -46,12 +46,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<ApiKeyDTO>>, Integer, Hash)> delete_user_api_key_with_http_info(delete_user_api_key_request)
+> <Array(<Array<ApiKeyDTO>>, Integer, Hash)> delete_user_api_key_with_http_info(api_key_id)
 
 ```ruby
 begin
   # Delete User Api Key
-  data, status_code, headers = api_instance.delete_user_api_key_with_http_info(delete_user_api_key_request)
+  data, status_code, headers = api_instance.delete_user_api_key_with_http_info(api_key_id)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<ApiKeyDTO>>
@@ -64,7 +64,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **delete_user_api_key_request** | [**DeleteUserApiKeyRequest**](DeleteUserApiKeyRequest.md) | JSON request payload to delete a user api key |  |
+| **api_key_id** | **String** | The id of the api key to delete |  |
 
 ### Return type
 
@@ -76,7 +76,7 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
