@@ -87,7 +87,7 @@ end
 
 ## delete_dataset
 
-> delete_dataset(tr_organization, dataset_id)
+> delete_dataset(tr_dataset, dataset_id)
 
 Delete Dataset
 
@@ -107,12 +107,12 @@ TrieveRubyClient.configure do |config|
 end
 
 api_instance = TrieveRubyClient::DatasetApi.new
-tr_organization = 'tr_organization_example' # String | The organization id to use for the request
+tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 dataset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the dataset you want to delete.
 
 begin
   # Delete Dataset
-  api_instance.delete_dataset(tr_organization, dataset_id)
+  api_instance.delete_dataset(tr_dataset, dataset_id)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->delete_dataset: #{e}"
 end
@@ -122,12 +122,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> delete_dataset_with_http_info(tr_organization, dataset_id)
+> <Array(nil, Integer, Hash)> delete_dataset_with_http_info(tr_dataset, dataset_id)
 
 ```ruby
 begin
   # Delete Dataset
-  data, status_code, headers = api_instance.delete_dataset_with_http_info(tr_organization, dataset_id)
+  data, status_code, headers = api_instance.delete_dataset_with_http_info(tr_dataset, dataset_id)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -140,7 +140,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **tr_organization** | **String** | The organization id to use for the request |  |
+| **tr_dataset** | **String** | The dataset id to use for the request |  |
 | **dataset_id** | **String** | The id of the dataset you want to delete. |  |
 
 ### Return type

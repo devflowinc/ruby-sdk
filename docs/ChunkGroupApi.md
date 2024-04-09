@@ -47,7 +47,7 @@ end
 api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Id of the group to add the chunk to as a bookmark
-add_chunk_to_group_data = TrieveRubyClient::AddChunkToGroupData.new({chunk_id: 'chunk_id_example'}) # AddChunkToGroupData | JSON request payload to add a chunk to a group (bookmark it)
+add_chunk_to_group_data = TrieveRubyClient::AddChunkToGroupData.new # AddChunkToGroupData | JSON request payload to add a chunk to a group (bookmark it)
 
 begin
   # Add Chunk to Group
@@ -121,7 +121,7 @@ end
 api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 tracking_id = 'tracking_id_example' # String | Id of the group to add the chunk to as a bookmark
-add_chunk_to_group_data = TrieveRubyClient::AddChunkToGroupData.new({chunk_id: 'chunk_id_example'}) # AddChunkToGroupData | JSON request payload to add a chunk to a group (bookmark it)
+add_chunk_to_group_data = TrieveRubyClient::AddChunkToGroupData.new # AddChunkToGroupData | JSON request payload to add a chunk to a group (bookmark it)
 
 begin
   # Add Chunk to Group by Tracking ID
@@ -250,7 +250,7 @@ end
 
 Delete Group
 
-Delete Group  This will delete a chunk_group. This will not delete the chunks that are in the group. We will soon support deleting a chunk_group along with its member chunks.
+Delete Group  This will delete a chunk_group. If you set delete_chunks to true, it will also delete the chunks within the group.
 
 ### Examples
 
@@ -469,7 +469,7 @@ end
 
 Get Chunks in Group
 
-Get Chunks in Group  Route to get all chunks for a group. The response is paginated, with each page containing 10 chunks. Support for custom page size is coming soon.
+Get Chunks in Group  Route to get all chunks for a group. The response is paginated, with each page containing 10 chunks. Page is 1-indexed.
 
 ### Examples
 
@@ -544,7 +544,7 @@ end
 
 Get Chunks in Group by Tracking ID
 
-Get Chunks in Group by Tracking ID  Route to get all chunks for a group. The response is paginated, with each page containing 10 chunks. Support for custom page size is coming soon.
+Get Chunks in Group by Tracking ID  Route to get all chunks for a group. The response is paginated, with each page containing 10 chunks. Support for custom page size is coming soon. Page is 1-indexed.
 
 ### Examples
 
@@ -761,7 +761,7 @@ end
 
 ## get_recommended_groups
 
-> <RecommendGroupChunkResponseTypes> get_recommended_groups(tr_dataset, reccomend_group_chunks_request)
+> <RecommendGroupChunkResponseTypes> get_recommended_groups(tr_dataset, recommend_group_chunks_request)
 
 Get Recommended Groups
 
@@ -782,11 +782,11 @@ end
 
 api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-reccomend_group_chunks_request = TrieveRubyClient::ReccomendGroupChunksRequest.new # ReccomendGroupChunksRequest | JSON request payload to get recommendations of chunks similar to the chunks in the request
+recommend_group_chunks_request = TrieveRubyClient::RecommendGroupChunksRequest.new # RecommendGroupChunksRequest | JSON request payload to get recommendations of chunks similar to the chunks in the request
 
 begin
   # Get Recommended Groups
-  result = api_instance.get_recommended_groups(tr_dataset, reccomend_group_chunks_request)
+  result = api_instance.get_recommended_groups(tr_dataset, recommend_group_chunks_request)
   p result
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->get_recommended_groups: #{e}"
@@ -797,12 +797,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<RecommendGroupChunkResponseTypes>, Integer, Hash)> get_recommended_groups_with_http_info(tr_dataset, reccomend_group_chunks_request)
+> <Array(<RecommendGroupChunkResponseTypes>, Integer, Hash)> get_recommended_groups_with_http_info(tr_dataset, recommend_group_chunks_request)
 
 ```ruby
 begin
   # Get Recommended Groups
-  data, status_code, headers = api_instance.get_recommended_groups_with_http_info(tr_dataset, reccomend_group_chunks_request)
+  data, status_code, headers = api_instance.get_recommended_groups_with_http_info(tr_dataset, recommend_group_chunks_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <RecommendGroupChunkResponseTypes>
@@ -816,7 +816,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **reccomend_group_chunks_request** | [**ReccomendGroupChunksRequest**](ReccomendGroupChunksRequest.md) | JSON request payload to get recommendations of chunks similar to the chunks in the request |  |
+| **recommend_group_chunks_request** | [**RecommendGroupChunksRequest**](RecommendGroupChunksRequest.md) | JSON request payload to get recommendations of chunks similar to the chunks in the request |  |
 
 ### Return type
 
@@ -856,7 +856,7 @@ end
 api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 dataset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the dataset to fetch groups for.
-page = 789 # Integer | The page of groups to fetch. Each page contains 10 groups. Support for custom page size is coming soon.
+page = 789 # Integer | The page of groups to fetch. Page is 1-indexed.
 
 begin
   # Get Groups for Dataset
@@ -891,7 +891,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
 | **dataset_id** | **String** | The id of the dataset to fetch groups for. |  |
-| **page** | **Integer** | The page of groups to fetch. Each page contains 10 groups. Support for custom page size is coming soon. |  |
+| **page** | **Integer** | The page of groups to fetch. Page is 1-indexed. |  |
 
 ### Return type
 

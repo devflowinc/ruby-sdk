@@ -16,7 +16,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 Delete File
 
-Delete File  Delete a file from S3 attached to the server based on its id. This will disassociate chunks from the file, but will not delete the chunks. We plan to add support for deleting chunks in a release soon. Auth'ed user must be an admin or owner of the dataset's organization to upload a file.
+Delete File  Delete a file from S3 attached to the server based on its id. This will disassociate chunks from the file, but only delete them all together if you specify delete_chunks to be true. Auth'ed user must be an admin or owner of the dataset's organization to delete a file.
 
 ### Examples
 
@@ -165,7 +165,7 @@ end
 
 Get File
 
-Get File  Download a file from S3 attached to the server based on its id. We plan to add support for getting signed S3 URLs to download from S3 directly in a release soon.
+Get File  Download a file based on its id.
 
 ### Examples
 
