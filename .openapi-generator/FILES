@@ -62,10 +62,10 @@ docs/OrganizationApi.md
 docs/OrganizationUsageCount.md
 docs/Range.md
 docs/RangeCondition.md
-docs/ReccomendGroupChunksRequest.md
 docs/RecommendChunksRequest.md
 docs/RecommendChunksResponseTypes.md
 docs/RecommendGroupChunkResponseTypes.md
+docs/RecommendGroupChunksRequest.md
 docs/RegenerateMessageData.md
 docs/ReturnQueuedChunk.md
 docs/ScoreChunkDTO.md
@@ -170,10 +170,10 @@ lib/trieve_ruby_client/models/organization.rb
 lib/trieve_ruby_client/models/organization_usage_count.rb
 lib/trieve_ruby_client/models/range.rb
 lib/trieve_ruby_client/models/range_condition.rb
-lib/trieve_ruby_client/models/reccomend_group_chunks_request.rb
 lib/trieve_ruby_client/models/recommend_chunks_request.rb
 lib/trieve_ruby_client/models/recommend_chunks_response_types.rb
 lib/trieve_ruby_client/models/recommend_group_chunk_response_types.rb
+lib/trieve_ruby_client/models/recommend_group_chunks_request.rb
 lib/trieve_ruby_client/models/regenerate_message_data.rb
 lib/trieve_ruby_client/models/return_queued_chunk.rb
 lib/trieve_ruby_client/models/score_chunk_dto.rb
@@ -212,5 +212,6 @@ lib/trieve_ruby_client/models/upload_file_data.rb
 lib/trieve_ruby_client/models/upload_file_result.rb
 lib/trieve_ruby_client/models/user_organization.rb
 lib/trieve_ruby_client/version.rb
+spec/models/recommend_group_chunks_request_spec.rb
 spec/spec_helper.rb
 trieve_ruby_client.gemspec

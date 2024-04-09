@@ -14,53 +14,45 @@ require 'date'
 require 'time'
 
 module TrieveRubyClient
-  class SearchOverGroupsData
+  class RecommendGroupChunksRequest
     attr_accessor :filters
 
-    # Set get_collisions to true to get the collisions for each chunk. This will only apply if environment variable COLLISIONS_ENABLED is set to true.
-    attr_accessor :get_collisions
-
-    # Group_size is the number of chunks to fetch for each group. The default is 3. If a group has less than group_size chunks, all chunks will be returned. If this is set to a large number, we recommend setting slim_chunks to true to avoid returning the content and chunk_html of the chunks so as to lower the amount of time required for content download and serialization.
+    # The number of chunks to fetch for each group. This is the number of chunks which will be returned in the response for each group. The default is 3. If this is set to a large number, we recommend setting slim_chunks to true to avoid returning the content and chunk_html of the chunks so as to reduce latency due to content download and serialization.
     attr_accessor :group_size
 
-    # Set highlight_delimiters to a list of strings to use as delimiters for highlighting. If not specified, this defaults to [\"?\", \",\", \".\", \"!\"].
-    attr_accessor :highlight_delimiters
+    # The number of groups to return. This is the number of groups which will be returned in the response. The default is 10.
+    attr_accessor :limit
 
-    # Set highlight_results to true to highlight the results. If not specified, this defaults to true.
-    attr_accessor :highlight_results
+    # The ids of the groups to be used as negative examples for the recommendation. The groups in this array will be used to filter out similar groups.
+    attr_accessor :negative_group_ids
 
-    # Page of group results to fetch. Page is 1-indexed.
-    attr_accessor :page
+    # The ids of the groups to be used as negative examples for the recommendation. The groups in this array will be used to filter out similar groups.
+    attr_accessor :negative_group_tracking_ids
 
-    # Page size is the number of group results to fetch. The default is 10.
-    attr_accessor :page_size
+    # The ids of the groups to be used as positive examples for the recommendation. The groups in this array will be used to find similar groups.
+    attr_accessor :positive_group_ids
 
-    # Query is the search query. This can be any string. The query will be used to create an embedding vector and/or SPLADE vector which will be used to find the result set.
-    attr_accessor :query
-
-    # Set score_threshold to a float to filter out chunks with a score below the threshold.
-    attr_accessor :score_threshold
-
-    # Can be either \"semantic\", \"fulltext\", or \"hybrid\". \"hybrid\" will pull in one page (10 chunks) of both semantic and full-text results then re-rank them using BAAI/bge-reranker-large. \"semantic\" will pull in one page (10 chunks) of the nearest cosine distant vectors. \"fulltext\" will pull in one page (10 chunks) of full-text results based on SPLADE.
-    attr_accessor :search_type
+    # The ids of the groups to be used as positive examples for the recommendation. The groups in this array will be used to find similar groups.
+    attr_accessor :positive_group_tracking_ids
 
     # Set slim_chunks to true to avoid returning the content and chunk_html of the chunks. This is useful for when you want to reduce amount of data over the wire for latency improvement. Default is false.
     attr_accessor :slim_chunks
+
+    # Strategy to use for recommendations, either \"average_vector\" or \"best_score\". The default is \"average_vector\". The \"average_vector\" strategy will construct a single average vector from the positive and negative samples then use it to perform a pseudo-search. The \"best_score\" strategy is more advanced and navigates the HNSW with a heuristic of picking edges where the point is closer to the positive samples than it is the negatives.
+    attr_accessor :strategy
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'filters' => :'filters',
-        :'get_collisions' => :'get_collisions',
         :'group_size' => :'group_size',
-        :'highlight_delimiters' => :'highlight_delimiters',
-        :'highlight_results' => :'highlight_results',
-        :'page' => :'page',
-        :'page_size' => :'page_size',
-        :'query' => :'query',
-        :'score_threshold' => :'score_threshold',
-        :'search_type' => :'search_type',
-        :'slim_chunks' => :'slim_chunks'
+        :'limit' => :'limit',
+        :'negative_group_ids' => :'negative_group_ids',
+        :'negative_group_tracking_ids' => :'negative_group_tracking_ids',
+        :'positive_group_ids' => :'positive_group_ids',
+        :'positive_group_tracking_ids' => :'positive_group_tracking_ids',
+        :'slim_chunks' => :'slim_chunks',
+        :'strategy' => :'strategy'
       }
     end
 
@@ -73,16 +65,14 @@ module TrieveRubyClient
     def self.openapi_types
       {
         :'filters' => :'ChunkFilter',
-        :'get_collisions' => :'Boolean',
         :'group_size' => :'Integer',
-        :'highlight_delimiters' => :'Array<String>',
-        :'highlight_results' => :'Boolean',
-        :'page' => :'Integer',
-        :'page_size' => :'Integer',
-        :'query' => :'String',
-        :'score_threshold' => :'Float',
-        :'search_type' => :'String',
-        :'slim_chunks' => :'Boolean'
+        :'limit' => :'Integer',
+        :'negative_group_ids' => :'Array<String>',
+        :'negative_group_tracking_ids' => :'Array<String>',
+        :'positive_group_ids' => :'Array<String>',
+        :'positive_group_tracking_ids' => :'Array<String>',
+        :'slim_chunks' => :'Boolean',
+        :'strategy' => :'String'
       }
     end
 
@@ -90,14 +80,14 @@ module TrieveRubyClient
     def self.openapi_nullable
       Set.new([
         :'filters',
-        :'get_collisions',
         :'group_size',
-        :'highlight_delimiters',
-        :'highlight_results',
-        :'page',
-        :'page_size',
-        :'score_threshold',
-        :'slim_chunks'
+        :'limit',
+        :'negative_group_ids',
+        :'negative_group_tracking_ids',
+        :'positive_group_ids',
+        :'positive_group_tracking_ids',
+        :'slim_chunks',
+        :'strategy'
       ])
     end
 
@@ -105,13 +95,13 @@ module TrieveRubyClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `TrieveRubyClient::SearchOverGroupsData` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `TrieveRubyClient::RecommendGroupChunksRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `TrieveRubyClient::SearchOverGroupsData`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `TrieveRubyClient::RecommendGroupChunksRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -120,50 +110,44 @@ module TrieveRubyClient
         self.filters = attributes[:'filters']
       end
 
-      if attributes.key?(:'get_collisions')
-        self.get_collisions = attributes[:'get_collisions']
-      end
-
       if attributes.key?(:'group_size')
         self.group_size = attributes[:'group_size']
       end
 
-      if attributes.key?(:'highlight_delimiters')
-        if (value = attributes[:'highlight_delimiters']).is_a?(Array)
-          self.highlight_delimiters = value
+      if attributes.key?(:'limit')
+        self.limit = attributes[:'limit']
+      end
+
+      if attributes.key?(:'negative_group_ids')
+        if (value = attributes[:'negative_group_ids']).is_a?(Array)
+          self.negative_group_ids = value
         end
       end
 
-      if attributes.key?(:'highlight_results')
-        self.highlight_results = attributes[:'highlight_results']
+      if attributes.key?(:'negative_group_tracking_ids')
+        if (value = attributes[:'negative_group_tracking_ids']).is_a?(Array)
+          self.negative_group_tracking_ids = value
+        end
       end
 
-      if attributes.key?(:'page')
-        self.page = attributes[:'page']
+      if attributes.key?(:'positive_group_ids')
+        if (value = attributes[:'positive_group_ids']).is_a?(Array)
+          self.positive_group_ids = value
+        end
       end
 
-      if attributes.key?(:'page_size')
-        self.page_size = attributes[:'page_size']
-      end
-
-      if attributes.key?(:'query')
-        self.query = attributes[:'query']
-      else
-        self.query = nil
-      end
-
-      if attributes.key?(:'score_threshold')
-        self.score_threshold = attributes[:'score_threshold']
-      end
-
-      if attributes.key?(:'search_type')
-        self.search_type = attributes[:'search_type']
-      else
-        self.search_type = nil
+      if attributes.key?(:'positive_group_tracking_ids')
+        if (value = attributes[:'positive_group_tracking_ids']).is_a?(Array)
+          self.positive_group_tracking_ids = value
+        end
       end
 
       if attributes.key?(:'slim_chunks')
         self.slim_chunks = attributes[:'slim_chunks']
+      end
+
+      if attributes.key?(:'strategy')
+        self.strategy = attributes[:'strategy']
       end
     end
 
@@ -176,20 +160,8 @@ module TrieveRubyClient
         invalid_properties.push('invalid value for "group_size", must be greater than or equal to 0.')
       end
 
-      if !@page.nil? && @page < 0
-        invalid_properties.push('invalid value for "page", must be greater than or equal to 0.')
-      end
-
-      if !@page_size.nil? && @page_size < 0
-        invalid_properties.push('invalid value for "page_size", must be greater than or equal to 0.')
-      end
-
-      if @query.nil?
-        invalid_properties.push('invalid value for "query", query cannot be nil.')
-      end
-
-      if @search_type.nil?
-        invalid_properties.push('invalid value for "search_type", search_type cannot be nil.')
+      if !@limit.nil? && @limit < 0
+        invalid_properties.push('invalid value for "limit", must be greater than or equal to 0.')
       end
 
       invalid_properties
@@ -200,10 +172,7 @@ module TrieveRubyClient
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@group_size.nil? && @group_size < 0
-      return false if !@page.nil? && @page < 0
-      return false if !@page_size.nil? && @page_size < 0
-      return false if @query.nil?
-      return false if @search_type.nil?
+      return false if !@limit.nil? && @limit < 0
       true
     end
 
@@ -218,23 +187,13 @@ module TrieveRubyClient
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] page Value to be assigned
-    def page=(page)
-      if !page.nil? && page < 0
-        fail ArgumentError, 'invalid value for "page", must be greater than or equal to 0.'
+    # @param [Object] limit Value to be assigned
+    def limit=(limit)
+      if !limit.nil? && limit < 0
+        fail ArgumentError, 'invalid value for "limit", must be greater than or equal to 0.'
       end
 
-      @page = page
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] page_size Value to be assigned
-    def page_size=(page_size)
-      if !page_size.nil? && page_size < 0
-        fail ArgumentError, 'invalid value for "page_size", must be greater than or equal to 0.'
-      end
-
-      @page_size = page_size
+      @limit = limit
     end
 
     # Checks equality by comparing each attribute.
@@ -243,16 +202,14 @@ module TrieveRubyClient
       return true if self.equal?(o)
       self.class == o.class &&
           filters == o.filters &&
-          get_collisions == o.get_collisions &&
           group_size == o.group_size &&
-          highlight_delimiters == o.highlight_delimiters &&
-          highlight_results == o.highlight_results &&
-          page == o.page &&
-          page_size == o.page_size &&
-          query == o.query &&
-          score_threshold == o.score_threshold &&
-          search_type == o.search_type &&
-          slim_chunks == o.slim_chunks
+          limit == o.limit &&
+          negative_group_ids == o.negative_group_ids &&
+          negative_group_tracking_ids == o.negative_group_tracking_ids &&
+          positive_group_ids == o.positive_group_ids &&
+          positive_group_tracking_ids == o.positive_group_tracking_ids &&
+          slim_chunks == o.slim_chunks &&
+          strategy == o.strategy
     end
 
     # @see the `==` method
@@ -264,7 +221,7 @@ module TrieveRubyClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [filters, get_collisions, group_size, highlight_delimiters, highlight_results, page, page_size, query, score_threshold, search_type, slim_chunks].hash
+      [filters, group_size, limit, negative_group_ids, negative_group_tracking_ids, positive_group_ids, positive_group_tracking_ids, slim_chunks, strategy].hash
     end
 
     # Builds the object from hash

@@ -141,7 +141,7 @@ This endpoint does not need any parameter.
 
 ## login
 
-> login(content)
+> login(opts)
 
 Login
 
@@ -154,11 +154,15 @@ require 'time'
 require 'trieve_ruby_client'
 
 api_instance = TrieveRubyClient::AuthApi.new
-content = TrieveRubyClient::AuthQuery.new # AuthQuery | Query parameters for login to be included as kv pairs after ? on the request URL.
+opts = {
+  organization_id: '38400000-8cf0-11bd-b23e-10b96e4ef00d', # String | ID of organization to authenticate into
+  redirect_uri: 'redirect_uri_example', # String | URL to redirect to after successful login
+  inv_code: '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Code sent via email as a result of successful call to send_invitation
+}
 
 begin
   # Login
-  api_instance.login(content)
+  api_instance.login(opts)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling AuthApi->login: #{e}"
 end
@@ -168,12 +172,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> login_with_http_info(content)
+> <Array(nil, Integer, Hash)> login_with_http_info(opts)
 
 ```ruby
 begin
   # Login
-  data, status_code, headers = api_instance.login_with_http_info(content)
+  data, status_code, headers = api_instance.login_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -186,7 +190,9 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **content** | [**AuthQuery**](.md) | Query parameters for login to be included as kv pairs after ? on the request URL. |  |
+| **organization_id** | **String** | ID of organization to authenticate into | [optional] |
+| **redirect_uri** | **String** | URL to redirect to after successful login | [optional] |
+| **inv_code** | **String** | Code sent via email as a result of successful call to send_invitation | [optional] |
 
 ### Return type
 
