@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **chunks** | [**Array&lt;ChunkMetadataWithFileData&gt;**](ChunkMetadataWithFileData.md) |  |  |
+| **chunks** | [**Array&lt;ChunkMetadata&gt;**](ChunkMetadata.md) |  |  |
 | **group** | [**ChunkGroup**](ChunkGroup.md) |  |  |
 | **total_pages** | **Integer** |  |  |
 
