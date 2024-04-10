@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **metadata** | [**Array&lt;ChunkMetadataWithFileData&gt;**](ChunkMetadataWithFileData.md) |  |  |
+| **metadata** | [**Array&lt;ChunkMetadata&gt;**](ChunkMetadata.md) |  |  |
 | **score** | **Float** |  |  |
 
 ## Example
