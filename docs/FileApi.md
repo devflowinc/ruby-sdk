@@ -255,7 +255,7 @@ end
 
 api_instance = TrieveRubyClient::FileApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-upload_file_data = TrieveRubyClient::UploadFileData.new({base64_file: 'base64_file_example', file_mime_type: 'file_mime_type_example', file_name: 'file_name_example'}) # UploadFileData | JSON request payload to upload a file
+upload_file_data = TrieveRubyClient::UploadFileData.new({base64_file: 'base64_file_example', file_name: 'file_name_example'}) # UploadFileData | JSON request payload to upload a file
 
 begin
   # Upload File

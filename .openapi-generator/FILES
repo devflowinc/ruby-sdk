@@ -204,13 +204,5 @@ lib/trieve_ruby_client/models/upload_file_data.rb
 lib/trieve_ruby_client/models/upload_file_result.rb
 lib/trieve_ruby_client/models/user_organization.rb
 lib/trieve_ruby_client/version.rb
-spec/models/chunk_metadata_with_score_spec.rb
-spec/models/group_score_chunk_spec.rb
-spec/models/group_score_slim_chunks_spec.rb
-spec/models/search_over_groups_results_spec.rb
-spec/models/search_over_groups_slim_results_spec.rb
-spec/models/search_within_group_results_spec.rb
-spec/models/search_within_group_slim_results_spec.rb
-spec/models/slim_chunk_metadata_with_score_spec.rb
 spec/spec_helper.rb
 trieve_ruby_client.gemspec
