@@ -10,6 +10,7 @@
 | **name** | **String** |  |  |
 | **organization_id** | **String** |  |  |
 | **server_configuration** | **Object** |  |  |
+| **tracking_id** | **String** |  | [optional] |
 | **updated_at** | **Time** |  |  |
 
 ## Example
@@ -24,6 +25,7 @@ instance = TrieveRubyClient::Dataset.new(
   name: null,
   organization_id: null,
   server_configuration: null,
+  tracking_id: null,
   updated_at: null
 )
 ```
