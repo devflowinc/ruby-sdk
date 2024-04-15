@@ -399,7 +399,7 @@ end
 
 api_instance = TrieveRubyClient::DatasetApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
-update_dataset_request = TrieveRubyClient::UpdateDatasetRequest.new({dataset_id: 'dataset_id_example'}) # UpdateDatasetRequest | JSON request payload to update a dataset
+update_dataset_request = TrieveRubyClient::UpdateDatasetRequest.new # UpdateDatasetRequest | JSON request payload to update a dataset
 
 begin
   # Update Dataset

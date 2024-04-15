@@ -9,6 +9,7 @@
 | **id** | **String** |  |  |
 | **name** | **String** |  |  |
 | **organization_id** | **String** |  |  |
+| **tracking_id** | **String** |  | [optional] |
 | **updated_at** | **Time** |  |  |
 
 ## Example
@@ -22,6 +23,7 @@ instance = TrieveRubyClient::DatasetDTO.new(
   id: null,
   name: null,
   organization_id: null,
+  tracking_id: null,
   updated_at: null
 )
 ```
