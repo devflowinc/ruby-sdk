@@ -14,27 +14,21 @@ require 'date'
 require 'time'
 
 module TrieveRubyClient
-  class UserOrganization
-    attr_accessor :created_at
-
-    attr_accessor :id
-
+  class UpdateUserOrgRoleData
+    # The id of the organization to update the user for.
     attr_accessor :organization_id
 
+    # Either 0 (user), 1 (admin), or 2 (owner). If not provided, the current role will be used. The auth'ed user must have a role greater than or equal to the role being assigned.
     attr_accessor :role
 
-    attr_accessor :updated_at
-
+    # The id of the user to update, if not provided, the auth'ed user will be updated. If provided, the auth'ed user must be an admin (1) or owner (2) of the organization.
     attr_accessor :user_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'created_at' => :'created_at',
-        :'id' => :'id',
         :'organization_id' => :'organization_id',
         :'role' => :'role',
-        :'updated_at' => :'updated_at',
         :'user_id' => :'user_id'
       }
     end
@@ -47,11 +41,8 @@ module TrieveRubyClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'created_at' => :'Time',
-        :'id' => :'String',
         :'organization_id' => :'String',
         :'role' => :'Integer',
-        :'updated_at' => :'Time',
         :'user_id' => :'String'
       }
     end
@@ -59,6 +50,7 @@ module TrieveRubyClient
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'user_id'
       ])
     end
 
@@ -66,28 +58,16 @@ module TrieveRubyClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `TrieveRubyClient::UserOrganization` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `TrieveRubyClient::UpdateUserOrgRoleData` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `TrieveRubyClient::UserOrganization`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `TrieveRubyClient::UpdateUserOrgRoleData`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
-      end
-
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      else
-        self.id = nil
-      end
 
       if attributes.key?(:'organization_id')
         self.organization_id = attributes[:'organization_id']
@@ -101,16 +81,8 @@ module TrieveRubyClient
         self.role = nil
       end
 
-      if attributes.key?(:'updated_at')
-        self.updated_at = attributes[:'updated_at']
-      else
-        self.updated_at = nil
-      end
-
       if attributes.key?(:'user_id')
         self.user_id = attributes[:'user_id']
-      else
-        self.user_id = nil
       end
     end
 
@@ -119,28 +91,12 @@ module TrieveRubyClient
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
       if @organization_id.nil?
         invalid_properties.push('invalid value for "organization_id", organization_id cannot be nil.')
       end
 
       if @role.nil?
         invalid_properties.push('invalid value for "role", role cannot be nil.')
-      end
-
-      if @updated_at.nil?
-        invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
-      end
-
-      if @user_id.nil?
-        invalid_properties.push('invalid value for "user_id", user_id cannot be nil.')
       end
 
       invalid_properties
@@ -150,12 +106,8 @@ module TrieveRubyClient
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @created_at.nil?
-      return false if @id.nil?
       return false if @organization_id.nil?
       return false if @role.nil?
-      return false if @updated_at.nil?
-      return false if @user_id.nil?
       true
     end
 
@@ -164,11 +116,8 @@ module TrieveRubyClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          created_at == o.created_at &&
-          id == o.id &&
           organization_id == o.organization_id &&
           role == o.role &&
-          updated_at == o.updated_at &&
           user_id == o.user_id
     end
 
@@ -181,7 +130,7 @@ module TrieveRubyClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [created_at, id, organization_id, role, updated_at, user_id].hash
+      [organization_id, role, user_id].hash
     end
 
     # Builds the object from hash

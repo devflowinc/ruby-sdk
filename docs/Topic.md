@@ -9,8 +9,8 @@
 | **deleted** | **Boolean** |  |  |
 | **id** | **String** |  |  |
 | **name** | **String** |  |  |
+| **owner_id** | **String** |  |  |
 | **updated_at** | **Time** |  |  |
-| **user_id** | **String** |  |  |
 
 ## Example
 
@@ -23,8 +23,8 @@ instance = TrieveRubyClient::Topic.new(
   deleted: null,
   id: null,
   name: null,
-  updated_at: null,
-  user_id: null
+  owner_id: null,
+  updated_at: null
 )
 ```
 

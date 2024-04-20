@@ -10,6 +10,7 @@
 | **file_name_key** | **String** |  |  |
 | **filter_items** | **Object** |  | [optional] |
 | **frontmatter_vals** | **String** |  | [optional] |
+| **image_metadata_key** | **String** |  |  |
 | **image_range_end_key** | **String** |  | [optional] |
 | **image_range_start_key** | **String** |  | [optional] |
 | **lines_before_show_more** | **Integer** |  | [optional] |
@@ -28,6 +29,7 @@ instance = TrieveRubyClient::ClientDatasetConfiguration.new(
   file_name_key: null,
   filter_items: null,
   frontmatter_vals: null,
+  image_metadata_key: null,
   image_range_end_key: null,
   image_range_start_key: null,
   lines_before_show_more: null,
