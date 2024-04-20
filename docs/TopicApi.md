@@ -6,7 +6,7 @@ All URIs are relative to *https://api.trieve.ai*
 | ------ | ------------ | ----------- |
 | [**create_topic**](TopicApi.md#create_topic) | **POST** /api/topic | Create Topic |
 | [**delete_topic**](TopicApi.md#delete_topic) | **DELETE** /api/topic/{topic_id} | Delete Topic |
-| [**get_all_topics_for_user**](TopicApi.md#get_all_topics_for_user) | **GET** /api/topic/user/{user_id} | Get All Topics for User |
+| [**get_all_topics_for_owner_id**](TopicApi.md#get_all_topics_for_owner_id) | **GET** /api/topic/owner/{owner_id} | Get All Topics for Owner ID |
 | [**update_topic**](TopicApi.md#update_topic) | **PUT** /api/topic | Update Topic |
 
 
@@ -16,7 +16,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 Create Topic
 
-Create Topic  Create a new chat topic. Topics are attached to a user and act as a coordinator for memory of gen-AI chat sessions. We are considering refactoring this resource of the API soon.
+Create Topic  Create a new chat topic. Topics are attached to a owner_id's and act as a coordinator for conversation message history of gen-AI chat sessions.
 
 ### Examples
 
@@ -33,7 +33,7 @@ end
 
 api_instance = TrieveRubyClient::TopicApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-create_topic_data = TrieveRubyClient::CreateTopicData.new # CreateTopicData | JSON request payload to create chat topic
+create_topic_data = TrieveRubyClient::CreateTopicData.new({owner_id: 'owner_id_example'}) # CreateTopicData | JSON request payload to create chat topic
 
 begin
   # Create Topic
@@ -155,13 +155,13 @@ nil (empty response body)
 - **Accept**: application/json
 
 
-## get_all_topics_for_user
+## get_all_topics_for_owner_id
 
-> <Array<Topic>> get_all_topics_for_user(user_id, tr_dataset)
+> <Array<Topic>> get_all_topics_for_owner_id(owner_id, tr_dataset)
 
-Get All Topics for User
+Get All Topics for Owner ID
 
-Get All Topics for User  Get all topics belonging to a the auth'ed user. Soon, we plan to allow specification of the user for this route and include pagination.
+Get All Topics for Owner ID  Get all topics belonging to an arbitary owner_id. This is useful for managing message history and chat sessions. It is common to use a browser fingerprint or your user's id as the owner_id.
 
 ### Examples
 
@@ -177,33 +177,33 @@ TrieveRubyClient.configure do |config|
 end
 
 api_instance = TrieveRubyClient::TopicApi.new
-user_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the user to get topics for
+owner_id = 'owner_id_example' # String | The owner_id to get topics of; A common approach is to use a browser fingerprint or your user's id
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 
 begin
-  # Get All Topics for User
-  result = api_instance.get_all_topics_for_user(user_id, tr_dataset)
+  # Get All Topics for Owner ID
+  result = api_instance.get_all_topics_for_owner_id(owner_id, tr_dataset)
   p result
 rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling TopicApi->get_all_topics_for_user: #{e}"
+  puts "Error when calling TopicApi->get_all_topics_for_owner_id: #{e}"
 end
 ```
 
-#### Using the get_all_topics_for_user_with_http_info variant
+#### Using the get_all_topics_for_owner_id_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<Topic>>, Integer, Hash)> get_all_topics_for_user_with_http_info(user_id, tr_dataset)
+> <Array(<Array<Topic>>, Integer, Hash)> get_all_topics_for_owner_id_with_http_info(owner_id, tr_dataset)
 
 ```ruby
 begin
-  # Get All Topics for User
-  data, status_code, headers = api_instance.get_all_topics_for_user_with_http_info(user_id, tr_dataset)
+  # Get All Topics for Owner ID
+  data, status_code, headers = api_instance.get_all_topics_for_owner_id_with_http_info(owner_id, tr_dataset)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<Topic>>
 rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling TopicApi->get_all_topics_for_user_with_http_info: #{e}"
+  puts "Error when calling TopicApi->get_all_topics_for_owner_id_with_http_info: #{e}"
 end
 ```
 
@@ -211,7 +211,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **user_id** | **String** | The id of the user to get topics for |  |
+| **owner_id** | **String** | The owner_id to get topics of; A common approach is to use a browser fingerprint or your user&#39;s id |  |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
 
 ### Return type

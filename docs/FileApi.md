@@ -12,7 +12,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 ## delete_file_handler
 
-> delete_file_handler(tr_dataset, file_id, delete_chunks)
+> delete_file_handler(tr_dataset, file_id)
 
 Delete File
 
@@ -34,11 +34,10 @@ end
 api_instance = TrieveRubyClient::FileApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 file_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the file to delete
-delete_chunks = true # Boolean | Whether or not to delete the chunks associated with the file
 
 begin
   # Delete File
-  api_instance.delete_file_handler(tr_dataset, file_id, delete_chunks)
+  api_instance.delete_file_handler(tr_dataset, file_id)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling FileApi->delete_file_handler: #{e}"
 end
@@ -48,12 +47,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> delete_file_handler_with_http_info(tr_dataset, file_id, delete_chunks)
+> <Array(nil, Integer, Hash)> delete_file_handler_with_http_info(tr_dataset, file_id)
 
 ```ruby
 begin
   # Delete File
-  data, status_code, headers = api_instance.delete_file_handler_with_http_info(tr_dataset, file_id, delete_chunks)
+  data, status_code, headers = api_instance.delete_file_handler_with_http_info(tr_dataset, file_id)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -68,7 +67,6 @@ end
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
 | **file_id** | **String** | The id of the file to delete |  |
-| **delete_chunks** | **Boolean** | Whether or not to delete the chunks associated with the file |  |
 
 ### Return type
 

@@ -153,7 +153,7 @@ end
 
 ## update_user
 
-> <SlimUser> update_user(update_user_data)
+> update_user(update_user_org_role_data)
 
 Update User
 
@@ -173,12 +173,11 @@ TrieveRubyClient.configure do |config|
 end
 
 api_instance = TrieveRubyClient::UserApi.new
-update_user_data = TrieveRubyClient::UpdateUserData.new({organization_id: 'organization_id_example'}) # UpdateUserData | JSON request payload to update user information for the auth'ed user
+update_user_org_role_data = TrieveRubyClient::UpdateUserOrgRoleData.new({organization_id: 'organization_id_example', role: 37}) # UpdateUserOrgRoleData | JSON request payload to update user information for the auth'ed user
 
 begin
   # Update User
-  result = api_instance.update_user(update_user_data)
-  p result
+  api_instance.update_user(update_user_org_role_data)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling UserApi->update_user: #{e}"
 end
@@ -186,17 +185,17 @@ end
 
 #### Using the update_user_with_http_info variant
 
-This returns an Array which contains the response data, status code and headers.
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(<SlimUser>, Integer, Hash)> update_user_with_http_info(update_user_data)
+> <Array(nil, Integer, Hash)> update_user_with_http_info(update_user_org_role_data)
 
 ```ruby
 begin
   # Update User
-  data, status_code, headers = api_instance.update_user_with_http_info(update_user_data)
+  data, status_code, headers = api_instance.update_user_with_http_info(update_user_org_role_data)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <SlimUser>
+  p data # => nil
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling UserApi->update_user_with_http_info: #{e}"
 end
@@ -206,11 +205,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **update_user_data** | [**UpdateUserData**](UpdateUserData.md) | JSON request payload to update user information for the auth&#39;ed user |  |
+| **update_user_org_role_data** | [**UpdateUserOrgRoleData**](UpdateUserOrgRoleData.md) | JSON request payload to update user information for the auth&#39;ed user |  |
 
 ### Return type
 
-[**SlimUser**](SlimUser.md)
+nil (empty response body)
 
 ### Authorization
 

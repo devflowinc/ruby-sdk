@@ -97,7 +97,7 @@ docs/UpdateDatasetRequest.md
 docs/UpdateGroupByTrackingIDData.md
 docs/UpdateOrganizationData.md
 docs/UpdateTopicData.md
-docs/UpdateUserData.md
+docs/UpdateUserOrgRoleData.md
 docs/UploadFileData.md
 docs/UploadFileResult.md
 docs/UserApi.md
@@ -199,7 +199,7 @@ lib/trieve_ruby_client/models/update_dataset_request.rb
 lib/trieve_ruby_client/models/update_group_by_tracking_id_data.rb
 lib/trieve_ruby_client/models/update_organization_data.rb
 lib/trieve_ruby_client/models/update_topic_data.rb
-lib/trieve_ruby_client/models/update_user_data.rb
+lib/trieve_ruby_client/models/update_user_org_role_data.rb
 lib/trieve_ruby_client/models/upload_file_data.rb
 lib/trieve_ruby_client/models/upload_file_result.rb
 lib/trieve_ruby_client/models/user_organization.rb
