@@ -5,8 +5,10 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **created_at** | **Time** |  |  |
+| **dataset_id** | **String** |  |  |
 | **id** | **String** |  |  |
 | **link** | **String** |  | [optional] |
+| **location** | [**GeoInfo**](GeoInfo.md) |  | [optional] |
 | **metadata** | **Object** |  | [optional] |
 | **qdrant_point_id** | **String** |  | [optional] |
 | **tag_set** | **String** |  | [optional] |
@@ -22,8 +24,10 @@ require 'trieve_ruby_client'
 
 instance = TrieveRubyClient::SlimChunkMetadata.new(
   created_at: null,
+  dataset_id: null,
   id: null,
   link: null,
+  location: null,
   metadata: null,
   qdrant_point_id: null,
   tag_set: null,

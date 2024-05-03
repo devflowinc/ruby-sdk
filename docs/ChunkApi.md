@@ -11,8 +11,10 @@ All URIs are relative to *https://api.trieve.ai*
 | [**generate_off_chunks**](ChunkApi.md#generate_off_chunks) | **POST** /api/chunk/generate | RAG on Specified Chunks |
 | [**get_chunk_by_id**](ChunkApi.md#get_chunk_by_id) | **GET** /api/chunk/{chunk_id} | Get Chunk By Id |
 | [**get_chunk_by_tracking_id**](ChunkApi.md#get_chunk_by_tracking_id) | **GET** /api/chunk/tracking_id/{tracking_id} | Get Chunk By Tracking Id |
+| [**get_chunks_by_ids**](ChunkApi.md#get_chunks_by_ids) | **POST** /api/chunks | Get Chunks By Ids |
+| [**get_chunks_by_tracking_ids**](ChunkApi.md#get_chunks_by_tracking_ids) | **POST** /api/chunks/tracking | Get Chunks By TrackingIds |
 | [**get_recommended_chunks**](ChunkApi.md#get_recommended_chunks) | **POST** /api/chunk/recommend | Get Recommended Chunks |
-| [**search_chunk**](ChunkApi.md#search_chunk) | **POST** /api/chunk/search | Search |
+| [**search_chunks**](ChunkApi.md#search_chunks) | **POST** /api/chunk/search | Search |
 | [**update_chunk**](ChunkApi.md#update_chunk) | **PUT** /api/chunk | Update Chunk |
 | [**update_chunk_by_tracking_id**](ChunkApi.md#update_chunk_by_tracking_id) | **PUT** /api/chunk/tracking_id/update | Update Chunk By Tracking Id |
 
@@ -23,7 +25,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 Create or Upsert Chunk or Chunks
 
-Create or Upsert Chunk or Chunks  Create a new chunk. If the chunk has the same tracking_id as an existing chunk, the request will fail. Once a chunk is created, it can be searched for using the search endpoint.
+Create or Upsert Chunk or Chunks  Create a new chunk. If the chunk has the same tracking_id as an existing chunk, the request will fail. Once a chunk is created, it can be searched for using the search endpoint. If uploading in bulk, the maximum amount of chunks that can be uploaded at once is 120 chunks.
 
 ### Examples
 
@@ -526,6 +528,152 @@ end
 - **Accept**: application/json
 
 
+## get_chunks_by_ids
+
+> <Array<ChunkMetadata>> get_chunks_by_ids(tr_dataset, get_chunks_data)
+
+Get Chunks By Ids
+
+Get Chunks By Ids  Get multiple chunks by multiple ids.
+
+### Examples
+
+```ruby
+require 'time'
+require 'trieve_ruby_client'
+# setup authorization
+TrieveRubyClient.configure do |config|
+  # Configure API key authorization: ApiKey
+  config.api_key['ApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKey'] = 'Bearer'
+end
+
+api_instance = TrieveRubyClient::ChunkApi.new
+tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
+get_chunks_data = TrieveRubyClient::GetChunksData.new({ids: ['ids_example']}) # GetChunksData | JSON request payload to get the chunks in the request
+
+begin
+  # Get Chunks By Ids
+  result = api_instance.get_chunks_by_ids(tr_dataset, get_chunks_data)
+  p result
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling ChunkApi->get_chunks_by_ids: #{e}"
+end
+```
+
+#### Using the get_chunks_by_ids_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Array<ChunkMetadata>>, Integer, Hash)> get_chunks_by_ids_with_http_info(tr_dataset, get_chunks_data)
+
+```ruby
+begin
+  # Get Chunks By Ids
+  data, status_code, headers = api_instance.get_chunks_by_ids_with_http_info(tr_dataset, get_chunks_data)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Array<ChunkMetadata>>
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling ChunkApi->get_chunks_by_ids_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **tr_dataset** | **String** | The dataset id to use for the request |  |
+| **get_chunks_data** | [**GetChunksData**](GetChunksData.md) | JSON request payload to get the chunks in the request |  |
+
+### Return type
+
+[**Array&lt;ChunkMetadata&gt;**](ChunkMetadata.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## get_chunks_by_tracking_ids
+
+> <ChunkMetadata> get_chunks_by_tracking_ids(tr_dataset, get_tracking_chunks_data)
+
+Get Chunks By TrackingIds
+
+Get Chunks By TrackingIds  Get multiple chunks by ids.
+
+### Examples
+
+```ruby
+require 'time'
+require 'trieve_ruby_client'
+# setup authorization
+TrieveRubyClient.configure do |config|
+  # Configure API key authorization: ApiKey
+  config.api_key['ApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKey'] = 'Bearer'
+end
+
+api_instance = TrieveRubyClient::ChunkApi.new
+tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
+get_tracking_chunks_data = TrieveRubyClient::GetTrackingChunksData.new({tracking_ids: ['tracking_ids_example']}) # GetTrackingChunksData | JSON request payload to get the chunks in the request
+
+begin
+  # Get Chunks By TrackingIds
+  result = api_instance.get_chunks_by_tracking_ids(tr_dataset, get_tracking_chunks_data)
+  p result
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling ChunkApi->get_chunks_by_tracking_ids: #{e}"
+end
+```
+
+#### Using the get_chunks_by_tracking_ids_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ChunkMetadata>, Integer, Hash)> get_chunks_by_tracking_ids_with_http_info(tr_dataset, get_tracking_chunks_data)
+
+```ruby
+begin
+  # Get Chunks By TrackingIds
+  data, status_code, headers = api_instance.get_chunks_by_tracking_ids_with_http_info(tr_dataset, get_tracking_chunks_data)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ChunkMetadata>
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling ChunkApi->get_chunks_by_tracking_ids_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **tr_dataset** | **String** | The dataset id to use for the request |  |
+| **get_tracking_chunks_data** | [**GetTrackingChunksData**](GetTrackingChunksData.md) | JSON request payload to get the chunks in the request |  |
+
+### Return type
+
+[**ChunkMetadata**](ChunkMetadata.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## get_recommended_chunks
 
 > <Array<ChunkMetadataWithScore>> get_recommended_chunks(tr_dataset, recommend_chunks_request)
@@ -599,9 +747,9 @@ end
 - **Accept**: application/json
 
 
-## search_chunk
+## search_chunks
 
-> <SearchChunkQueryResponseBody> search_chunk(tr_dataset, search_chunk_data)
+> <SearchChunkQueryResponseBody> search_chunks(tr_dataset, search_chunk_data)
 
 Search
 
@@ -626,28 +774,28 @@ search_chunk_data = TrieveRubyClient::SearchChunkData.new({query: 'query_example
 
 begin
   # Search
-  result = api_instance.search_chunk(tr_dataset, search_chunk_data)
+  result = api_instance.search_chunks(tr_dataset, search_chunk_data)
   p result
 rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling ChunkApi->search_chunk: #{e}"
+  puts "Error when calling ChunkApi->search_chunks: #{e}"
 end
 ```
 
-#### Using the search_chunk_with_http_info variant
+#### Using the search_chunks_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SearchChunkQueryResponseBody>, Integer, Hash)> search_chunk_with_http_info(tr_dataset, search_chunk_data)
+> <Array(<SearchChunkQueryResponseBody>, Integer, Hash)> search_chunks_with_http_info(tr_dataset, search_chunk_data)
 
 ```ruby
 begin
   # Search
-  data, status_code, headers = api_instance.search_chunk_with_http_info(tr_dataset, search_chunk_data)
+  data, status_code, headers = api_instance.search_chunks_with_http_info(tr_dataset, search_chunk_data)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SearchChunkQueryResponseBody>
 rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling ChunkApi->search_chunk_with_http_info: #{e}"
+  puts "Error when calling ChunkApi->search_chunks_with_http_info: #{e}"
 end
 ```
 
