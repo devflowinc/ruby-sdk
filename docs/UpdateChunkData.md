@@ -10,6 +10,7 @@
 | **group_ids** | **Array&lt;String&gt;** | Group ids are the ids of the groups that the chunk should be placed into. This is useful for when you want to update a chunk and add it to a group or multiple groups in one request. | [optional] |
 | **group_tracking_ids** | **Array&lt;String&gt;** | Group tracking_ids are the tracking_ids of the groups that the chunk should be placed into. This is useful for when you want to update a chunk and add it to a group or multiple groups in one request. | [optional] |
 | **link** | **String** | Link of the chunk you want to update. This can also be any string. Frequently, this is a link to the source of the chunk. The link value will not affect the embedding creation. If no link is provided, the existing link will be used. | [optional] |
+| **location** | [**GeoInfo**](GeoInfo.md) |  | [optional] |
 | **metadata** | **Object** | The metadata is a JSON object which can be used to filter chunks. This is useful for when you want to filter chunks by arbitrary metadata. Unlike with tag filtering, there is a performance hit for filtering on metadata. If no metadata is provided, the existing metadata will be used. | [optional] |
 | **tag_set** | **Array&lt;String&gt;** | Tag set is a list of tags. This can be used to filter chunks by tag. Unlike with metadata filtering, HNSW indices will exist for each tag such that there is not a performance hit for filtering on them. If no tag_set is provided, the existing tag_set will be used. | [optional] |
 | **time_stamp** | **String** | Time_stamp should be an ISO 8601 combined date and time without timezone. It is used for time window filtering and recency-biasing search results. If no time_stamp is provided, the existing time_stamp will be used. | [optional] |
@@ -28,6 +29,7 @@ instance = TrieveRubyClient::UpdateChunkData.new(
   group_ids: null,
   group_tracking_ids: null,
   link: null,
+  location: null,
   metadata: null,
   tag_set: null,
   time_stamp: null,

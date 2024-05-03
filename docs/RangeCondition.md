@@ -15,6 +15,7 @@ TrieveRubyClient::RangeCondition.openapi_one_of
 # =>
 # [
 #   :'Float',
+#   :'Integer',
 #   :'String'
 # ]
 ```
@@ -44,6 +45,7 @@ TrieveRubyClient::RangeCondition.build(data_that_doesnt_match)
 #### Return type
 
 - `Float`
+- `Integer`
 - `String`
 - `nil` (if no type matches)
 

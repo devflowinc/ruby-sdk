@@ -5,7 +5,6 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **first_user_message** | **String** | The first message which will belong to the topic. The topic name is generated based on this message similar to how it works in the OpenAI chat UX if a name is not explicitly provided on the name request body key. | [optional] |
-| **model** | **String** | The model to use for the assistant&#39;s messages. This can be any model from the openrouter model list. If no model is provided, the gpt-3.5-turbo will be used. | [optional] |
 | **name** | **String** | The name of the topic. If this is not provided, the topic name is generated from the first_user_message. | [optional] |
 | **owner_id** | **String** | The owner_id of the topic. This is typically a browser fingerprint or your user&#39;s id. It is used to group topics together for a user. |  |
 
@@ -16,7 +15,6 @@ require 'trieve_ruby_client'
 
 instance = TrieveRubyClient::CreateTopicData.new(
   first_user_message: null,
-  model: null,
   name: null,
   owner_id: null
 )

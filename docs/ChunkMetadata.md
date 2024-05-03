@@ -10,6 +10,7 @@
 | **dataset_id** | **String** |  |  |
 | **id** | **String** |  |  |
 | **link** | **String** |  | [optional] |
+| **location** | [**GeoInfo**](GeoInfo.md) |  | [optional] |
 | **metadata** | **Object** |  | [optional] |
 | **qdrant_point_id** | **String** |  | [optional] |
 | **tag_set** | **String** |  | [optional] |
@@ -30,6 +31,7 @@ instance = TrieveRubyClient::ChunkMetadata.new(
   dataset_id: null,
   id: null,
   link: null,
+  location: null,
   metadata: null,
   qdrant_point_id: null,
   tag_set: null,
