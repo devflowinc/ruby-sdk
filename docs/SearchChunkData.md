@@ -7,6 +7,7 @@
 | **date_bias** | **Boolean** | Set date_bias to true to bias search results towards more recent chunks. This will work best in hybrid search mode. | [optional] |
 | **filters** | [**ChunkFilter**](ChunkFilter.md) |  | [optional] |
 | **get_collisions** | **Boolean** | Set get_collisions to true to get the collisions for each chunk. This will only apply if environment variable COLLISIONS_ENABLED is set to true. | [optional] |
+| **get_total_pages** | **Boolean** | Get total page count for the query accounting for the applied filters. Defaults to true, but can be set to false to reduce latency in edge cases performance. | [optional] |
 | **highlight_delimiters** | **Array&lt;String&gt;** | Set highlight_delimiters to a list of strings to use as delimiters for highlighting. If not specified, this defaults to [\&quot;?\&quot;, \&quot;,\&quot;, \&quot;.\&quot;, \&quot;!\&quot;]. | [optional] |
 | **highlight_results** | **Boolean** | Set highlight_results to true to highlight the results. If not specified, this defaults to true. | [optional] |
 | **page** | **Integer** | Page of chunks to fetch. Page is 1-indexed. | [optional] |
@@ -26,6 +27,7 @@ instance = TrieveRubyClient::SearchChunkData.new(
   date_bias: null,
   filters: null,
   get_collisions: null,
+  get_total_pages: null,
   highlight_delimiters: null,
   highlight_results: null,
   page: null,
