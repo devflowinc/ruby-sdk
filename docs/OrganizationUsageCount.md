@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **chunk_count** | **Integer** |  |  |
 | **dataset_count** | **Integer** |  |  |
 | **file_storage** | **Integer** |  |  |
 | **id** | **String** |  |  |
@@ -17,6 +18,7 @@
 require 'trieve_ruby_client'
 
 instance = TrieveRubyClient::OrganizationUsageCount.new(
+  chunk_count: null,
   dataset_count: null,
   file_storage: null,
   id: null,
