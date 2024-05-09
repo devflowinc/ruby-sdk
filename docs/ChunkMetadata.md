@@ -5,7 +5,6 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **chunk_html** | **String** |  | [optional] |
-| **content** | **String** |  |  |
 | **created_at** | **Time** |  |  |
 | **dataset_id** | **String** |  |  |
 | **id** | **String** |  |  |
@@ -26,7 +25,6 @@ require 'trieve_ruby_client'
 
 instance = TrieveRubyClient::ChunkMetadata.new(
   chunk_html: null,
-  content: null,
   created_at: null,
   dataset_id: null,
   id: null,
