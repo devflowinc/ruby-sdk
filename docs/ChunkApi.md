@@ -4,6 +4,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**autocomplete**](ChunkApi.md#autocomplete) | **POST** /api/chunk/autocomplete | Autocomplete |
 | [**create_chunk**](ChunkApi.md#create_chunk) | **POST** /api/chunk | Create or Upsert Chunk or Chunks |
 | [**create_suggested_queries_handler**](ChunkApi.md#create_suggested_queries_handler) | **POST** /api/chunk/gen_suggestions | Generate suggested queries |
 | [**delete_chunk**](ChunkApi.md#delete_chunk) | **DELETE** /api/chunk/{chunk_id} | Delete Chunk |
@@ -17,6 +18,79 @@ All URIs are relative to *https://api.trieve.ai*
 | [**search_chunks**](ChunkApi.md#search_chunks) | **POST** /api/chunk/search | Search |
 | [**update_chunk**](ChunkApi.md#update_chunk) | **PUT** /api/chunk | Update Chunk |
 | [**update_chunk_by_tracking_id**](ChunkApi.md#update_chunk_by_tracking_id) | **PUT** /api/chunk/tracking_id/update | Update Chunk By Tracking Id |
+
+
+## autocomplete
+
+> <SearchChunkQueryResponseBody> autocomplete(tr_dataset, autocomplete_data)
+
+Autocomplete
+
+Autocomplete  This route provides the primary autocomplete functionality for the API. This prioritize prefix matching with semantic or full-text search.
+
+### Examples
+
+```ruby
+require 'time'
+require 'trieve_ruby_client'
+# setup authorization
+TrieveRubyClient.configure do |config|
+  # Configure API key authorization: ApiKey
+  config.api_key['ApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKey'] = 'Bearer'
+end
+
+api_instance = TrieveRubyClient::ChunkApi.new
+tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
+autocomplete_data = TrieveRubyClient::AutocompleteData.new({query: 'query_example', search_type: 'search_type_example'}) # AutocompleteData | JSON request payload to semantically search for chunks (chunks)
+
+begin
+  # Autocomplete
+  result = api_instance.autocomplete(tr_dataset, autocomplete_data)
+  p result
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling ChunkApi->autocomplete: #{e}"
+end
+```
+
+#### Using the autocomplete_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SearchChunkQueryResponseBody>, Integer, Hash)> autocomplete_with_http_info(tr_dataset, autocomplete_data)
+
+```ruby
+begin
+  # Autocomplete
+  data, status_code, headers = api_instance.autocomplete_with_http_info(tr_dataset, autocomplete_data)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SearchChunkQueryResponseBody>
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling ChunkApi->autocomplete_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **tr_dataset** | **String** | The dataset id to use for the request |  |
+| **autocomplete_data** | [**AutocompleteData**](AutocompleteData.md) | JSON request payload to semantically search for chunks (chunks) |  |
+
+### Return type
+
+[**SearchChunkQueryResponseBody**](SearchChunkQueryResponseBody.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
 ## create_chunk

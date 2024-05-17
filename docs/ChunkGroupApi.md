@@ -320,7 +320,7 @@ nil (empty response body)
 
 ## delete_group_by_tracking_id
 
-> delete_group_by_tracking_id(tr_dataset, tracking_id)
+> delete_group_by_tracking_id(tr_dataset, tracking_id, delete_chunks)
 
 Delete Group by Tracking ID
 
@@ -342,10 +342,11 @@ end
 api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 tracking_id = 'tracking_id_example' # String | Tracking id of the chunk_group to delete
+delete_chunks = true # Boolean | Delete the chunks within the group
 
 begin
   # Delete Group by Tracking ID
-  api_instance.delete_group_by_tracking_id(tr_dataset, tracking_id)
+  api_instance.delete_group_by_tracking_id(tr_dataset, tracking_id, delete_chunks)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->delete_group_by_tracking_id: #{e}"
 end
@@ -355,12 +356,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> delete_group_by_tracking_id_with_http_info(tr_dataset, tracking_id)
+> <Array(nil, Integer, Hash)> delete_group_by_tracking_id_with_http_info(tr_dataset, tracking_id, delete_chunks)
 
 ```ruby
 begin
   # Delete Group by Tracking ID
-  data, status_code, headers = api_instance.delete_group_by_tracking_id_with_http_info(tr_dataset, tracking_id)
+  data, status_code, headers = api_instance.delete_group_by_tracking_id_with_http_info(tr_dataset, tracking_id, delete_chunks)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -375,6 +376,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
 | **tracking_id** | **String** | Tracking id of the chunk_group to delete |  |
+| **delete_chunks** | **Boolean** | Delete the chunks within the group |  |
 
 ### Return type
 

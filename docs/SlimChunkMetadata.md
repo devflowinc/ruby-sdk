@@ -7,6 +7,7 @@
 | **created_at** | **Time** |  |  |
 | **dataset_id** | **String** |  |  |
 | **id** | **String** |  |  |
+| **image_urls** | **Array&lt;String&gt;** |  | [optional] |
 | **link** | **String** |  | [optional] |
 | **location** | [**GeoInfo**](GeoInfo.md) |  | [optional] |
 | **metadata** | **Object** |  | [optional] |
@@ -26,6 +27,7 @@ instance = TrieveRubyClient::SlimChunkMetadata.new(
   created_at: null,
   dataset_id: null,
   id: null,
+  image_urls: null,
   link: null,
   location: null,
   metadata: null,
