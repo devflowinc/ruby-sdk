@@ -4,12 +4,87 @@ All URIs are relative to *https://api.trieve.ai*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**clear_dataset**](DatasetApi.md#clear_dataset) | **PUT** /api/dataset/clear/{dataset_id} | Clear Dataset |
 | [**create_dataset**](DatasetApi.md#create_dataset) | **POST** /api/dataset | Create dataset |
 | [**delete_dataset**](DatasetApi.md#delete_dataset) | **DELETE** /api/dataset/{dataset_id} | Delete Dataset |
+| [**delete_dataset_by_tracking_id**](DatasetApi.md#delete_dataset_by_tracking_id) | **DELETE** /api/dataset/tracking_id/{tracking_id} | Delete Dataset by Tracking ID |
 | [**get_client_dataset_config**](DatasetApi.md#get_client_dataset_config) | **GET** /api/dataset/envs | Get Client Configuration |
 | [**get_dataset**](DatasetApi.md#get_dataset) | **GET** /api/dataset/{dataset_id} | Get Dataset |
 | [**get_datasets_from_organization**](DatasetApi.md#get_datasets_from_organization) | **GET** /api/dataset/organization/{organization_id} | Get Datasets from Organization |
+| [**get_usage_by_dataset_id**](DatasetApi.md#get_usage_by_dataset_id) | **GET** /api/dataset/usage/{dataset_id} | Get Usage By Dataset ID |
 | [**update_dataset**](DatasetApi.md#update_dataset) | **PUT** /api/dataset | Update Dataset |
+
+
+## clear_dataset
+
+> clear_dataset(tr_dataset, dataset_id)
+
+Clear Dataset
+
+Clear Dataset  Clears a dataset. The auth'ed user must be an owner of the organization to clear a dataset.
+
+### Examples
+
+```ruby
+require 'time'
+require 'trieve_ruby_client'
+# setup authorization
+TrieveRubyClient.configure do |config|
+  # Configure API key authorization: ApiKey
+  config.api_key['ApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKey'] = 'Bearer'
+end
+
+api_instance = TrieveRubyClient::DatasetApi.new
+tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
+dataset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the dataset you want to clear.
+
+begin
+  # Clear Dataset
+  api_instance.clear_dataset(tr_dataset, dataset_id)
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling DatasetApi->clear_dataset: #{e}"
+end
+```
+
+#### Using the clear_dataset_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> clear_dataset_with_http_info(tr_dataset, dataset_id)
+
+```ruby
+begin
+  # Clear Dataset
+  data, status_code, headers = api_instance.clear_dataset_with_http_info(tr_dataset, dataset_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling DatasetApi->clear_dataset_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **tr_dataset** | **String** | The dataset id to use for the request |  |
+| **dataset_id** | **String** | The id of the dataset you want to clear. |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
 ## create_dataset
@@ -157,6 +232,78 @@ nil (empty response body)
 - **Accept**: application/json
 
 
+## delete_dataset_by_tracking_id
+
+> delete_dataset_by_tracking_id(tr_dataset, tracking_id)
+
+Delete Dataset by Tracking ID
+
+Delete Dataset by Tracking ID  Delete a dataset by its tracking id. The auth'ed user must be an owner of the organization to delete a dataset.
+
+### Examples
+
+```ruby
+require 'time'
+require 'trieve_ruby_client'
+# setup authorization
+TrieveRubyClient.configure do |config|
+  # Configure API key authorization: ApiKey
+  config.api_key['ApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKey'] = 'Bearer'
+end
+
+api_instance = TrieveRubyClient::DatasetApi.new
+tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
+tracking_id = 'tracking_id_example' # String | The tracking id of the dataset you want to delete.
+
+begin
+  # Delete Dataset by Tracking ID
+  api_instance.delete_dataset_by_tracking_id(tr_dataset, tracking_id)
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling DatasetApi->delete_dataset_by_tracking_id: #{e}"
+end
+```
+
+#### Using the delete_dataset_by_tracking_id_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> delete_dataset_by_tracking_id_with_http_info(tr_dataset, tracking_id)
+
+```ruby
+begin
+  # Delete Dataset by Tracking ID
+  data, status_code, headers = api_instance.delete_dataset_by_tracking_id_with_http_info(tr_dataset, tracking_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling DatasetApi->delete_dataset_by_tracking_id_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **tr_dataset** | **String** | The dataset id to use for the request |  |
+| **tracking_id** | **String** | The tracking id of the dataset you want to delete. |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_client_dataset_config
 
 > <ClientDatasetConfiguration> get_client_dataset_config(tr_dataset)
@@ -230,11 +377,11 @@ end
 
 ## get_dataset
 
-> <Dataset> get_dataset(tr_organization, tr_dataset, dataset_id)
+> <Dataset> get_dataset(tr_dataset, dataset_id)
 
 Get Dataset
 
-Get Dataset  Get a dataset by id. The auth'ed user must be an admin or owner of the organization to get a dataset.
+Get Dataset  Get a dataset by id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -250,13 +397,12 @@ TrieveRubyClient.configure do |config|
 end
 
 api_instance = TrieveRubyClient::DatasetApi.new
-tr_organization = 'tr_organization_example' # String | The organization id to use for the request
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 dataset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the dataset you want to retrieve.
 
 begin
   # Get Dataset
-  result = api_instance.get_dataset(tr_organization, tr_dataset, dataset_id)
+  result = api_instance.get_dataset(tr_dataset, dataset_id)
   p result
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->get_dataset: #{e}"
@@ -267,12 +413,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Dataset>, Integer, Hash)> get_dataset_with_http_info(tr_organization, tr_dataset, dataset_id)
+> <Array(<Dataset>, Integer, Hash)> get_dataset_with_http_info(tr_dataset, dataset_id)
 
 ```ruby
 begin
   # Get Dataset
-  data, status_code, headers = api_instance.get_dataset_with_http_info(tr_organization, tr_dataset, dataset_id)
+  data, status_code, headers = api_instance.get_dataset_with_http_info(tr_dataset, dataset_id)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Dataset>
@@ -285,7 +431,6 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **tr_organization** | **String** | The organization id to use for the request |  |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
 | **dataset_id** | **String** | The id of the dataset you want to retrieve. |  |
 
@@ -305,11 +450,11 @@ end
 
 ## get_datasets_from_organization
 
-> <Array<DatasetAndUsage>> get_datasets_from_organization(tr_organization, organization_id)
+> <Array<DatasetAndUsage>> get_datasets_from_organization(tr_organization, organization_id, opts)
 
 Get Datasets from Organization
 
-Get Datasets from Organization  Get all datasets for an organization. The auth'ed user must be an admin or owner of the organization to get its datasets.
+Get Datasets from Organization  Get all datasets for an organization. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -327,10 +472,14 @@ end
 api_instance = TrieveRubyClient::DatasetApi.new
 tr_organization = 'tr_organization_example' # String | The organization id to use for the request
 organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | id of the organization you want to retrieve datasets for
+opts = {
+  limit: 789, # Integer | The number of records to return
+  offset: 789 # Integer | The number of records to skip
+}
 
 begin
   # Get Datasets from Organization
-  result = api_instance.get_datasets_from_organization(tr_organization, organization_id)
+  result = api_instance.get_datasets_from_organization(tr_organization, organization_id, opts)
   p result
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling DatasetApi->get_datasets_from_organization: #{e}"
@@ -341,12 +490,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<DatasetAndUsage>>, Integer, Hash)> get_datasets_from_organization_with_http_info(tr_organization, organization_id)
+> <Array(<Array<DatasetAndUsage>>, Integer, Hash)> get_datasets_from_organization_with_http_info(tr_organization, organization_id, opts)
 
 ```ruby
 begin
   # Get Datasets from Organization
-  data, status_code, headers = api_instance.get_datasets_from_organization_with_http_info(tr_organization, organization_id)
+  data, status_code, headers = api_instance.get_datasets_from_organization_with_http_info(tr_organization, organization_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<DatasetAndUsage>>
@@ -361,10 +510,85 @@ end
 | ---- | ---- | ----------- | ----- |
 | **tr_organization** | **String** | The organization id to use for the request |  |
 | **organization_id** | **String** | id of the organization you want to retrieve datasets for |  |
+| **limit** | **Integer** | The number of records to return | [optional] |
+| **offset** | **Integer** | The number of records to skip | [optional] |
 
 ### Return type
 
 [**Array&lt;DatasetAndUsage&gt;**](DatasetAndUsage.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_usage_by_dataset_id
+
+> <DatasetUsageCount> get_usage_by_dataset_id(tr_dataset, dataset_id)
+
+Get Usage By Dataset ID
+
+Get Usage By Dataset ID  Get the usage for a dataset by its id.
+
+### Examples
+
+```ruby
+require 'time'
+require 'trieve_ruby_client'
+# setup authorization
+TrieveRubyClient.configure do |config|
+  # Configure API key authorization: ApiKey
+  config.api_key['ApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKey'] = 'Bearer'
+end
+
+api_instance = TrieveRubyClient::DatasetApi.new
+tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
+dataset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the dataset you want to retrieve usage for.
+
+begin
+  # Get Usage By Dataset ID
+  result = api_instance.get_usage_by_dataset_id(tr_dataset, dataset_id)
+  p result
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling DatasetApi->get_usage_by_dataset_id: #{e}"
+end
+```
+
+#### Using the get_usage_by_dataset_id_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DatasetUsageCount>, Integer, Hash)> get_usage_by_dataset_id_with_http_info(tr_dataset, dataset_id)
+
+```ruby
+begin
+  # Get Usage By Dataset ID
+  data, status_code, headers = api_instance.get_usage_by_dataset_id_with_http_info(tr_dataset, dataset_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DatasetUsageCount>
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling DatasetApi->get_usage_by_dataset_id_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **tr_dataset** | **String** | The dataset id to use for the request |  |
+| **dataset_id** | **String** | The id of the dataset you want to retrieve usage for. |  |
+
+### Return type
+
+[**DatasetUsageCount**](DatasetUsageCount.md)
 
 ### Authorization
 

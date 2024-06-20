@@ -10,7 +10,7 @@
 | **id** | **String** |  |  |
 | **metadata** | **Object** |  | [optional] |
 | **name** | **String** |  |  |
-| **tag_set** | **String** |  | [optional] |
+| **tag_set** | **Array&lt;String&gt;** |  | [optional] |
 | **tracking_id** | **String** |  | [optional] |
 | **updated_at** | **Time** |  |  |
 

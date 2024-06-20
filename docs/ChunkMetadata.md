@@ -12,8 +12,9 @@
 | **link** | **String** |  | [optional] |
 | **location** | [**GeoInfo**](GeoInfo.md) |  | [optional] |
 | **metadata** | **Object** |  | [optional] |
+| **num_value** | **Float** |  | [optional] |
 | **qdrant_point_id** | **String** |  | [optional] |
-| **tag_set** | **String** |  | [optional] |
+| **tag_set** | **Array&lt;String&gt;** |  | [optional] |
 | **time_stamp** | **Time** |  | [optional] |
 | **tracking_id** | **String** |  | [optional] |
 | **updated_at** | **Time** |  |  |
@@ -33,6 +34,7 @@ instance = TrieveRubyClient::ChunkMetadata.new(
   link: null,
   location: null,
   metadata: null,
+  num_value: null,
   qdrant_point_id: null,
   tag_set: null,
   time_stamp: null,

@@ -11,7 +11,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 ## delete_user_api_key
 
-> <Array<ApiKeyDTO>> delete_user_api_key(api_key_id)
+> delete_user_api_key(api_key_id)
 
 Delete User Api Key
 
@@ -35,8 +35,7 @@ api_key_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the api
 
 begin
   # Delete User Api Key
-  result = api_instance.delete_user_api_key(api_key_id)
-  p result
+  api_instance.delete_user_api_key(api_key_id)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling UserApi->delete_user_api_key: #{e}"
 end
@@ -44,9 +43,9 @@ end
 
 #### Using the delete_user_api_key_with_http_info variant
 
-This returns an Array which contains the response data, status code and headers.
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(<Array<ApiKeyDTO>>, Integer, Hash)> delete_user_api_key_with_http_info(api_key_id)
+> <Array(nil, Integer, Hash)> delete_user_api_key_with_http_info(api_key_id)
 
 ```ruby
 begin
@@ -54,7 +53,7 @@ begin
   data, status_code, headers = api_instance.delete_user_api_key_with_http_info(api_key_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<ApiKeyDTO>>
+  p data # => nil
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling UserApi->delete_user_api_key_with_http_info: #{e}"
 end
@@ -68,7 +67,7 @@ end
 
 ### Return type
 
-[**Array&lt;ApiKeyDTO&gt;**](ApiKeyDTO.md)
+nil (empty response body)
 
 ### Authorization
 
@@ -157,7 +156,7 @@ end
 
 Update User
 
-Update User  Update a user's information. If the user_id is not provided, the auth'ed user will be updated. If the user_id is provided, the auth'ed user must be an admin (1) or owner (2) of the organization.
+Update User  Update a user's information. If the user_id is not provided, the auth'ed user will be updated. If the user_id is provided, the role of the auth'ed user or api key must be an admin (1) or owner (2) of the organization.
 
 ### Examples
 

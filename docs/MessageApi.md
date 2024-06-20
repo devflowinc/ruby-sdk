@@ -4,19 +4,19 @@ All URIs are relative to *https://api.trieve.ai*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**create_message_completion_handler**](MessageApi.md#create_message_completion_handler) | **POST** /api/message | Create a message |
-| [**edit_message_handler**](MessageApi.md#edit_message_handler) | **PUT** /api/message | Edit a message |
+| [**create_message**](MessageApi.md#create_message) | **POST** /api/message | Create message |
+| [**edit_message**](MessageApi.md#edit_message) | **PUT** /api/message | Edit message |
 | [**get_all_topic_messages**](MessageApi.md#get_all_topic_messages) | **GET** /api/messages/{messages_topic_id} | Get all messages for a given topic |
-| [**regenerate_message_handler**](MessageApi.md#regenerate_message_handler) | **DELETE** /api/message | Regenerate message |
+| [**regenerate_message**](MessageApi.md#regenerate_message) | **DELETE** /api/message | Regenerate message |
 
 
-## create_message_completion_handler
+## create_message
 
-> String create_message_completion_handler(tr_dataset, create_message_data)
+> String create_message(tr_dataset, create_message_req_payload)
 
-Create a message
+Create message
 
-Create a message  Create a message. Messages are attached to topics in order to coordinate memory of gen-AI chat sessions. We are considering refactoring this resource of the API soon. Currently, you can only send user messages. If the topic is a RAG topic then the response will include Chunks first on the stream. The structure will look like `[chunks]||mesage`. See docs.trieve.ai for more information.
+Create message  Create message. Messages are attached to topics in order to coordinate memory of gen-AI chat sessions. We are considering refactoring this resource of the API soon. Currently, you can only send user messages. If the topic is a RAG topic then the response will include Chunks first on the stream. The structure will look like `[chunks]||mesage`. See docs.trieve.ai for more information. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -33,32 +33,32 @@ end
 
 api_instance = TrieveRubyClient::MessageApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-create_message_data = TrieveRubyClient::CreateMessageData.new({new_message_content: 'new_message_content_example', topic_id: 'topic_id_example'}) # CreateMessageData | JSON request payload to create a message completion
+create_message_req_payload = TrieveRubyClient::CreateMessageReqPayload.new({new_message_content: 'new_message_content_example', topic_id: 'topic_id_example'}) # CreateMessageReqPayload | JSON request payload to create a message completion
 
 begin
-  # Create a message
-  result = api_instance.create_message_completion_handler(tr_dataset, create_message_data)
+  # Create message
+  result = api_instance.create_message(tr_dataset, create_message_req_payload)
   p result
 rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling MessageApi->create_message_completion_handler: #{e}"
+  puts "Error when calling MessageApi->create_message: #{e}"
 end
 ```
 
-#### Using the create_message_completion_handler_with_http_info variant
+#### Using the create_message_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(String, Integer, Hash)> create_message_completion_handler_with_http_info(tr_dataset, create_message_data)
+> <Array(String, Integer, Hash)> create_message_with_http_info(tr_dataset, create_message_req_payload)
 
 ```ruby
 begin
-  # Create a message
-  data, status_code, headers = api_instance.create_message_completion_handler_with_http_info(tr_dataset, create_message_data)
+  # Create message
+  data, status_code, headers = api_instance.create_message_with_http_info(tr_dataset, create_message_req_payload)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => String
 rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling MessageApi->create_message_completion_handler_with_http_info: #{e}"
+  puts "Error when calling MessageApi->create_message_with_http_info: #{e}"
 end
 ```
 
@@ -67,7 +67,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **create_message_data** | [**CreateMessageData**](CreateMessageData.md) | JSON request payload to create a message completion |  |
+| **create_message_req_payload** | [**CreateMessageReqPayload**](CreateMessageReqPayload.md) | JSON request payload to create a message completion |  |
 
 ### Return type
 
@@ -83,13 +83,13 @@ end
 - **Accept**: text/plain, application/json
 
 
-## edit_message_handler
+## edit_message
 
-> edit_message_handler(tr_dataset, edit_message_data)
+> edit_message(tr_dataset, edit_message_req_payload)
 
-Edit a message
+Edit message
 
-Edit a message  Edit a message which exists within the topic's chat history. This will delete the message and replace it with a new message. The new message will be generated by the AI based on the new content provided in the request body. The response will include Chunks first on the stream if the topic is using RAG. The structure will look like `[chunks]||mesage`. See docs.trieve.ai for more information.
+Edit message  Edit message which exists within the topic's chat history. This will delete the message and replace it with a new message. The new message will be generated by the AI based on the new content provided in the request body. The response will include Chunks first on the stream if the topic is using RAG. The structure will look like `[chunks]||mesage`. See docs.trieve.ai for more information. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -106,31 +106,31 @@ end
 
 api_instance = TrieveRubyClient::MessageApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-edit_message_data = TrieveRubyClient::EditMessageData.new({message_sort_order: 37, new_message_content: 'new_message_content_example', topic_id: 'topic_id_example'}) # EditMessageData | JSON request payload to edit a message and get a new stream
+edit_message_req_payload = TrieveRubyClient::EditMessageReqPayload.new({message_sort_order: 37, new_message_content: 'new_message_content_example', topic_id: 'topic_id_example'}) # EditMessageReqPayload | JSON request payload to edit a message and get a new stream
 
 begin
-  # Edit a message
-  api_instance.edit_message_handler(tr_dataset, edit_message_data)
+  # Edit message
+  api_instance.edit_message(tr_dataset, edit_message_req_payload)
 rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling MessageApi->edit_message_handler: #{e}"
+  puts "Error when calling MessageApi->edit_message: #{e}"
 end
 ```
 
-#### Using the edit_message_handler_with_http_info variant
+#### Using the edit_message_with_http_info variant
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> edit_message_handler_with_http_info(tr_dataset, edit_message_data)
+> <Array(nil, Integer, Hash)> edit_message_with_http_info(tr_dataset, edit_message_req_payload)
 
 ```ruby
 begin
-  # Edit a message
-  data, status_code, headers = api_instance.edit_message_handler_with_http_info(tr_dataset, edit_message_data)
+  # Edit message
+  data, status_code, headers = api_instance.edit_message_with_http_info(tr_dataset, edit_message_req_payload)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
 rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling MessageApi->edit_message_handler_with_http_info: #{e}"
+  puts "Error when calling MessageApi->edit_message_with_http_info: #{e}"
 end
 ```
 
@@ -139,7 +139,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **edit_message_data** | [**EditMessageData**](EditMessageData.md) | JSON request payload to edit a message and get a new stream |  |
+| **edit_message_req_payload** | [**EditMessageReqPayload**](EditMessageReqPayload.md) | JSON request payload to edit a message and get a new stream |  |
 
 ### Return type
 
@@ -228,13 +228,13 @@ end
 - **Accept**: application/json
 
 
-## regenerate_message_handler
+## regenerate_message
 
-> String regenerate_message_handler(tr_dataset, regenerate_message_data)
+> String regenerate_message(tr_dataset, regenerate_message_req_payload)
 
 Regenerate message
 
-Regenerate message  Regenerate the assistant response to the last user message of a topic. This will delete the last message and replace it with a new message. The response will include Chunks first on the stream if the topic is using RAG. The structure will look like `[chunks]||mesage`. See docs.trieve.ai for more information.
+Regenerate message  Regenerate the assistant response to the last user message of a topic. This will delete the last message and replace it with a new message. The response will include Chunks first on the stream if the topic is using RAG. The structure will look like `[chunks]||mesage`. See docs.trieve.ai for more information. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -251,32 +251,32 @@ end
 
 api_instance = TrieveRubyClient::MessageApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-regenerate_message_data = TrieveRubyClient::RegenerateMessageData.new({topic_id: 'topic_id_example'}) # RegenerateMessageData | JSON request payload to delete an agent message then regenerate it in a strem
+regenerate_message_req_payload = TrieveRubyClient::RegenerateMessageReqPayload.new({topic_id: 'topic_id_example'}) # RegenerateMessageReqPayload | JSON request payload to delete an agent message then regenerate it in a strem
 
 begin
   # Regenerate message
-  result = api_instance.regenerate_message_handler(tr_dataset, regenerate_message_data)
+  result = api_instance.regenerate_message(tr_dataset, regenerate_message_req_payload)
   p result
 rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling MessageApi->regenerate_message_handler: #{e}"
+  puts "Error when calling MessageApi->regenerate_message: #{e}"
 end
 ```
 
-#### Using the regenerate_message_handler_with_http_info variant
+#### Using the regenerate_message_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(String, Integer, Hash)> regenerate_message_handler_with_http_info(tr_dataset, regenerate_message_data)
+> <Array(String, Integer, Hash)> regenerate_message_with_http_info(tr_dataset, regenerate_message_req_payload)
 
 ```ruby
 begin
   # Regenerate message
-  data, status_code, headers = api_instance.regenerate_message_handler_with_http_info(tr_dataset, regenerate_message_data)
+  data, status_code, headers = api_instance.regenerate_message_with_http_info(tr_dataset, regenerate_message_req_payload)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => String
 rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling MessageApi->regenerate_message_handler_with_http_info: #{e}"
+  puts "Error when calling MessageApi->regenerate_message_with_http_info: #{e}"
 end
 ```
 
@@ -285,7 +285,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **regenerate_message_data** | [**RegenerateMessageData**](RegenerateMessageData.md) | JSON request payload to delete an agent message then regenerate it in a strem |  |
+| **regenerate_message_req_payload** | [**RegenerateMessageReqPayload**](RegenerateMessageReqPayload.md) | JSON request payload to delete an agent message then regenerate it in a strem |  |
 
 ### Return type
 

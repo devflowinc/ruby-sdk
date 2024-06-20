@@ -14,7 +14,7 @@ require 'trieve_ruby_client'
 TrieveRubyClient::ChunkMetadataTypes.openapi_one_of
 # =>
 # [
-#   :'ChunkMetadata',
+#   :'ChunkMetadataStringTagSet',
 #   :'ContentChunkMetadata',
 #   :'SlimChunkMetadata'
 # ]
@@ -30,7 +30,7 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 require 'trieve_ruby_client'
 
 TrieveRubyClient::ChunkMetadataTypes.build(data)
-# => #<ChunkMetadata:0x00007fdd4aab02a0>
+# => #<ChunkMetadataStringTagSet:0x00007fdd4aab02a0>
 
 TrieveRubyClient::ChunkMetadataTypes.build(data_that_doesnt_match)
 # => nil
@@ -44,7 +44,7 @@ TrieveRubyClient::ChunkMetadataTypes.build(data_that_doesnt_match)
 
 #### Return type
 
-- `ChunkMetadata`
+- `ChunkMetadataStringTagSet`
 - `ContentChunkMetadata`
 - `SlimChunkMetadata`
 - `nil` (if no type matches)

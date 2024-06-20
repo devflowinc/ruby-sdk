@@ -29,7 +29,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 Add Chunk to Group
 
-Add Chunk to Group  Route to add a chunk to a group.
+Add Chunk to Group  Route to add a chunk to a group. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -103,7 +103,7 @@ nil (empty response body)
 
 Add Chunk to Group by Tracking ID
 
-Add Chunk to Group by Tracking ID  Route to add a chunk to a group by tracking id.
+Add Chunk to Group by Tracking ID  Route to add a chunk to a group by tracking id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -173,11 +173,11 @@ nil (empty response body)
 
 ## create_chunk_group
 
-> <ChunkGroup> create_chunk_group(tr_dataset, create_chunk_group_data)
+> <ChunkGroup> create_chunk_group(tr_dataset, create_chunk_group_req_payload)
 
 Create Chunk Group
 
-Create Chunk Group  Create a new chunk_group. This is a way to group chunks together. If you try to create a chunk_group with the same tracking_id as an existing chunk_group, this operation will fail.
+Create Chunk Group  Create a new chunk_group. This is a way to group chunks together. If you try to create a chunk_group with the same tracking_id as an existing chunk_group, this operation will fail. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -194,11 +194,11 @@ end
 
 api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-create_chunk_group_data = TrieveRubyClient::CreateChunkGroupData.new({name: 'name_example'}) # CreateChunkGroupData | JSON request payload to cretea a chunkGroup
+create_chunk_group_req_payload = TrieveRubyClient::CreateChunkGroupReqPayload.new # CreateChunkGroupReqPayload | JSON request payload to cretea a chunkGroup
 
 begin
   # Create Chunk Group
-  result = api_instance.create_chunk_group(tr_dataset, create_chunk_group_data)
+  result = api_instance.create_chunk_group(tr_dataset, create_chunk_group_req_payload)
   p result
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->create_chunk_group: #{e}"
@@ -209,12 +209,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ChunkGroup>, Integer, Hash)> create_chunk_group_with_http_info(tr_dataset, create_chunk_group_data)
+> <Array(<ChunkGroup>, Integer, Hash)> create_chunk_group_with_http_info(tr_dataset, create_chunk_group_req_payload)
 
 ```ruby
 begin
   # Create Chunk Group
-  data, status_code, headers = api_instance.create_chunk_group_with_http_info(tr_dataset, create_chunk_group_data)
+  data, status_code, headers = api_instance.create_chunk_group_with_http_info(tr_dataset, create_chunk_group_req_payload)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ChunkGroup>
@@ -228,7 +228,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **create_chunk_group_data** | [**CreateChunkGroupData**](CreateChunkGroupData.md) | JSON request payload to cretea a chunkGroup |  |
+| **create_chunk_group_req_payload** | [**CreateChunkGroupReqPayload**](CreateChunkGroupReqPayload.md) | JSON request payload to cretea a chunkGroup |  |
 
 ### Return type
 
@@ -250,7 +250,7 @@ end
 
 Delete Group
 
-Delete Group  This will delete a chunk_group. If you set delete_chunks to true, it will also delete the chunks within the group.
+Delete Group  This will delete a chunk_group. If you set delete_chunks to true, it will also delete the chunks within the group. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -324,7 +324,7 @@ nil (empty response body)
 
 Delete Group by Tracking ID
 
-Delete Group by Tracking ID  Delete a chunk_group with the given tracking id.
+Delete Group by Tracking ID  Delete a chunk_group with the given tracking id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -767,7 +767,7 @@ end
 
 Get Recommended Groups
 
-Get Recommended Groups  Route to get recommended groups. This route will return groups which are similar to the groups in the request body.
+Get Recommended Groups  Route to get recommended groups. This route will return groups which are similar to the groups in the request body. You must provide at least one positive group id or group tracking id.
 
 ### Examples
 
@@ -911,11 +911,11 @@ end
 
 ## remove_chunk_from_group
 
-> remove_chunk_from_group(tr_dataset, group_id, create_chunk_group_data)
+> remove_chunk_from_group(tr_dataset, group_id, remove_chunk_from_group_req_payload)
 
 Remove Chunk from Group
 
-Remove Chunk from Group  Route to remove a chunk from a group.
+Remove Chunk from Group  Route to remove a chunk from a group. Auth'ed user or api key must be an admin or owner of the dataset's organization to remove a chunk from a group.
 
 ### Examples
 
@@ -932,12 +932,12 @@ end
 
 api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Id of the group to remove the bookmark'ed chunk from
-create_chunk_group_data = TrieveRubyClient::CreateChunkGroupData.new({name: 'name_example'}) # CreateChunkGroupData | JSON request payload to cretea a chunkGroup
+group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Id of the group you want to remove the chunk from.
+remove_chunk_from_group_req_payload = TrieveRubyClient::RemoveChunkFromGroupReqPayload.new({chunk_id: 'chunk_id_example'}) # RemoveChunkFromGroupReqPayload | JSON request payload to remove a chunk from a group
 
 begin
   # Remove Chunk from Group
-  api_instance.remove_chunk_from_group(tr_dataset, group_id, create_chunk_group_data)
+  api_instance.remove_chunk_from_group(tr_dataset, group_id, remove_chunk_from_group_req_payload)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->remove_chunk_from_group: #{e}"
 end
@@ -947,12 +947,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> remove_chunk_from_group_with_http_info(tr_dataset, group_id, create_chunk_group_data)
+> <Array(nil, Integer, Hash)> remove_chunk_from_group_with_http_info(tr_dataset, group_id, remove_chunk_from_group_req_payload)
 
 ```ruby
 begin
   # Remove Chunk from Group
-  data, status_code, headers = api_instance.remove_chunk_from_group_with_http_info(tr_dataset, group_id, create_chunk_group_data)
+  data, status_code, headers = api_instance.remove_chunk_from_group_with_http_info(tr_dataset, group_id, remove_chunk_from_group_req_payload)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -966,8 +966,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **group_id** | **String** | Id of the group to remove the bookmark&#39;ed chunk from |  |
-| **create_chunk_group_data** | [**CreateChunkGroupData**](CreateChunkGroupData.md) | JSON request payload to cretea a chunkGroup |  |
+| **group_id** | **String** | Id of the group you want to remove the chunk from. |  |
+| **remove_chunk_from_group_req_payload** | [**RemoveChunkFromGroupReqPayload**](RemoveChunkFromGroupReqPayload.md) | JSON request payload to remove a chunk from a group |  |
 
 ### Return type
 
@@ -1135,7 +1135,7 @@ end
 
 Update Group
 
-Update Group  Update a chunk_group. If you try to change the tracking_id to one that already exists, this operation will fail.
+Update Group  Update a chunk_group. If you try to change the tracking_id to one that already exists, this operation will fail. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -1203,11 +1203,11 @@ nil (empty response body)
 
 ## update_group_by_tracking_id
 
-> update_group_by_tracking_id(tr_dataset, tracking_id, update_group_by_tracking_id_data)
+> update_group_by_tracking_id(tr_dataset, tracking_id, update_group_by_tracking_id_req_payload)
 
 Update Group by Tracking ID
 
-Update Group by Tracking ID  Update a chunk_group with the given tracking id.
+Update Group by Tracking ID  Update a chunk_group with the given tracking id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -1225,11 +1225,11 @@ end
 api_instance = TrieveRubyClient::ChunkGroupApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
 tracking_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Tracking id of the chunk_group to update
-update_group_by_tracking_id_data = TrieveRubyClient::UpdateGroupByTrackingIDData.new({tracking_id: 'tracking_id_example'}) # UpdateGroupByTrackingIDData | JSON request payload to update a chunkGroup
+update_group_by_tracking_id_req_payload = TrieveRubyClient::UpdateGroupByTrackingIDReqPayload.new({tracking_id: 'tracking_id_example'}) # UpdateGroupByTrackingIDReqPayload | JSON request payload to update a chunkGroup
 
 begin
   # Update Group by Tracking ID
-  api_instance.update_group_by_tracking_id(tr_dataset, tracking_id, update_group_by_tracking_id_data)
+  api_instance.update_group_by_tracking_id(tr_dataset, tracking_id, update_group_by_tracking_id_req_payload)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkGroupApi->update_group_by_tracking_id: #{e}"
 end
@@ -1239,12 +1239,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> update_group_by_tracking_id_with_http_info(tr_dataset, tracking_id, update_group_by_tracking_id_data)
+> <Array(nil, Integer, Hash)> update_group_by_tracking_id_with_http_info(tr_dataset, tracking_id, update_group_by_tracking_id_req_payload)
 
 ```ruby
 begin
   # Update Group by Tracking ID
-  data, status_code, headers = api_instance.update_group_by_tracking_id_with_http_info(tr_dataset, tracking_id, update_group_by_tracking_id_data)
+  data, status_code, headers = api_instance.update_group_by_tracking_id_with_http_info(tr_dataset, tracking_id, update_group_by_tracking_id_req_payload)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -1259,7 +1259,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
 | **tracking_id** | **String** | Tracking id of the chunk_group to update |  |
-| **update_group_by_tracking_id_data** | [**UpdateGroupByTrackingIDData**](UpdateGroupByTrackingIDData.md) | JSON request payload to update a chunkGroup |  |
+| **update_group_by_tracking_id_req_payload** | [**UpdateGroupByTrackingIDReqPayload**](UpdateGroupByTrackingIDReqPayload.md) | JSON request payload to update a chunkGroup |  |
 
 ### Return type
 

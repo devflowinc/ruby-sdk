@@ -6,7 +6,6 @@ All URIs are relative to *https://api.trieve.ai*
 | ------ | ------------ | ----------- |
 | [**autocomplete**](ChunkApi.md#autocomplete) | **POST** /api/chunk/autocomplete | Autocomplete |
 | [**create_chunk**](ChunkApi.md#create_chunk) | **POST** /api/chunk | Create or Upsert Chunk or Chunks |
-| [**create_suggested_queries_handler**](ChunkApi.md#create_suggested_queries_handler) | **POST** /api/chunk/gen_suggestions | Generate suggested queries |
 | [**delete_chunk**](ChunkApi.md#delete_chunk) | **DELETE** /api/chunk/{chunk_id} | Delete Chunk |
 | [**delete_chunk_by_tracking_id**](ChunkApi.md#delete_chunk_by_tracking_id) | **DELETE** /api/chunk/tracking_id/{tracking_id} | Delete Chunk By Tracking Id |
 | [**generate_off_chunks**](ChunkApi.md#generate_off_chunks) | **POST** /api/chunk/generate | RAG on Specified Chunks |
@@ -15,6 +14,7 @@ All URIs are relative to *https://api.trieve.ai*
 | [**get_chunks_by_ids**](ChunkApi.md#get_chunks_by_ids) | **POST** /api/chunks | Get Chunks By Ids |
 | [**get_chunks_by_tracking_ids**](ChunkApi.md#get_chunks_by_tracking_ids) | **POST** /api/chunks/tracking | Get Chunks By TrackingIds |
 | [**get_recommended_chunks**](ChunkApi.md#get_recommended_chunks) | **POST** /api/chunk/recommend | Get Recommended Chunks |
+| [**get_suggested_queries**](ChunkApi.md#get_suggested_queries) | **POST** /api/chunk/gen_suggestions | Generate suggested queries |
 | [**search_chunks**](ChunkApi.md#search_chunks) | **POST** /api/chunk/search | Search |
 | [**update_chunk**](ChunkApi.md#update_chunk) | **PUT** /api/chunk | Update Chunk |
 | [**update_chunk_by_tracking_id**](ChunkApi.md#update_chunk_by_tracking_id) | **PUT** /api/chunk/tracking_id/update | Update Chunk By Tracking Id |
@@ -22,7 +22,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 ## autocomplete
 
-> <SearchChunkQueryResponseBody> autocomplete(tr_dataset, autocomplete_data)
+> <SearchChunkQueryResponseBody> autocomplete(tr_dataset, autocomplete_req_payload)
 
 Autocomplete
 
@@ -43,11 +43,11 @@ end
 
 api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-autocomplete_data = TrieveRubyClient::AutocompleteData.new({query: 'query_example', search_type: 'search_type_example'}) # AutocompleteData | JSON request payload to semantically search for chunks (chunks)
+autocomplete_req_payload = TrieveRubyClient::AutocompleteReqPayload.new({query: 'query_example', search_type: 'search_type_example'}) # AutocompleteReqPayload | JSON request payload to semantically search for chunks (chunks)
 
 begin
   # Autocomplete
-  result = api_instance.autocomplete(tr_dataset, autocomplete_data)
+  result = api_instance.autocomplete(tr_dataset, autocomplete_req_payload)
   p result
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->autocomplete: #{e}"
@@ -58,12 +58,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SearchChunkQueryResponseBody>, Integer, Hash)> autocomplete_with_http_info(tr_dataset, autocomplete_data)
+> <Array(<SearchChunkQueryResponseBody>, Integer, Hash)> autocomplete_with_http_info(tr_dataset, autocomplete_req_payload)
 
 ```ruby
 begin
   # Autocomplete
-  data, status_code, headers = api_instance.autocomplete_with_http_info(tr_dataset, autocomplete_data)
+  data, status_code, headers = api_instance.autocomplete_with_http_info(tr_dataset, autocomplete_req_payload)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SearchChunkQueryResponseBody>
@@ -77,7 +77,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **autocomplete_data** | [**AutocompleteData**](AutocompleteData.md) | JSON request payload to semantically search for chunks (chunks) |  |
+| **autocomplete_req_payload** | [**AutocompleteReqPayload**](AutocompleteReqPayload.md) | JSON request payload to semantically search for chunks (chunks) |  |
 
 ### Return type
 
@@ -95,11 +95,11 @@ end
 
 ## create_chunk
 
-> <ReturnQueuedChunk> create_chunk(tr_dataset, create_chunk_data)
+> <ReturnQueuedChunk> create_chunk(tr_dataset, create_chunk_req_payload_enum)
 
 Create or Upsert Chunk or Chunks
 
-Create or Upsert Chunk or Chunks  Create a new chunk. If the chunk has the same tracking_id as an existing chunk, the request will fail. Once a chunk is created, it can be searched for using the search endpoint. If uploading in bulk, the maximum amount of chunks that can be uploaded at once is 120 chunks.
+Create or Upsert Chunk or Chunks  Create a new chunk. If the chunk has the same tracking_id as an existing chunk, the request will fail. Once a chunk is created, it can be searched for using the search endpoint. If uploading in bulk, the maximum amount of chunks that can be uploaded at once is 120 chunks. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -116,11 +116,11 @@ end
 
 api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-create_chunk_data = nil # CreateChunkData | JSON request payload to create a new chunk (chunk)
+create_chunk_req_payload_enum = nil # CreateChunkReqPayloadEnum | JSON request payload to create a new chunk (chunk)
 
 begin
   # Create or Upsert Chunk or Chunks
-  result = api_instance.create_chunk(tr_dataset, create_chunk_data)
+  result = api_instance.create_chunk(tr_dataset, create_chunk_req_payload_enum)
   p result
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->create_chunk: #{e}"
@@ -131,12 +131,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ReturnQueuedChunk>, Integer, Hash)> create_chunk_with_http_info(tr_dataset, create_chunk_data)
+> <Array(<ReturnQueuedChunk>, Integer, Hash)> create_chunk_with_http_info(tr_dataset, create_chunk_req_payload_enum)
 
 ```ruby
 begin
   # Create or Upsert Chunk or Chunks
-  data, status_code, headers = api_instance.create_chunk_with_http_info(tr_dataset, create_chunk_data)
+  data, status_code, headers = api_instance.create_chunk_with_http_info(tr_dataset, create_chunk_req_payload_enum)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ReturnQueuedChunk>
@@ -150,84 +150,11 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **create_chunk_data** | [**CreateChunkData**](CreateChunkData.md) | JSON request payload to create a new chunk (chunk) |  |
+| **create_chunk_req_payload_enum** | [**CreateChunkReqPayloadEnum**](CreateChunkReqPayloadEnum.md) | JSON request payload to create a new chunk (chunk) |  |
 
 ### Return type
 
 [**ReturnQueuedChunk**](ReturnQueuedChunk.md)
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## create_suggested_queries_handler
-
-> <SuggestedQueriesResponse> create_suggested_queries_handler(tr_dataset, suggested_queries_request)
-
-Generate suggested queries
-
-Generate suggested queries  This endpoint will generate 3 suggested queries based off the query provided in the request body and return them as a JSON object.
-
-### Examples
-
-```ruby
-require 'time'
-require 'trieve_ruby_client'
-# setup authorization
-TrieveRubyClient.configure do |config|
-  # Configure API key authorization: ApiKey
-  config.api_key['ApiKey'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKey'] = 'Bearer'
-end
-
-api_instance = TrieveRubyClient::ChunkApi.new
-tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-suggested_queries_request = TrieveRubyClient::SuggestedQueriesRequest.new({query: 'query_example'}) # SuggestedQueriesRequest | JSON request payload to get alternative suggested queries
-
-begin
-  # Generate suggested queries
-  result = api_instance.create_suggested_queries_handler(tr_dataset, suggested_queries_request)
-  p result
-rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling ChunkApi->create_suggested_queries_handler: #{e}"
-end
-```
-
-#### Using the create_suggested_queries_handler_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<SuggestedQueriesResponse>, Integer, Hash)> create_suggested_queries_handler_with_http_info(tr_dataset, suggested_queries_request)
-
-```ruby
-begin
-  # Generate suggested queries
-  data, status_code, headers = api_instance.create_suggested_queries_handler_with_http_info(tr_dataset, suggested_queries_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <SuggestedQueriesResponse>
-rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling ChunkApi->create_suggested_queries_handler_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **suggested_queries_request** | [**SuggestedQueriesRequest**](SuggestedQueriesRequest.md) | JSON request payload to get alternative suggested queries |  |
-
-### Return type
-
-[**SuggestedQueriesResponse**](SuggestedQueriesResponse.md)
 
 ### Authorization
 
@@ -245,7 +172,7 @@ end
 
 Delete Chunk
 
-Delete Chunk  Delete a chunk by its id. If deleting a root chunk which has a collision, the most recently created collision will become a new root chunk.
+Delete Chunk  Delete a chunk by its id. If deleting a root chunk which has a collision, the most recently created collision will become a new root chunk. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -317,7 +244,7 @@ nil (empty response body)
 
 Delete Chunk By Tracking Id
 
-Delete Chunk By Tracking Id  Delete a chunk by tracking_id. This is useful for when you are coordinating with an external system and want to use the tracking_id to identify the chunk. If deleting a root chunk which has a collision, the most recently created collision will become a new root chunk.
+Delete Chunk By Tracking Id  Delete a chunk by tracking_id. This is useful for when you are coordinating with an external system and want to use the tracking_id to identify the chunk. If deleting a root chunk which has a collision, the most recently created collision will become a new root chunk. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -458,7 +385,7 @@ end
 
 ## get_chunk_by_id
 
-> <ChunkMetadata> get_chunk_by_id(tr_dataset, chunk_id)
+> <ChunkMetadataStringTagSet> get_chunk_by_id(tr_dataset, chunk_id)
 
 Get Chunk By Id
 
@@ -494,7 +421,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ChunkMetadata>, Integer, Hash)> get_chunk_by_id_with_http_info(tr_dataset, chunk_id)
+> <Array(<ChunkMetadataStringTagSet>, Integer, Hash)> get_chunk_by_id_with_http_info(tr_dataset, chunk_id)
 
 ```ruby
 begin
@@ -502,7 +429,7 @@ begin
   data, status_code, headers = api_instance.get_chunk_by_id_with_http_info(tr_dataset, chunk_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ChunkMetadata>
+  p data # => <ChunkMetadataStringTagSet>
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->get_chunk_by_id_with_http_info: #{e}"
 end
@@ -517,7 +444,7 @@ end
 
 ### Return type
 
-[**ChunkMetadata**](ChunkMetadata.md)
+[**ChunkMetadataStringTagSet**](ChunkMetadataStringTagSet.md)
 
 ### Authorization
 
@@ -531,7 +458,7 @@ end
 
 ## get_chunk_by_tracking_id
 
-> <ChunkMetadata> get_chunk_by_tracking_id(tr_dataset, tracking_id)
+> <ChunkMetadataStringTagSet> get_chunk_by_tracking_id(tr_dataset, tracking_id)
 
 Get Chunk By Tracking Id
 
@@ -567,7 +494,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ChunkMetadata>, Integer, Hash)> get_chunk_by_tracking_id_with_http_info(tr_dataset, tracking_id)
+> <Array(<ChunkMetadataStringTagSet>, Integer, Hash)> get_chunk_by_tracking_id_with_http_info(tr_dataset, tracking_id)
 
 ```ruby
 begin
@@ -575,7 +502,7 @@ begin
   data, status_code, headers = api_instance.get_chunk_by_tracking_id_with_http_info(tr_dataset, tracking_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ChunkMetadata>
+  p data # => <ChunkMetadataStringTagSet>
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->get_chunk_by_tracking_id_with_http_info: #{e}"
 end
@@ -590,7 +517,7 @@ end
 
 ### Return type
 
-[**ChunkMetadata**](ChunkMetadata.md)
+[**ChunkMetadataStringTagSet**](ChunkMetadataStringTagSet.md)
 
 ### Authorization
 
@@ -604,7 +531,7 @@ end
 
 ## get_chunks_by_ids
 
-> <Array<ChunkMetadata>> get_chunks_by_ids(tr_dataset, get_chunks_data)
+> <Array<ChunkMetadataStringTagSet>> get_chunks_by_ids(tr_dataset, get_chunks_data)
 
 Get Chunks By Ids
 
@@ -640,7 +567,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<ChunkMetadata>>, Integer, Hash)> get_chunks_by_ids_with_http_info(tr_dataset, get_chunks_data)
+> <Array(<Array<ChunkMetadataStringTagSet>>, Integer, Hash)> get_chunks_by_ids_with_http_info(tr_dataset, get_chunks_data)
 
 ```ruby
 begin
@@ -648,7 +575,7 @@ begin
   data, status_code, headers = api_instance.get_chunks_by_ids_with_http_info(tr_dataset, get_chunks_data)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<ChunkMetadata>>
+  p data # => <Array<ChunkMetadataStringTagSet>>
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->get_chunks_by_ids_with_http_info: #{e}"
 end
@@ -663,7 +590,7 @@ end
 
 ### Return type
 
-[**Array&lt;ChunkMetadata&gt;**](ChunkMetadata.md)
+[**Array&lt;ChunkMetadataStringTagSet&gt;**](ChunkMetadataStringTagSet.md)
 
 ### Authorization
 
@@ -677,7 +604,7 @@ end
 
 ## get_chunks_by_tracking_ids
 
-> <ChunkMetadata> get_chunks_by_tracking_ids(tr_dataset, get_tracking_chunks_data)
+> <Array<ChunkMetadataStringTagSet>> get_chunks_by_tracking_ids(tr_dataset, get_tracking_chunks_data)
 
 Get Chunks By TrackingIds
 
@@ -713,7 +640,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ChunkMetadata>, Integer, Hash)> get_chunks_by_tracking_ids_with_http_info(tr_dataset, get_tracking_chunks_data)
+> <Array(<Array<ChunkMetadataStringTagSet>>, Integer, Hash)> get_chunks_by_tracking_ids_with_http_info(tr_dataset, get_tracking_chunks_data)
 
 ```ruby
 begin
@@ -721,7 +648,7 @@ begin
   data, status_code, headers = api_instance.get_chunks_by_tracking_ids_with_http_info(tr_dataset, get_tracking_chunks_data)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ChunkMetadata>
+  p data # => <Array<ChunkMetadataStringTagSet>>
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->get_chunks_by_tracking_ids_with_http_info: #{e}"
 end
@@ -736,7 +663,7 @@ end
 
 ### Return type
 
-[**ChunkMetadata**](ChunkMetadata.md)
+[**Array&lt;ChunkMetadataStringTagSet&gt;**](ChunkMetadataStringTagSet.md)
 
 ### Authorization
 
@@ -754,7 +681,7 @@ end
 
 Get Recommended Chunks
 
-Get Recommended Chunks  Get recommendations of chunks similar to the chunks in the request. Think about this as a feature similar to the \"add to playlist\" recommendation feature on Spotify. This request pairs especially well with our groups endpoint.
+Get Recommended Chunks  Get recommendations of chunks similar to the positive samples in the request and dissimilar to the negative. You must provide at least one of either positive_chunk_ids or positive_tracking_ids.
 
 ### Examples
 
@@ -821,9 +748,82 @@ end
 - **Accept**: application/json
 
 
+## get_suggested_queries
+
+> <SuggestedQueriesResponse> get_suggested_queries(tr_dataset, suggested_queries_req_payload)
+
+Generate suggested queries
+
+Generate suggested queries  This endpoint will generate 3 suggested queries based off a hybrid search using RAG with the query provided in the request body and return them as a JSON object.
+
+### Examples
+
+```ruby
+require 'time'
+require 'trieve_ruby_client'
+# setup authorization
+TrieveRubyClient.configure do |config|
+  # Configure API key authorization: ApiKey
+  config.api_key['ApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKey'] = 'Bearer'
+end
+
+api_instance = TrieveRubyClient::ChunkApi.new
+tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
+suggested_queries_req_payload = TrieveRubyClient::SuggestedQueriesReqPayload.new({query: 'query_example'}) # SuggestedQueriesReqPayload | JSON request payload to get alternative suggested queries
+
+begin
+  # Generate suggested queries
+  result = api_instance.get_suggested_queries(tr_dataset, suggested_queries_req_payload)
+  p result
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling ChunkApi->get_suggested_queries: #{e}"
+end
+```
+
+#### Using the get_suggested_queries_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SuggestedQueriesResponse>, Integer, Hash)> get_suggested_queries_with_http_info(tr_dataset, suggested_queries_req_payload)
+
+```ruby
+begin
+  # Generate suggested queries
+  data, status_code, headers = api_instance.get_suggested_queries_with_http_info(tr_dataset, suggested_queries_req_payload)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SuggestedQueriesResponse>
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling ChunkApi->get_suggested_queries_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **tr_dataset** | **String** | The dataset id to use for the request |  |
+| **suggested_queries_req_payload** | [**SuggestedQueriesReqPayload**](SuggestedQueriesReqPayload.md) | JSON request payload to get alternative suggested queries |  |
+
+### Return type
+
+[**SuggestedQueriesResponse**](SuggestedQueriesResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## search_chunks
 
-> <SearchChunkQueryResponseBody> search_chunks(tr_dataset, search_chunk_data)
+> <SearchChunkQueryResponseBody> search_chunks(tr_dataset, search_chunks_req_payload)
 
 Search
 
@@ -844,11 +844,11 @@ end
 
 api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-search_chunk_data = TrieveRubyClient::SearchChunkData.new({query: 'query_example', search_type: 'search_type_example'}) # SearchChunkData | JSON request payload to semantically search for chunks (chunks)
+search_chunks_req_payload = TrieveRubyClient::SearchChunksReqPayload.new({query: 'query_example', search_type: 'search_type_example'}) # SearchChunksReqPayload | JSON request payload to semantically search for chunks (chunks)
 
 begin
   # Search
-  result = api_instance.search_chunks(tr_dataset, search_chunk_data)
+  result = api_instance.search_chunks(tr_dataset, search_chunks_req_payload)
   p result
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->search_chunks: #{e}"
@@ -859,12 +859,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SearchChunkQueryResponseBody>, Integer, Hash)> search_chunks_with_http_info(tr_dataset, search_chunk_data)
+> <Array(<SearchChunkQueryResponseBody>, Integer, Hash)> search_chunks_with_http_info(tr_dataset, search_chunks_req_payload)
 
 ```ruby
 begin
   # Search
-  data, status_code, headers = api_instance.search_chunks_with_http_info(tr_dataset, search_chunk_data)
+  data, status_code, headers = api_instance.search_chunks_with_http_info(tr_dataset, search_chunks_req_payload)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SearchChunkQueryResponseBody>
@@ -878,7 +878,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **search_chunk_data** | [**SearchChunkData**](SearchChunkData.md) | JSON request payload to semantically search for chunks (chunks) |  |
+| **search_chunks_req_payload** | [**SearchChunksReqPayload**](SearchChunksReqPayload.md) | JSON request payload to semantically search for chunks (chunks) |  |
 
 ### Return type
 
@@ -896,11 +896,11 @@ end
 
 ## update_chunk
 
-> update_chunk(tr_dataset, update_chunk_data)
+> update_chunk(tr_dataset, update_chunk_req_payload)
 
 Update Chunk
 
-Update Chunk  Update a chunk. If you try to change the tracking_id of the chunk to have the same tracking_id as an existing chunk, the request will fail.
+Update Chunk  Update a chunk. If you try to change the tracking_id of the chunk to have the same tracking_id as an existing chunk, the request will fail. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -917,11 +917,11 @@ end
 
 api_instance = TrieveRubyClient::ChunkApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-update_chunk_data = TrieveRubyClient::UpdateChunkData.new # UpdateChunkData | JSON request payload to update a chunk (chunk)
+update_chunk_req_payload = TrieveRubyClient::UpdateChunkReqPayload.new # UpdateChunkReqPayload | JSON request payload to update a chunk (chunk)
 
 begin
   # Update Chunk
-  api_instance.update_chunk(tr_dataset, update_chunk_data)
+  api_instance.update_chunk(tr_dataset, update_chunk_req_payload)
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling ChunkApi->update_chunk: #{e}"
 end
@@ -931,12 +931,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> update_chunk_with_http_info(tr_dataset, update_chunk_data)
+> <Array(nil, Integer, Hash)> update_chunk_with_http_info(tr_dataset, update_chunk_req_payload)
 
 ```ruby
 begin
   # Update Chunk
-  data, status_code, headers = api_instance.update_chunk_with_http_info(tr_dataset, update_chunk_data)
+  data, status_code, headers = api_instance.update_chunk_with_http_info(tr_dataset, update_chunk_req_payload)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -950,7 +950,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **update_chunk_data** | [**UpdateChunkData**](UpdateChunkData.md) | JSON request payload to update a chunk (chunk) |  |
+| **update_chunk_req_payload** | [**UpdateChunkReqPayload**](UpdateChunkReqPayload.md) | JSON request payload to update a chunk (chunk) |  |
 
 ### Return type
 
@@ -972,7 +972,7 @@ nil (empty response body)
 
 Update Chunk By Tracking Id
 
-Update Chunk By Tracking Id  Update a chunk by tracking_id. This is useful for when you are coordinating with an external system and want to use the tracking_id to identify the chunk.
+Update Chunk By Tracking Id  Update a chunk by tracking_id. This is useful for when you are coordinating with an external system and want to use the tracking_id to identify the chunk. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
