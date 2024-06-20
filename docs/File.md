@@ -11,7 +11,7 @@
 | **link** | **String** |  | [optional] |
 | **metadata** | **Object** |  | [optional] |
 | **size** | **Integer** |  |  |
-| **tag_set** | **String** |  | [optional] |
+| **tag_set** | **Array&lt;String&gt;** |  | [optional] |
 | **time_stamp** | **Time** |  | [optional] |
 | **updated_at** | **Time** |  |  |
 

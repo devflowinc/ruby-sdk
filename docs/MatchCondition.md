@@ -14,6 +14,7 @@ require 'trieve_ruby_client'
 TrieveRubyClient::MatchCondition.openapi_one_of
 # =>
 # [
+#   :'Float',
 #   :'Integer',
 #   :'String'
 # ]
@@ -29,7 +30,7 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 require 'trieve_ruby_client'
 
 TrieveRubyClient::MatchCondition.build(data)
-# => #<Integer:0x00007fdd4aab02a0>
+# => #<Float:0x00007fdd4aab02a0>
 
 TrieveRubyClient::MatchCondition.build(data_that_doesnt_match)
 # => nil
@@ -43,6 +44,7 @@ TrieveRubyClient::MatchCondition.build(data_that_doesnt_match)
 
 #### Return type
 
+- `Float`
 - `Integer`
 - `String`
 - `nil` (if no type matches)

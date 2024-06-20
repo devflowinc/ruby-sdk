@@ -16,7 +16,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 Delete File
 
-Delete File  Delete a file from S3 attached to the server based on its id. This will disassociate chunks from the file, but only delete them all together if you specify delete_chunks to be true. Auth'ed user must be an admin or owner of the dataset's organization to delete a file.
+Delete File  Delete a file from S3 attached to the server based on its id. This will disassociate chunks from the file, but only delete them all together if you specify delete_chunks to be true. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -232,7 +232,7 @@ end
 
 ## upload_file_handler
 
-> <UploadFileResult> upload_file_handler(tr_dataset, upload_file_data)
+> <UploadFileResult> upload_file_handler(tr_dataset, upload_file_req_payload)
 
 Upload File
 
@@ -253,11 +253,11 @@ end
 
 api_instance = TrieveRubyClient::FileApi.new
 tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-upload_file_data = TrieveRubyClient::UploadFileData.new({base64_file: 'base64_file_example', file_name: 'file_name_example'}) # UploadFileData | JSON request payload to upload a file
+upload_file_req_payload = TrieveRubyClient::UploadFileReqPayload.new({base64_file: 'base64_file_example', file_name: 'file_name_example'}) # UploadFileReqPayload | JSON request payload to upload a file
 
 begin
   # Upload File
-  result = api_instance.upload_file_handler(tr_dataset, upload_file_data)
+  result = api_instance.upload_file_handler(tr_dataset, upload_file_req_payload)
   p result
 rescue TrieveRubyClient::ApiError => e
   puts "Error when calling FileApi->upload_file_handler: #{e}"
@@ -268,12 +268,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UploadFileResult>, Integer, Hash)> upload_file_handler_with_http_info(tr_dataset, upload_file_data)
+> <Array(<UploadFileResult>, Integer, Hash)> upload_file_handler_with_http_info(tr_dataset, upload_file_req_payload)
 
 ```ruby
 begin
   # Upload File
-  data, status_code, headers = api_instance.upload_file_handler_with_http_info(tr_dataset, upload_file_data)
+  data, status_code, headers = api_instance.upload_file_handler_with_http_info(tr_dataset, upload_file_req_payload)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UploadFileResult>
@@ -287,7 +287,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **tr_dataset** | **String** | The dataset id to use for the request |  |
-| **upload_file_data** | [**UploadFileData**](UploadFileData.md) | JSON request payload to upload a file |  |
+| **upload_file_req_payload** | [**UploadFileReqPayload**](UploadFileReqPayload.md) | JSON request payload to upload a file |  |
 
 ### Return type
 

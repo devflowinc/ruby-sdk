@@ -5,8 +5,8 @@ All URIs are relative to *https://api.trieve.ai*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**create_organization**](OrganizationApi.md#create_organization) | **POST** /api/organization | Create Organization |
-| [**delete_organization_by_id**](OrganizationApi.md#delete_organization_by_id) | **DELETE** /api/organization/{organization_id} | Delete Organization |
-| [**get_organization_by_id**](OrganizationApi.md#get_organization_by_id) | **GET** /api/organization/{organization_id} | Get Organization |
+| [**delete_organization**](OrganizationApi.md#delete_organization) | **DELETE** /api/organization/{organization_id} | Delete Organization |
+| [**get_organization**](OrganizationApi.md#get_organization) | **GET** /api/organization/{organization_id} | Get Organization |
 | [**get_organization_usage**](OrganizationApi.md#get_organization_usage) | **GET** /api/organization/usage/{organization_id} | Get Organization Usage |
 | [**get_organization_users**](OrganizationApi.md#get_organization_users) | **GET** /api/organization/users/{organization_id} | Get Organization Users |
 | [**update_organization**](OrganizationApi.md#update_organization) | **PUT** /api/organization | Update Organization |
@@ -83,9 +83,9 @@ end
 - **Accept**: application/json
 
 
-## delete_organization_by_id
+## delete_organization
 
-> <Organization> delete_organization_by_id(tr_organization, organization_id)
+> delete_organization(tr_organization, organization_id)
 
 Delete Organization
 
@@ -110,28 +110,27 @@ organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of th
 
 begin
   # Delete Organization
-  result = api_instance.delete_organization_by_id(tr_organization, organization_id)
-  p result
+  api_instance.delete_organization(tr_organization, organization_id)
 rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling OrganizationApi->delete_organization_by_id: #{e}"
+  puts "Error when calling OrganizationApi->delete_organization: #{e}"
 end
 ```
 
-#### Using the delete_organization_by_id_with_http_info variant
+#### Using the delete_organization_with_http_info variant
 
-This returns an Array which contains the response data, status code and headers.
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(<Organization>, Integer, Hash)> delete_organization_by_id_with_http_info(tr_organization, organization_id)
+> <Array(nil, Integer, Hash)> delete_organization_with_http_info(tr_organization, organization_id)
 
 ```ruby
 begin
   # Delete Organization
-  data, status_code, headers = api_instance.delete_organization_by_id_with_http_info(tr_organization, organization_id)
+  data, status_code, headers = api_instance.delete_organization_with_http_info(tr_organization, organization_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Organization>
+  p data # => nil
 rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling OrganizationApi->delete_organization_by_id_with_http_info: #{e}"
+  puts "Error when calling OrganizationApi->delete_organization_with_http_info: #{e}"
 end
 ```
 
@@ -144,7 +143,7 @@ end
 
 ### Return type
 
-[**Organization**](Organization.md)
+nil (empty response body)
 
 ### Authorization
 
@@ -156,13 +155,13 @@ end
 - **Accept**: application/json
 
 
-## get_organization_by_id
+## get_organization
 
-> <Organization> get_organization_by_id(tr_organization, organization_id)
+> <Organization> get_organization(tr_organization, organization_id)
 
 Get Organization
 
-Get Organization  Fetch the details of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.
+Get Organization  Fetch the details of an organization by its id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -183,28 +182,28 @@ organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of th
 
 begin
   # Get Organization
-  result = api_instance.get_organization_by_id(tr_organization, organization_id)
+  result = api_instance.get_organization(tr_organization, organization_id)
   p result
 rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling OrganizationApi->get_organization_by_id: #{e}"
+  puts "Error when calling OrganizationApi->get_organization: #{e}"
 end
 ```
 
-#### Using the get_organization_by_id_with_http_info variant
+#### Using the get_organization_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Organization>, Integer, Hash)> get_organization_by_id_with_http_info(tr_organization, organization_id)
+> <Array(<Organization>, Integer, Hash)> get_organization_with_http_info(tr_organization, organization_id)
 
 ```ruby
 begin
   # Get Organization
-  data, status_code, headers = api_instance.get_organization_by_id_with_http_info(tr_organization, organization_id)
+  data, status_code, headers = api_instance.get_organization_with_http_info(tr_organization, organization_id)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Organization>
 rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling OrganizationApi->get_organization_by_id_with_http_info: #{e}"
+  puts "Error when calling OrganizationApi->get_organization_with_http_info: #{e}"
 end
 ```
 
@@ -235,7 +234,7 @@ end
 
 Get Organization Usage
 
-Get Organization Usage  Fetch the current usage specification of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.
+Get Organization Usage  Fetch the current usage specification of an organization by its id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -308,7 +307,7 @@ end
 
 Get Organization Users
 
-Get Organization Users  Fetch the users of an organization by its id. The auth'ed user must be an admin or owner of the organization to fetch it.
+Get Organization Users  Fetch the users of an organization by its id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
