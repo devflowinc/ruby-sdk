@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **bookmarks** | [**Array&lt;ScoreChunkDTO&gt;**](ScoreChunkDTO.md) |  |  |
-| **group** | [**ChunkGroup**](ChunkGroup.md) |  |  |
+| **group** | [**ChunkGroupAndFileId**](ChunkGroupAndFileId.md) |  |  |
 | **total_pages** | **Integer** |  |  |
 
 ## Example

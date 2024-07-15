@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **chunk_uuid** | **String** |  |  |
-| **slim_groups** | [**Array&lt;SlimGroup&gt;**](SlimGroup.md) |  |  |
+| **slim_groups** | [**Array&lt;ChunkGroupAndFileId&gt;**](ChunkGroupAndFileId.md) |  |  |
 
 ## Example
 

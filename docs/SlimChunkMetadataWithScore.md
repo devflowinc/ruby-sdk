@@ -8,7 +8,7 @@
 | **id** | **String** |  |  |
 | **link** | **String** |  | [optional] |
 | **metadata** | **Object** |  | [optional] |
-| **qdrant_point_id** | **String** |  | [optional] |
+| **qdrant_point_id** | **String** |  |  |
 | **score** | **Float** |  |  |
 | **tag_set** | **String** |  | [optional] |
 | **time_stamp** | **Time** |  | [optional] |

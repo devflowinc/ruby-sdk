@@ -4,12 +4,11 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **created_at** | **Time** |  |  |
+| **created_at** | **String** |  |  |
 | **dataset_id** | **String** |  |  |
-| **event_data** | **Object** |  |  |
+| **event_data** | **String** |  |  |
 | **event_type** | **String** |  |  |
 | **id** | **String** |  |  |
-| **updated_at** | **Time** |  |  |
 
 ## Example
 
@@ -21,8 +20,7 @@ instance = TrieveRubyClient::Event.new(
   dataset_id: null,
   event_data: null,
   event_type: null,
-  id: null,
-  updated_at: null
+  id: null
 )
 ```
 

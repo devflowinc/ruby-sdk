@@ -10,6 +10,7 @@
 | **name** | **String** | Name to assign to the chunk_group. Does not need to be unique. If not provided, the name will not be updated. | [optional] |
 | **tag_set** | **Array&lt;String&gt;** | Optional tags to assign to the chunk_group. This is a list of strings that can be used to categorize the chunks inside the chunk_group. | [optional] |
 | **tracking_id** | **String** | Tracking Id of the chunk_group to update. | [optional] |
+| **update_chunks** | **Boolean** | Flag to update the chunks in the group. If true, each chunk in the group will be updated by appending the group&#39;s tags to the chunk&#39;s tags. Default is false. | [optional] |
 
 ## Example
 
@@ -22,7 +23,8 @@ instance = TrieveRubyClient::UpdateChunkGroupData.new(
   metadata: null,
   name: null,
   tag_set: null,
-  tracking_id: null
+  tracking_id: null,
+  update_chunks: null
 )
 ```
 

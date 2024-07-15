@@ -5,7 +5,9 @@ All URIs are relative to *https://api.trieve.ai*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**cancel_subscription**](StripeApi.md#cancel_subscription) | **DELETE** /api/stripe/subscription/{subscription_id} | Cancel Subscription |
+| [**create_setup_checkout_session**](StripeApi.md#create_setup_checkout_session) | **POST** /api/stripe/checkout/setup/{organization_id} | Create checkout session setup |
 | [**direct_to_payment_link**](StripeApi.md#direct_to_payment_link) | **GET** /api/stripe/payment_link/{plan_id}/{organization_id} | Checkout |
+| [**get_all_invoices**](StripeApi.md#get_all_invoices) | **GET** /api/stripe/invoices/{organization_id} | Get All Invoices |
 | [**get_all_plans**](StripeApi.md#get_all_plans) | **GET** /api/stripe/plans | Get All Plans |
 | [**update_subscription_plan**](StripeApi.md#update_subscription_plan) | **PATCH** /api/stripe/subscription_plan/{subscription_id}/{plan_id} | Update Subscription Plan |
 
@@ -16,7 +18,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 Cancel Subscription
 
-Cancel Subscription  Cancel a subscription by its id
+Cancel a subscription by its id
 
 ### Examples
 
@@ -82,13 +84,77 @@ nil (empty response body)
 - **Accept**: application/json
 
 
+## create_setup_checkout_session
+
+> <CreateSetupCheckoutSessionResPayload> create_setup_checkout_session(organization_id)
+
+Create checkout session setup
+
+Create a checkout session (setup)
+
+### Examples
+
+```ruby
+require 'time'
+require 'trieve_ruby_client'
+
+api_instance = TrieveRubyClient::StripeApi.new
+organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the organization to create setup checkout session for.
+
+begin
+  # Create checkout session setup
+  result = api_instance.create_setup_checkout_session(organization_id)
+  p result
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling StripeApi->create_setup_checkout_session: #{e}"
+end
+```
+
+#### Using the create_setup_checkout_session_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateSetupCheckoutSessionResPayload>, Integer, Hash)> create_setup_checkout_session_with_http_info(organization_id)
+
+```ruby
+begin
+  # Create checkout session setup
+  data, status_code, headers = api_instance.create_setup_checkout_session_with_http_info(organization_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateSetupCheckoutSessionResPayload>
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling StripeApi->create_setup_checkout_session_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **organization_id** | **String** | The id of the organization to create setup checkout session for. |  |
+
+### Return type
+
+[**CreateSetupCheckoutSessionResPayload**](CreateSetupCheckoutSessionResPayload.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## direct_to_payment_link
 
 > direct_to_payment_link(plan_id, organization_id)
 
 Checkout
 
-Checkout  Get a direct link to the stripe checkout page for the plan and organization
+Get a 303 SeeOther redirect link to the stripe checkout page for the plan and organization
 
 ### Examples
 
@@ -147,13 +213,77 @@ No authorization required
 - **Accept**: application/json
 
 
+## get_all_invoices
+
+> <Array<StripeInvoice>> get_all_invoices(organization_id)
+
+Get All Invoices
+
+Get a list of all invoices
+
+### Examples
+
+```ruby
+require 'time'
+require 'trieve_ruby_client'
+
+api_instance = TrieveRubyClient::StripeApi.new
+organization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The id of the organization to get invoices for.
+
+begin
+  # Get All Invoices
+  result = api_instance.get_all_invoices(organization_id)
+  p result
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling StripeApi->get_all_invoices: #{e}"
+end
+```
+
+#### Using the get_all_invoices_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Array<StripeInvoice>>, Integer, Hash)> get_all_invoices_with_http_info(organization_id)
+
+```ruby
+begin
+  # Get All Invoices
+  data, status_code, headers = api_instance.get_all_invoices_with_http_info(organization_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Array<StripeInvoice>>
+rescue TrieveRubyClient::ApiError => e
+  puts "Error when calling StripeApi->get_all_invoices_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **organization_id** | **String** | The id of the organization to get invoices for. |  |
+
+### Return type
+
+[**Array&lt;StripeInvoice&gt;**](StripeInvoice.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_all_plans
 
 > <Array<StripePlan>> get_all_plans
 
 Get All Plans
 
-Get All Plans  Get a list of all plans
+Get a list of all plans
 
 ### Examples
 
@@ -214,7 +344,7 @@ No authorization required
 
 Update Subscription Plan
 
-Update Subscription Plan  Update a subscription to a new plan
+Update a subscription to a new plan
 
 ### Examples
 

@@ -16,7 +16,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 OpenID Connect callback
 
-OpenID Connect callback  This is the callback route for the OAuth provider, it should not be called directly. Redirects to browser with set-cookie header.
+This is the callback route for the OAuth provider, it should not be called directly. Redirects to browser with set-cookie header.
 
 ### Examples
 
@@ -77,7 +77,7 @@ No authorization required
 
 Get Me
 
-Get Me  Get the user corresponding to your current auth credentials.
+Get the user corresponding to your current auth credentials.
 
 ### Examples
 
@@ -145,7 +145,7 @@ This endpoint does not need any parameter.
 
 Login
 
-Login  This will redirect you to the OAuth provider for authentication with email/pass, SSO, Google, Github, etc.
+This will redirect you to the OAuth provider for authentication with email/pass, SSO, Google, Github, etc.
 
 ### Examples
 
@@ -214,7 +214,7 @@ No authorization required
 
 Logout
 
-Logout  Invalidate your current auth credential stored typically stored in a cookie. This does not invalidate your API key.
+Invalidate your current auth credential stored typically stored in a cookie. This does not invalidate your API key.
 
 ### Examples
 

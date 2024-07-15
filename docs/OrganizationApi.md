@@ -18,7 +18,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 Create Organization
 
-Create Organization  Create a new organization. The auth'ed user who creates the organization will be the default owner of the organization.
+Create a new organization. The auth'ed user who creates the organization will be the default owner of the organization.
 
 ### Examples
 
@@ -89,7 +89,7 @@ end
 
 Delete Organization
 
-Delete Organization  Delete an organization by its id. The auth'ed user must be an owner of the organization to delete it.
+Delete an organization by its id. The auth'ed user must be an owner of the organization to delete it.
 
 ### Examples
 
@@ -161,7 +161,7 @@ nil (empty response body)
 
 Get Organization
 
-Get Organization  Fetch the details of an organization by its id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
+Fetch the details of an organization by its id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -234,7 +234,7 @@ end
 
 Get Organization Usage
 
-Get Organization Usage  Fetch the current usage specification of an organization by its id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
+Fetch the current usage specification of an organization by its id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -307,7 +307,7 @@ end
 
 Get Organization Users
 
-Get Organization Users  Fetch the users of an organization by its id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
+Fetch the users of an organization by its id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -380,7 +380,7 @@ end
 
 Update Organization
 
-Update Organization  Update an organization. Only the owner of the organization can update it.
+Update an organization. Only the owner of the organization can update it.
 
 ### Examples
 

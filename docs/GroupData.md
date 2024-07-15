@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **groups** | [**Array&lt;ChunkGroupAndFile&gt;**](ChunkGroupAndFile.md) |  |  |
+| **groups** | [**Array&lt;ChunkGroupAndFileId&gt;**](ChunkGroupAndFileId.md) |  |  |
 | **total_pages** | **Integer** |  |  |
 
 ## Example

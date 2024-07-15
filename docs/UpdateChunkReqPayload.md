@@ -8,6 +8,7 @@
 | **chunk_html** | **String** | HTML content of the chunk you want to update. This can also be plaintext. The innerText of the HTML will be used to create the embedding vector. The point of using HTML is for convienience, as some users have applications where users submit HTML content. If no chunk_html is provided, the existing chunk_html will be used. | [optional] |
 | **chunk_id** | **String** | Id of the chunk you want to update. You can provide either the chunk_id or the tracking_id. If both are provided, the chunk_id will be used. | [optional] |
 | **convert_html_to_text** | **Boolean** | Convert HTML to raw text before processing to avoid adding noise to the vector embeddings. By default this is true. If you are using HTML content that you want to be included in the vector embeddings, set this to false. | [optional] |
+| **distance_phrase** | [**DistancePhrase**](DistancePhrase.md) |  | [optional] |
 | **group_ids** | **Array&lt;String&gt;** | Group ids are the ids of the groups that the chunk should be placed into. This is useful for when you want to update a chunk and add it to a group or multiple groups in one request. | [optional] |
 | **group_tracking_ids** | **Array&lt;String&gt;** | Group tracking_ids are the tracking_ids of the groups that the chunk should be placed into. This is useful for when you want to update a chunk and add it to a group or multiple groups in one request. | [optional] |
 | **image_urls** | **Array&lt;String&gt;** | Image urls are a list of urls to images that are associated with the chunk. This is useful for when you want to associate images with a chunk. If no image_urls are provided, the existing image_urls will be used. | [optional] |
@@ -30,6 +31,7 @@ instance = TrieveRubyClient::UpdateChunkReqPayload.new(
   chunk_html: null,
   chunk_id: null,
   convert_html_to_text: null,
+  distance_phrase: null,
   group_ids: null,
   group_tracking_ids: null,
   image_urls: null,

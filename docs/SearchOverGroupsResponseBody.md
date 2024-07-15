@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **group_chunks** | [**Array&lt;GroupScoreChunkDTO&gt;**](GroupScoreChunkDTO.md) |  |  |
-| **total_chunk_pages** | **Integer** |  |  |
+| **results** | [**Array&lt;SearchOverGroupsResults&gt;**](SearchOverGroupsResults.md) |  |  |
+| **total_pages** | **Integer** |  |  |
 
 ## Example
 
@@ -13,8 +13,8 @@
 require 'trieve_ruby_client'
 
 instance = TrieveRubyClient::SearchOverGroupsResponseBody.new(
-  group_chunks: null,
-  total_chunk_pages: null
+  results: null,
+  total_pages: null
 )
 ```
 

@@ -13,7 +13,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 Get events for the dataset
 
-Get events for the dataset  Get events for the dataset specified by the TR-Dataset header.
+Get events for the dataset specified by the TR-Dataset header.
 
 ### Examples
 

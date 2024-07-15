@@ -16,7 +16,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 Delete File
 
-Delete File  Delete a file from S3 attached to the server based on its id. This will disassociate chunks from the file, but only delete them all together if you specify delete_chunks to be true. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
+Delete a file from S3 attached to the server based on its id. This will disassociate chunks from the file, but only delete them all together if you specify delete_chunks to be true. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -88,7 +88,7 @@ nil (empty response body)
 
 Get Files for Dataset
 
-Get Files for Dataset  Get all files which belong to a given dataset specified by the dataset_id parameter. 10 files are returned per page.
+Get all files which belong to a given dataset specified by the dataset_id parameter. 10 files are returned per page.
 
 ### Examples
 
@@ -163,7 +163,7 @@ end
 
 Get File
 
-Get File  Download a file based on its id.
+Download a file based on its id.
 
 ### Examples
 
@@ -236,7 +236,7 @@ end
 
 Upload File
 
-Upload File  Upload a file to S3 attached to the server. The file will be converted to HTML with tika and chunked algorithmically, images will be OCR'ed with tesseract. The resulting chunks will be indexed and searchable. Optionally, you can only upload the file and manually create chunks associated to the file after. See docs.trieve.ai and/or contact us for more details and tips. Auth'ed user must be an admin or owner of the dataset's organization to upload a file.
+Upload a file to S3 attached to the server. The file will be converted to HTML with tika and chunked algorithmically, images will be OCR'ed with tesseract. The resulting chunks will be indexed and searchable. Optionally, you can only upload the file and manually create chunks associated to the file after. See docs.trieve.ai and/or contact us for more details and tips. Auth'ed user must be an admin or owner of the dataset's organization to upload a file.
 
 ### Examples
 

@@ -13,7 +13,7 @@
 | **location** | [**GeoInfo**](GeoInfo.md) |  | [optional] |
 | **metadata** | **Object** |  | [optional] |
 | **num_value** | **Float** |  | [optional] |
-| **qdrant_point_id** | **String** |  | [optional] |
+| **qdrant_point_id** | **String** |  |  |
 | **tag_set** | **Array&lt;String&gt;** |  | [optional] |
 | **time_stamp** | **Time** |  | [optional] |
 | **tracking_id** | **String** |  | [optional] |

@@ -4,7 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **client_configuration** | **Object** |  |  |
 | **created_at** | **Time** |  |  |
 | **deleted** | **Integer** |  |  |
 | **id** | **String** |  |  |
@@ -20,7 +19,6 @@
 require 'trieve_ruby_client'
 
 instance = TrieveRubyClient::Dataset.new(
-  client_configuration: null,
   created_at: null,
   deleted: null,
   id: null,

@@ -13,7 +13,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 Health Check
 
-Health Check  Confirmation that the service is healthy and can make embedding vectors
+Confirmation that the service is healthy and can make embedding vectors
 
 ### Examples
 

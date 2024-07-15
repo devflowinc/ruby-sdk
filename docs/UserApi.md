@@ -15,7 +15,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 Delete User Api Key
 
-Delete User Api Key  Delete an api key for the auth'ed user.
+Delete an api key for the auth'ed user.
 
 ### Examples
 
@@ -85,7 +85,7 @@ nil (empty response body)
 
 Set User Api Key
 
-Set User Api Key  Create a new api key for the auth'ed user. Successful response will contain the newly created api key. If a write role is assigned the api key will have permission level of the auth'ed user who calls this endpoint.
+Create a new api key for the auth'ed user. Successful response will contain the newly created api key. If a write role is assigned the api key will have permission level of the auth'ed user who calls this endpoint.
 
 ### Examples
 
@@ -156,7 +156,7 @@ end
 
 Update User
 
-Update User  Update a user's information. If the user_id is not provided, the auth'ed user will be updated. If the user_id is provided, the role of the auth'ed user or api key must be an admin (1) or owner (2) of the organization.
+Update a user's information. If the user_id is not provided, the auth'ed user will be updated. If the user_id is provided, the role of the auth'ed user or api key must be an admin (1) or owner (2) of the organization.
 
 ### Examples
 

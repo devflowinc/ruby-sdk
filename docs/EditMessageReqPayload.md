@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **completion_first** | **Boolean** | Completion first decides whether the stream should contain the stream of the completion response or the chunks first. Default is false. Keep in mind that || is used to separate the chunks from the completion response. If || is in the completion then you may want to split on ||{ instead. | [optional] |
+| **concat_user_messages_query** | **Boolean** | If concat user messages query is set to true, all of the user messages in the topic will be concatenated together and used as the search query. If not specified, this defaults to false. Default is false. | [optional] |
 | **filters** | [**ChunkFilter**](ChunkFilter.md) |  | [optional] |
 | **frequency_penalty** | **Float** | Frequency penalty is a number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model&#39;s likelihood to repeat the same line verbatim. Default is 0.7. | [optional] |
 | **highlight_citations** | **Boolean** | Whether or not to highlight the citations in the response. If this is set to true or not included, the citations will be highlighted. If this is set to false, the citations will not be highlighted. Default is true. | [optional] |
@@ -12,10 +13,14 @@
 | **max_tokens** | **Integer** | The maximum number of tokens to generate in the chat completion. | [optional] |
 | **message_sort_order** | **Integer** | The sort order of the message to edit. |  |
 | **new_message_content** | **String** | The new content of the message to replace the old content with. |  |
+| **page_size** | **Integer** | Page size is the number of chunks to fetch during RAG. If 0, then no search will be performed. If specified, this will override the N retrievals to include in the dataset configuration. Default is None. | [optional] |
 | **presence_penalty** | **Float** | Presence penalty is a number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model&#39;s likelihood to talk about new topics. | [optional] |
-| **search_type** | **String** | Search_type can be either \&quot;semantic\&quot;, \&quot;fulltext\&quot;, or \&quot;hybrid\&quot;. \&quot;hybrid\&quot; will pull in one page (10 chunks) of both semantic and full-text results then re-rank them using BAAI/bge-reranker-large. \&quot;semantic\&quot; will pull in one page (10 chunks) of the nearest cosine distant vectors. \&quot;fulltext\&quot; will pull in one page (10 chunks) of full-text results based on SPLADE. | [optional] |
+| **score_threshold** | **Float** | Set score_threshold to a float to filter out chunks with a score below the threshold. This threshold applies before weight and bias modifications. If not specified, this defaults to 0.0. | [optional] |
+| **search_query** | **String** | Query is the search query. This can be any string. The search_query will be used to create a dense embedding vector and/or sparse vector which will be used to find the result set. If not specified, will default to the last user message or HyDE if HyDE is enabled in the dataset configuration. Default is None. | [optional] |
+| **search_type** | [**SearchMethod**](SearchMethod.md) |  | [optional] |
 | **stop_tokens** | **Array&lt;String&gt;** | Stop tokens are up to 4 sequences where the API will stop generating further tokens. | [optional] |
 | **stream_response** | **Boolean** | Whether or not to stream the response. If this is set to true or not included, the response will be a stream. If this is set to false, the response will be a normal JSON response. Default is true. | [optional] |
+| **system_prompt** | **String** | Optionally, override the system prompt in dataset server settings. | [optional] |
 | **temperature** | **Float** | What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. Default is 0.7. | [optional] |
 | **topic_id** | **String** | The id of the topic to edit the message at the given sort order for. |  |
 
@@ -26,6 +31,7 @@ require 'trieve_ruby_client'
 
 instance = TrieveRubyClient::EditMessageReqPayload.new(
   completion_first: null,
+  concat_user_messages_query: null,
   filters: null,
   frequency_penalty: null,
   highlight_citations: null,
@@ -33,10 +39,14 @@ instance = TrieveRubyClient::EditMessageReqPayload.new(
   max_tokens: null,
   message_sort_order: null,
   new_message_content: null,
+  page_size: null,
   presence_penalty: null,
+  score_threshold: null,
+  search_query: null,
   search_type: null,
   stop_tokens: null,
   stream_response: null,
+  system_prompt: null,
   temperature: null,
   topic_id: null
 )

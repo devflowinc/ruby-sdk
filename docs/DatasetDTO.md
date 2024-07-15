@@ -4,7 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **client_configuration** | **Object** |  |  |
 | **created_at** | **Time** |  |  |
 | **id** | **String** |  |  |
 | **name** | **String** |  |  |
@@ -18,7 +17,6 @@
 require 'trieve_ruby_client'
 
 instance = TrieveRubyClient::DatasetDTO.new(
-  client_configuration: null,
   created_at: null,
   id: null,
   name: null,

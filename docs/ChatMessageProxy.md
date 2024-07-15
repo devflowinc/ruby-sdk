@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **content** | **String** |  |  |
-| **role** | **String** |  |  |
+| **role** | [**RoleProxy**](RoleProxy.md) |  |  |
 
 ## Example
 

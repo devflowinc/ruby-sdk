@@ -8,7 +8,6 @@ All URIs are relative to *https://api.trieve.ai*
 | [**create_dataset**](DatasetApi.md#create_dataset) | **POST** /api/dataset | Create dataset |
 | [**delete_dataset**](DatasetApi.md#delete_dataset) | **DELETE** /api/dataset/{dataset_id} | Delete Dataset |
 | [**delete_dataset_by_tracking_id**](DatasetApi.md#delete_dataset_by_tracking_id) | **DELETE** /api/dataset/tracking_id/{tracking_id} | Delete Dataset by Tracking ID |
-| [**get_client_dataset_config**](DatasetApi.md#get_client_dataset_config) | **GET** /api/dataset/envs | Get Client Configuration |
 | [**get_dataset**](DatasetApi.md#get_dataset) | **GET** /api/dataset/{dataset_id} | Get Dataset |
 | [**get_datasets_from_organization**](DatasetApi.md#get_datasets_from_organization) | **GET** /api/dataset/organization/{organization_id} | Get Datasets from Organization |
 | [**get_usage_by_dataset_id**](DatasetApi.md#get_usage_by_dataset_id) | **GET** /api/dataset/usage/{dataset_id} | Get Usage By Dataset ID |
@@ -21,7 +20,7 @@ All URIs are relative to *https://api.trieve.ai*
 
 Clear Dataset
 
-Clear Dataset  Clears a dataset. The auth'ed user must be an owner of the organization to clear a dataset.
+Clears a dataset. The auth'ed user must be an owner of the organization to clear a dataset.
 
 ### Examples
 
@@ -93,7 +92,7 @@ nil (empty response body)
 
 Create dataset
 
-Create dataset  Create a new dataset. The auth'ed user must be an owner of the organization to create a dataset.
+Create a new dataset. The auth'ed user must be an owner of the organization to create a dataset.
 
 ### Examples
 
@@ -166,7 +165,7 @@ end
 
 Delete Dataset
 
-Delete Dataset  Delete a dataset. The auth'ed user must be an owner of the organization to delete a dataset.
+Delete a dataset. The auth'ed user must be an owner of the organization to delete a dataset.
 
 ### Examples
 
@@ -238,7 +237,7 @@ nil (empty response body)
 
 Delete Dataset by Tracking ID
 
-Delete Dataset by Tracking ID  Delete a dataset by its tracking id. The auth'ed user must be an owner of the organization to delete a dataset.
+Delete a dataset by its tracking id. The auth'ed user must be an owner of the organization to delete a dataset.
 
 ### Examples
 
@@ -304,84 +303,13 @@ nil (empty response body)
 - **Accept**: application/json
 
 
-## get_client_dataset_config
-
-> <ClientDatasetConfiguration> get_client_dataset_config(tr_dataset)
-
-Get Client Configuration
-
-Get Client Configuration  Get the client configuration for a dataset. Will use the TR-D
-
-### Examples
-
-```ruby
-require 'time'
-require 'trieve_ruby_client'
-# setup authorization
-TrieveRubyClient.configure do |config|
-  # Configure API key authorization: ApiKey
-  config.api_key['ApiKey'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKey'] = 'Bearer'
-end
-
-api_instance = TrieveRubyClient::DatasetApi.new
-tr_dataset = 'tr_dataset_example' # String | The dataset id to use for the request
-
-begin
-  # Get Client Configuration
-  result = api_instance.get_client_dataset_config(tr_dataset)
-  p result
-rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling DatasetApi->get_client_dataset_config: #{e}"
-end
-```
-
-#### Using the get_client_dataset_config_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ClientDatasetConfiguration>, Integer, Hash)> get_client_dataset_config_with_http_info(tr_dataset)
-
-```ruby
-begin
-  # Get Client Configuration
-  data, status_code, headers = api_instance.get_client_dataset_config_with_http_info(tr_dataset)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ClientDatasetConfiguration>
-rescue TrieveRubyClient::ApiError => e
-  puts "Error when calling DatasetApi->get_client_dataset_config_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **tr_dataset** | **String** | The dataset id to use for the request |  |
-
-### Return type
-
-[**ClientDatasetConfiguration**](ClientDatasetConfiguration.md)
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_dataset
 
 > <Dataset> get_dataset(tr_dataset, dataset_id)
 
 Get Dataset
 
-Get Dataset  Get a dataset by id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
+Get a dataset by id. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -454,7 +382,7 @@ end
 
 Get Datasets from Organization
 
-Get Datasets from Organization  Get all datasets for an organization. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
+Get all datasets for an organization. Auth'ed user or api key must have an admin or owner role for the specified dataset's organization.
 
 ### Examples
 
@@ -533,7 +461,7 @@ end
 
 Get Usage By Dataset ID
 
-Get Usage By Dataset ID  Get the usage for a dataset by its id.
+Get the usage for a dataset by its id.
 
 ### Examples
 
@@ -606,7 +534,7 @@ end
 
 Update Dataset
 
-Update Dataset  Update a dataset. The auth'ed user must be an owner of the organization to update a dataset.
+Update a dataset. The auth'ed user must be an owner of the organization to update a dataset.
 
 ### Examples
 

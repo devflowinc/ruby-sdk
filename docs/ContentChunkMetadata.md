@@ -8,7 +8,7 @@
 | **id** | **String** |  |  |
 | **image_urls** | **Array&lt;String&gt;** |  | [optional] |
 | **num_value** | **Float** |  | [optional] |
-| **qdrant_point_id** | **String** |  | [optional] |
+| **qdrant_point_id** | **String** |  |  |
 | **time_stamp** | **Time** |  | [optional] |
 | **tracking_id** | **String** |  | [optional] |
 | **weight** | **Float** |  |  |
